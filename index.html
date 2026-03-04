@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miranto Zaenal Arief | Portfolio Komprehensif</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --obsidian: #1a1614;
+            --deep-brown: #2d241e;
+            --burnished-gold: #b38b4d;
+            --accent-brass: #d4af37;
+            --paper-white: #fdfcfb;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--paper-white);
+            color: var(--obsidian);
+            scroll-behavior: smooth;
+        }
+        h1, h2, h3, h4, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .text-gold { color: var(--burnished-gold); }
+        .bg-obsidian { background-color: var(--obsidian); }
+        .border-gold { border-color: var(--burnished-gold); }
+        
+        /* Charismatic Elements */
+        .sidebar-line {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .sidebar-line::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--burnished-gold), transparent);
+        }
+
+        .speaker-card {
+            background: white;
+            border: 1px solid #eee;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .speaker-card:hover {
+            border-color: var(--burnished-gold);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        .cert-slot {
+            filter: sepia(20%) contrast(95%);
+            transition: all 0.5s ease;
+        }
+        .cert-slot:hover {
+            filter: sepia(0%) contrast(100%);
+            transform: scale(1.03);
+            border-color: var(--burnished-gold);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--paper-white); }
+        ::-webkit-scrollbar-thumb { background: var(--obsidian); }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-lg border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <span class="serif text-xl font-black tracking-tighter uppercase text-obsidian">Miranto Zaenal Arief</span>
+            <div class="hidden md:flex space-x-8 text-[10px] font-bold uppercase tracking-[0.2em]">
+                <a href="#about" class="hover:text-gold transition">Profil</a>
+                <a href="#experience" class="hover:text-gold transition">Pengalaman</a>
+                <a href="#speakers" class="hover:text-gold transition">Speakers</a>
+                <a href="#certificates" class="hover:text-gold transition">Sertifikat</a>
+                <a href="#contact" class="bg-obsidian text-white px-4 py-2 hover:bg-black transition">Hubungi</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center pt-20 px-6 bg-[#f9f7f4]">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 items-center">
+            <div class="lg:col-span-7">
+                <div class="inline-block px-3 py-1 bg-stone-200 text-stone-600 text-[10px] font-bold tracking-widest uppercase mb-6">
+                    Human Development & Strategic Innovation
+                </div>
+                <h1 class="text-6xl md:text-8xl font-black leading-[0.9] mb-8 text-obsidian uppercase">
+                    MIRANTO <br> <span class="italic font-light text-stone-400 normal-case">Zaenal Arief</span>
+                </h1>
+                <p class="text-xl text-stone-600 mb-10 leading-relaxed max-w-xl sidebar-line">
+                    Mendedikasikan profesionalisme pada inisiatif <span class="text-obsidian font-bold">Human Development Index (HDI)</span>, pemberdayaan komunitas, dan riset sosial strategis berbasis data.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#contact" class="bg-obsidian text-white px-10 py-4 font-bold uppercase text-xs tracking-widest hover:bg-stone-800 transition shadow-xl">Bekerjasama</a>
+                    <a href="#speakers" class="border-2 border-obsidian text-obsidian px-10 py-4 font-bold uppercase text-xs tracking-widest hover:bg-obsidian hover:text-white transition">Daftar Pembicara</a>
+                </div>
+            </div>
+            <div class="lg:col-span-5 relative">
+                <div class="absolute -top-10 -right-10 w-64 h-64 bg-gold/5 rounded-full blur-3xl"></div>
+                <div class="relative overflow-hidden shadow-[40px_40px_0px_-10px_rgba(179,139,77,0.2)]">
+                    <img src="WhatsApp Image 2026-03-04 at 21.28.41 (2).jpeg" alt="Miranto Zaenal Arief" class="w-full aspect-[3/4] object-cover grayscale hover:grayscale-0 transition duration-1000">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed About (CV Summary) -->
+    <section id="about" class="py-32 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="md:col-span-1">
+                    <h2 class="serif text-4xl font-bold leading-tight">Ringkasan <br><span class="text-gold italic">Profil</span></h2>
+                </div>
+                <div class="md:col-span-3 space-y-6 text-stone-700 leading-relaxed">
+                    <p class="text-lg">
+                        Lulusan S1 Manajemen dengan spesialisasi non-gelar dalam Hukum Bisnis, memiliki orientasi kuat terhadap pemberdayaan masyarakat. Ahli dalam optimasi pemasaran digital dengan pencapaian pertumbuhan penjualan yang terukur, serta berpengalaman luas dalam meningkatkan kesadaran publik melalui program advokasi nasional.
+                    </p>
+                    <p>
+                        Memahami indikator Pengembangan Sumber Daya Manusia dalam konteks Kecerdasan Buatan (AI) dan kesiapan demografi. Saat ini aktif mengejar karier di bidang riset komunitas, inovasi program, atau pengembangan sosial.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Skills (From CV) -->
+    <section class="py-24 bg-stone-50 border-y border-stone-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16">
+                <div>
+                    <h3 class="text-xs font-black tracking-widest uppercase mb-8 flex items-center gap-4">
+                        <span class="w-8 h-[1px] bg-gold"></span> Technical & Hard Skills
+                    </h3>
+                    <div class="grid grid-cols-2 gap-y-4 text-sm font-medium">
+                        <p class="flex items-center gap-2"><span class="text-gold">/</span> Digital Marketing</p>
+                        <p class="flex items-center gap-2"><span class="text-gold">/</span> Program Innovation</p>
+                        <p class="flex items-center gap-2"><span class="text-gold">/</span> Market Optimization</p>
+                        <p class="flex items-center gap-2"><span class="text-gold">/</span> Data Analysis</p>
+                        <p class="flex items-center gap-2"><span class="text-gold">/</span> Distribution Management</p>
+                        <p class="flex items-center gap-2"><span class="text-gold">/</span> Language Training</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xs font-black tracking-widest uppercase mb-8 flex items-center gap-4">
+                        <span class="w-8 h-[1px] bg-gold"></span> Soft Skills & Expertise
+                    </h3>
+                    <div class="grid grid-cols-2 gap-y-4 text-sm font-medium">
+                        <p class="flex items-center gap-2"><span class="text-gold">/</span> Community Empowerment</p>
+                        <p class="flex items-center gap-2"><span class="text-gold">/</span> Stakeholder Engagement</p>
+                        <p class="flex items-center gap-2"><span class="text-gold">/</span> Public Speaking</p>
+                        <p class="flex items-center gap-2"><span class="text-gold">/</span> Cross-Cultural Comm</p>
+                        <p class="flex items-center gap-2"><span class="text-gold">/</span> Human Dev. Index (HDI)</p>
+                        <p class="flex items-center gap-2"><span class="text-gold">/</span> HR Dev Indicators</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Experience (Full CV Details) -->
+    <section id="experience" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="serif text-5xl font-bold mb-20 text-center">Pengalaman Kerja</h2>
+            
+            <div class="space-y-12">
+                <!-- Allianz -->
+                <div class="bg-white p-12 border border-stone-100 shadow-sm relative overflow-hidden group">
+                    <div class="absolute right-0 top-0 w-1 bg-gold h-full group-hover:w-2 transition-all"></div>
+                    <div class="flex flex-col md:flex-row justify-between mb-8 gap-4">
+                        <div>
+                            <h4 class="text-2xl font-black uppercase tracking-tight">Executive Agent</h4>
+                            <p class="text-gold font-bold italic">PT Asuransi Allianz Life "Syariah" Indonesia</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-bold text-sm">D.I. Yogyakarta</p>
+                            <p class="text-stone-400 text-xs">Agu 2023 — Mar 2024</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 text-stone-600 text-sm leading-relaxed max-w-4xl">
+                        <li class="flex gap-3"><span>•</span> Mencapai target milenial sebagai agen termuda, mengedukasi kesadaran asuransi di kalangan demografi muda.</li>
+                        <li class="flex gap-3"><span>•</span> Berhasil meningkatkan citra dan persepsi positif asuransi di tengah komunitas adat.</li>
+                    </ul>
+                </div>
+
+                <!-- Pempek BOOM -->
+                <div class="bg-white p-12 border border-stone-100 shadow-sm relative overflow-hidden group">
+                    <div class="absolute right-0 top-0 w-1 bg-gold h-full group-hover:w-2 transition-all"></div>
+                    <div class="flex flex-col md:flex-row justify-between mb-8 gap-4">
+                        <div>
+                            <h4 class="text-2xl font-black uppercase tracking-tight">Digital Marketing Strategy</h4>
+                            <p class="text-gold font-bold italic">Industrial Factory of Pempek BOOM Pekalongan</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-bold text-sm">Pekalongan</p>
+                            <p class="text-stone-400 text-xs">Des 2023 — Sekarang</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 text-stone-600 text-sm leading-relaxed max-w-4xl">
+                        <li class="flex gap-3"><span>•</span> Mengoptimalisasi pasar online yang menghasilkan pertumbuhan volume penjualan stabil sebesar 6% setiap bulan.</li>
+                        <li class="flex gap-3"><span>•</span> Membangun dan mengelola jaringan distribusi strategis hingga antar provinsi.</li>
+                    </ul>
+                </div>
+
+                <!-- Milenial Hub -->
+                <div class="bg-white p-12 border border-stone-100 shadow-sm relative overflow-hidden group">
+                    <div class="absolute right-0 top-0 w-1 bg-gold h-full group-hover:w-2 transition-all"></div>
+                    <div class="flex flex-col md:flex-row justify-between mb-8 gap-4">
+                        <div>
+                            <h4 class="text-2xl font-black uppercase tracking-tight">Social Media Strategist</h4>
+                            <p class="text-gold font-bold italic">Milenial Hub Yogyakarta</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-bold text-sm">D.I. Yogyakarta</p>
+                            <p class="text-stone-400 text-xs">2022 — 2023</p>
+                        </div>
+                    </div>
+                    <p class="text-stone-600 text-sm italic">Berhasil meningkatkan visibilitas digital platform melalui manajemen konten kreatif dan analisis tren Gen Z.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership (BKKBN & HB X) -->
+    <section class="py-32 bg-obsidian text-white px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+            <div>
+                <h2 class="serif text-5xl font-bold mb-8">Kepemimpinan <br>& <span class="text-gold italic text-4xl">Penghargaan Nasional</span></h2>
+                <div class="space-y-8">
+                    <div class="border-l border-stone-700 pl-6">
+                        <h5 class="text-gold font-bold uppercase text-xs tracking-widest mb-1">2024 — Sekarang</h5>
+                        <h4 class="text-xl font-bold">Duta GenRe Indonesia</h4>
+                        <p class="text-stone-400 text-sm mt-2 italic">Representatif Nasional oleh Kementerian BKKBN</p>
+                    </div>
+                    <div class="border-l border-stone-700 pl-6">
+                        <h5 class="text-gold font-bold uppercase text-xs tracking-widest mb-1">2023 — Sekarang</h5>
+                        <h4 class="text-xl font-bold">Duta GenRe D.I. Yogyakarta (Juara 1)</h4>
+                        <p class="text-stone-400 text-sm mt-2 italic">Ditandatangani oleh Sri Sultan Hamengkubuwono X. Saat ini menjabat sebagai Wakil Ketua Forum GenRe DIY.</p>
+                    </div>
+                    <div class="border-l border-stone-700 pl-6">
+                        <h5 class="text-gold font-bold uppercase text-xs tracking-widest mb-1">2022</h5>
+                        <h4 class="text-xl font-bold">Delegasi AYIMUN Kuala Lumpur</h4>
+                        <p class="text-stone-400 text-sm mt-2 italic">Mewakili Indonesia di tingkat internasional dalam simulasi sidang PBB.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <img src="WhatsApp Image 2026-03-04 at 21.28.41.jpeg" class="rounded shadow-2xl w-full h-64 object-cover" alt="Award 1">
+                <img src="WhatsApp Image 2026-03-04 at 21.28.40 (1).jpeg" class="rounded shadow-2xl w-full h-64 object-cover mt-8" alt="Award 2">
+            </div>
+        </div>
+    </section>
+
+    <!-- SPEAKERS EXPERIENCE (Full 11 Items from CV) -->
+    <section id="speakers" class="py-32 bg-stone-50 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="serif text-5xl font-bold text-obsidian uppercase">Speakers Experience</h2>
+                <div class="w-24 h-1 bg-gold mx-auto mt-6"></div>
+                <p class="text-stone-500 mt-4 italic">Rekam jejak sebagai pembicara di instansi nasional dan internasional.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 1 -->
+                <div class="speaker-card p-8">
+                    <p class="text-[10px] font-black text-gold uppercase tracking-widest mb-2">International</p>
+                    <h5 class="font-bold text-lg mb-2">Global Millenial MUN</h5>
+                    <p class="text-sm text-stone-600 italic">Speaker of International Webinar (2021)</p>
+                </div>
+                <!-- 2 -->
+                <div class="speaker-card p-8">
+                    <p class="text-[10px] font-black text-gold uppercase tracking-widest mb-2">Career Strategy</p>
+                    <h5 class="font-bold text-lg mb-2">Business Law Community</h5>
+                    <p class="text-sm text-stone-600 italic">"Job Finding Strategy & LinkedIn Optimization"</p>
+                </div>
+                <!-- 3 -->
+                <div class="speaker-card p-8">
+                    <p class="text-[10px] font-black text-gold uppercase tracking-widest mb-2">Entrepreneurship</p>
+                    <h5 class="font-bold text-lg mb-2">Aisyiyah Yogyakarta University</h5>
+                    <p class="text-sm text-stone-600 italic">"Empowered Gen Z: Cultivating Creativity & Innovation trough Targeted Initiatives"</p>
+                </div>
+                <!-- 4 -->
+                <div class="speaker-card p-8">
+                    <p class="text-[10px] font-black text-gold uppercase tracking-widest mb-2">Cultural Camp</p>
+                    <h5 class="font-bold text-lg mb-2">SABAH BRIDGE Malaysia</h5>
+                    <p class="text-sm text-stone-600 italic">"Self Healing Mental Care & Sex Education" - Beswan SABAH Bridge</p>
+                </div>
+                <!-- 5 -->
+                <div class="speaker-card p-8">
+                    <p class="text-[10px] font-black text-gold uppercase tracking-widest mb-2">Public Service</p>
+                    <h5 class="font-bold text-lg mb-2">OMBUDSMAN DIY</h5>
+                    <p class="text-sm text-stone-600 italic">Speaker of "Care About PUBLIC SERVICES"</p>
+                </div>
+                <!-- 6 -->
+                <div class="speaker-card p-8">
+                    <p class="text-[10px] font-black text-gold uppercase tracking-widest mb-2">Health Advocacy</p>
+                    <h5 class="font-bold text-lg mb-2">UGM (Gadjah Mada)</h5>
+                    <p class="text-sm text-stone-600 italic">Speaker of Intern Mbassador Class Duta Anti NAPZA</p>
+                </div>
+                <!-- 7 -->
+                <div class="speaker-card p-8">
+                    <p class="text-[10px] font-black text-gold uppercase tracking-widest mb-2">Security & Policy</p>
+                    <h5 class="font-bold text-lg mb-2">BNN D.I. Yogyakarta</h5>
+                    <p class="text-sm text-stone-600 italic">Speaker of Upgrading "SATGAS Anti Narkoba Wilayah IV"</p>
+                </div>
+                <!-- 8 -->
+                <div class="speaker-card p-8">
+                    <p class="text-[10px] font-black text-gold uppercase tracking-widest mb-2">Campus Milestone</p>
+                    <h5 class="font-bold text-lg mb-2">Anniversary UNISA</h5>
+                    <p class="text-sm text-stone-600 italic">"Menumbuhkan Jiwa Kewirausahaan Gen Z dalam Membangun Inovasi"</p>
+                </div>
+                <!-- 9 -->
+                <div class="speaker-card p-8">
+                    <p class="text-[10px] font-black text-gold uppercase tracking-widest mb-2">National Seminar</p>
+                    <h5 class="font-bold text-lg mb-2">UIN Sunan Kalijaga</h5>
+                    <p class="text-sm text-stone-600 italic">"Gen Z, Generasi Tangguh di Era Digitalisasi"</p>
+                </div>
+                <!-- 10 -->
+                <div class="speaker-card p-8">
+                    <p class="text-[10px] font-black text-gold uppercase tracking-widest mb-2">Social Awareness</p>
+                    <h5 class="font-bold text-lg mb-2">SMA Negeri 1 Ngaglik</h5>
+                    <p class="text-sm text-stone-600 italic">Special Speaker for AIDS Day Remembrance 2023</p>
+                </div>
+                <!-- 11 -->
+                <div class="speaker-card p-8">
+                    <p class="text-[10px] font-black text-gold uppercase tracking-widest mb-2">Youth Talkshow</p>
+                    <h5 class="font-bold text-lg mb-2">Dewantara University</h5>
+                    <p class="text-sm text-stone-600 italic">Speaker of Talkshow "Mahasiswa Anti Narkoba"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education (Full Details) -->
+    <section id="education" class="py-32 bg-white px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="serif text-4xl font-bold mb-16 border-b-2 border-gold inline-block">Latar Belakang Akademik</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="p-10 bg-stone-50 border-t-4 border-obsidian">
+                    <span class="text-stone-400 text-xs font-bold tracking-widest uppercase">2025 — 2029 (Expected)</span>
+                    <h4 class="text-2xl font-black mt-2">S1 Manajemen</h4>
+                    <p class="text-gold font-bold">Pekalongan University</p>
+                    <p class="text-stone-500 text-sm mt-4 italic">Terlibat aktif dalam kegiatan akademik dan organisasi kemahasiswaan yang relevan dengan pengembangan manajemen dan sosial.</p>
+                </div>
+                <div class="p-10 bg-stone-50 border-t-4 border-gold">
+                    <span class="text-stone-400 text-xs font-bold tracking-widest uppercase">2022 — 2024</span>
+                    <h4 class="text-2xl font-black mt-2">Non-Degree Business Law</h4>
+                    <p class="text-gold font-bold">Indonesian Islamic University (UII)</p>
+                    <p class="text-stone-500 text-sm mt-4 italic">Fokus pada regulasi bisnis, kebijakan publik, dan advokasi masyarakat dalam konteks hukum.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- E-CERTIFICATES (11 Slots Matching Speaker List) -->
+    <section id="certificates" class="py-32 bg-stone-100 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="serif text-5xl font-bold mb-20 text-center">E-Certificates Gallery</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- Slot 1 -->
+                <div class="cert-slot bg-white border p-2 text-center group">
+                    <div class="aspect-[4/3] bg-stone-200 mb-2 flex items-center justify-center p-4">
+                        <span class="text-[10px] text-stone-400 font-bold uppercase">Sertifikat 01</span>
+                    </div>
+                    <p class="text-[9px] font-bold uppercase tracking-tighter text-stone-700">GM-MUN 2021</p>
+                </div>
+                <!-- Slot 2 -->
+                <div class="cert-slot bg-white border p-2 text-center">
+                    <div class="aspect-[4/3] bg-stone-200 mb-2 flex items-center justify-center p-4">
+                        <span class="text-[10px] text-stone-400 font-bold">Sertifikat 02</span>
+                    </div>
+                    <p class="text-[9px] font-bold uppercase tracking-tighter text-stone-700">Law Community</p>
+                </div>
+                <!-- Slot 3 -->
+                <div class="cert-slot bg-white border p-2 text-center">
+                    <div class="aspect-[4/3] bg-stone-200 mb-2 flex items-center justify-center p-4">
+                        <span class="text-[10px] text-stone-400 font-bold">Sertifikat 03</span>
+                    </div>
+                    <p class="text-[9px] font-bold uppercase tracking-tighter text-stone-700">UNISA Speaker</p>
+                </div>
+                <!-- Slot 4 -->
+                <div class="cert-slot bg-white border p-2 text-center">
+                    <div class="aspect-[4/3] bg-stone-200 mb-2 flex items-center justify-center p-4">
+                        <span class="text-[10px] text-stone-400 font-bold">Sertifikat 04</span>
+                    </div>
+                    <p class="text-[9px] font-bold uppercase tracking-tighter text-stone-700">Sabah Bridge</p>
+                </div>
+                <!-- Slot 5 -->
+                <div class="cert-slot bg-white border p-2 text-center">
+                    <div class="aspect-[4/3] bg-stone-200 mb-2 flex items-center justify-center p-4">
+                        <span class="text-[10px] text-stone-400 font-bold">Sertifikat 05</span>
+                    </div>
+                    <p class="text-[9px] font-bold uppercase tracking-tighter text-stone-700">Ombudsman DIY</p>
+                </div>
+                <!-- Slot 6 -->
+                <div class="cert-slot bg-white border p-2 text-center">
+                    <div class="aspect-[4/3] bg-stone-200 mb-2 flex items-center justify-center p-4">
+                        <span class="text-[10px] text-stone-400 font-bold">Sertifikat 06</span>
+                    </div>
+                    <p class="text-[9px] font-bold uppercase tracking-tighter text-stone-700">UGM Anti NAPZA</p>
+                </div>
+                <!-- Slot 7 -->
+                <div class="cert-slot bg-white border p-2 text-center">
+                    <div class="aspect-[4/3] bg-stone-200 mb-2 flex items-center justify-center p-4">
+                        <span class="text-[10px] text-stone-400 font-bold">Sertifikat 07</span>
+                    </div>
+                    <p class="text-[9px] font-bold uppercase tracking-tighter text-stone-700">BNN D.I.Y</p>
+                </div>
+                <!-- Slot 8 -->
+                <div class="cert-slot bg-white border p-2 text-center">
+                    <div class="aspect-[4/3] bg-stone-200 mb-2 flex items-center justify-center p-4">
+                        <span class="text-[10px] text-stone-400 font-bold">Sertifikat 08</span>
+                    </div>
+                    <p class="text-[9px] font-bold uppercase tracking-tighter text-stone-700">UNISA Anniv</p>
+                </div>
+                <!-- Slot 9 -->
+                <div class="cert-slot bg-white border p-2 text-center">
+                    <div class="aspect-[4/3] bg-stone-200 mb-2 flex items-center justify-center p-4">
+                        <span class="text-[10px] text-stone-400 font-bold">Sertifikat 09</span>
+                    </div>
+                    <p class="text-[9px] font-bold uppercase tracking-tighter text-stone-700">UIN Sunan Kalijaga</p>
+                </div>
+                <!-- Slot 10 -->
+                <div class="cert-slot bg-white border p-2 text-center">
+                    <div class="aspect-[4/3] bg-stone-200 mb-2 flex items-center justify-center p-4">
+                        <span class="text-[10px] text-stone-400 font-bold">Sertifikat 10</span>
+                    </div>
+                    <p class="text-[9px] font-bold uppercase tracking-tighter text-stone-700">SMAN 1 Ngaglik</p>
+                </div>
+                <!-- Slot 11 -->
+                <div class="cert-slot bg-white border p-2 text-center">
+                    <div class="aspect-[4/3] bg-stone-200 mb-2 flex items-center justify-center p-4">
+                        <span class="text-[10px] text-stone-400 font-bold">Sertifikat 11</span>
+                    </div>
+                    <p class="text-[9px] font-bold uppercase tracking-tighter text-stone-700">Dewantara Univ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Moments (Mosaic) -->
+    <section class="py-32 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="serif text-5xl font-bold mb-20 text-center">Dokumentasi <span class="italic text-gold">Dampak</span></h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="col-span-2 row-span-2 overflow-hidden bg-stone-100">
+                    <img src="WhatsApp Image 2026-03-04 at 21.28.40.jpeg" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700">
+                </div>
+                <div class="overflow-hidden bg-stone-100 aspect-square">
+                    <img src="WhatsApp Image 2026-03-04 at 21.28.40 (1).jpeg" class="w-full h-full object-cover">
+                </div>
+                <div class="overflow-hidden bg-stone-100 aspect-square">
+                    <img src="WhatsApp Image 2026-03-04 at 21.28.41.jpeg" class="w-full h-full object-cover">
+                </div>
+                <div class="overflow-hidden bg-stone-100 aspect-square">
+                    <img src="WhatsApp Image 2026-03-04 at 21.28.40 (2).jpeg" class="w-full h-full object-cover">
+                </div>
+                <div class="overflow-hidden bg-stone-100 aspect-square">
+                    <img src="WhatsApp Image 2026-03-04 at 21.28.40 (3).jpg" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-40 bg-obsidian text-white px-6">
+        <div class="max-w-5xl mx-auto text-center">
+            <h2 class="serif text-5xl font-bold mb-8">Build the <span class="text-gold italic">Future</span></h2>
+            <p class="text-stone-400 mb-20 text-lg">Tersedia untuk inisiatif pembangunan manusia, riset sosial, dan inovasi program.</p>
+            
+            <div class="grid md:grid-cols-2 gap-12 text-left mb-24">
+                <div class="border-b border-stone-800 pb-8">
+                    <p class="text-gold text-[10px] font-black uppercase tracking-widest mb-2">Electronic Mail</p>
+                    <p class="text-2xl font-bold">zaenalariefrl@gmail.com</p>
+                </div>
+                <div class="border-b border-stone-800 pb-8">
+                    <p class="text-gold text-[10px] font-black uppercase tracking-widest mb-2">Instant Messenger</p>
+                    <p class="text-2xl font-bold">(+62) 822-5362-5293</p>
+                </div>
+                <div class="border-b border-stone-800 pb-8">
+                    <p class="text-gold text-[10px] font-black uppercase tracking-widest mb-2">Location Base</p>
+                    <p class="text-2xl font-bold">Pekalongan, Central Java</p>
+                </div>
+                <div class="border-b border-stone-800 pb-8">
+                    <p class="text-gold text-[10px] font-black uppercase tracking-widest mb-2">Professional Social</p>
+                    <div class="flex gap-6 mt-2">
+                        <a href="#" class="text-sm font-bold hover:text-gold">LinkedIn</a>
+                        <a href="#" class="text-sm font-bold hover:text-gold">Instagram</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 bg-black text-stone-700 text-center text-[9px] font-bold uppercase tracking-[0.4em]">
+        &copy; 2026 Miranto Zaenal Arief — Developed for Excellence.
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
