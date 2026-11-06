@@ -1,0 +1,189 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<style>
+  :root{--navy0:#04122b;--navy1:#0a2350;--blue:#1e88e5;--sky:#4fb3ff;--yellow:#ffc928;--lemon:#ffe31a;--orange:#f7a21b;--white:#ffffff;--mist:#cfd9ea}
+  html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:var(--navy0)}
+  #stage{position:absolute;inset:0;overflow:hidden;transform-origin:50% 40%;
+    background:radial-gradient(ellipse 120% 60% at 50% 18%,#0f3473 0%,#0a2350 38%,#04122b 78%)}
+  #grid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(79,179,255,.55) 1.6px,transparent 2px);background-size:36px 36px;
+    -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.9) 0%,rgba(0,0,0,.15) 35%,transparent 55%,rgba(0,0,0,.25) 85%,rgba(0,0,0,.6) 100%)}
+  #scan{position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--sky),transparent);box-shadow:0 0 30px 6px rgba(79,179,255,.45)}
+  #smoke{position:absolute;inset:0}
+  #wm{position:absolute;right:-40px;bottom:120px;font:900 380px 'Montserrat';color:transparent;-webkit-text-stroke:2px rgba(255,201,40,.10);letter-spacing:-10px}
+  #topbar{position:absolute;left:0;top:0;height:10px;background:linear-gradient(90deg,var(--blue),var(--sky) 45%,var(--yellow) 55%,var(--orange))}
+
+  #plate{position:absolute;left:90px;top:150px;width:900px;height:250px;border-radius:28px;background:#fff;
+    box-shadow:0 30px 80px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;gap:54px;overflow:hidden}
+  #plate img.unikal{height:190px}
+  #plate img.dikti{height:118px}
+  #plate .div{width:3px;height:150px;background:linear-gradient(180deg,transparent,#c9d3e3,transparent)}
+  #plateSweep{position:absolute;top:-20px;bottom:-20px;width:160px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.95),transparent);mix-blend-mode:overlay}
+  #plateLine{position:absolute;left:0;bottom:0;height:8px;background:linear-gradient(90deg,var(--blue),var(--yellow))}
+
+  #kicker{position:absolute;left:90px;top:500px;font:700 30px Montserrat;color:var(--yellow);letter-spacing:7px;white-space:nowrap;display:flex;align-items:center;gap:20px}
+  #kicker .bar{display:inline-block;height:4px;width:60px;background:var(--yellow)}
+  #title{position:absolute;left:90px;top:565px;width:920px;font:900 82px/1.13 'Playfair Display';color:var(--white)}
+  #title .ln{display:block;overflow:hidden;padding-bottom:6px}
+  #title .in{display:inline-block}
+  #title .hl{color:var(--yellow)}
+  #ul{position:absolute;left:90px;height:10px;background:linear-gradient(90deg,var(--yellow),var(--orange));border-radius:5px}
+  #vbar{position:absolute;left:52px;top:580px;width:8px;background:linear-gradient(180deg,var(--sky),var(--blue));border-radius:4px}
+  #sweep{position:absolute;left:0;top:560px;width:1080px;height:560px;pointer-events:none;mix-blend-mode:overlay;
+    background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.75) 50%,transparent 60%);background-size:300% 100%}
+
+  #divider{position:absolute;left:90px;top:1170px;height:2px;background:linear-gradient(90deg,var(--yellow),rgba(255,201,40,.0))}
+  #card{position:absolute;left:90px;top:1210px;width:900px;padding:34px 40px 18px 40px;box-sizing:border-box;border-radius:24px;
+    background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.14);
+    border-left:8px solid var(--yellow);box-shadow:0 30px 70px rgba(0,0,0,.35)}
+  .row{display:flex;align-items:flex-start;gap:28px;margin-bottom:26px}
+  .ic{flex:0 0 76px;height:76px;border-radius:50%;background:linear-gradient(135deg,var(--blue),#1565c0);display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 0 3px rgba(255,201,40,.65)}
+  .ic svg{width:40px;height:40px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .lab{font:700 21px Montserrat;color:var(--yellow);letter-spacing:5px;margin:2px 0 6px}
+  .val{font:500 33px/1.25 Montserrat;color:var(--white)}
+  .val b{font-weight:700}
+  #footer{position:absolute;left:0;right:0;bottom:92px;text-align:center;font:500 22px Montserrat;color:var(--mist);letter-spacing:6px}
+  #footer span{color:var(--yellow)}
+  #vig{position:absolute;inset:0;background:radial-gradient(ellipse 85% 75% at 50% 45%,transparent 55%,rgba(0,0,0,.55) 100%);pointer-events:none}
+  #grain{position:absolute;inset:-60px;opacity:.07;mix-blend-mode:overlay;pointer-events:none}
+  #flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+  #black{position:absolute;inset:0;background:#000;opacity:1;pointer-events:none}
+</style></head>
+<body><div id="stage">
+  <div id="grid"></div><div id="scan"></div><canvas id="smoke" width="1080" height="1920"></canvas><div id="wm">2026</div><div id="topbar"></div>
+
+  <div id="plate">
+    <img class="unikal" src="../assets/img/unikal.png"><div class="div"></div><img class="dikti" src="../assets/img/diktisaintek.png">
+    <div id="plateSweep"></div><div id="plateLine"></div>
+  </div>
+
+  <div id="kicker"><span class="bar"></span><span id="kt">PENGABDIAN KEPADA MASYARAKAT</span></div>
+  <div id="vbar"></div>
+  <div id="title">
+    <span class="ln"><span class="in">Inovasi dan</span></span>
+    <span class="ln"><span class="in">Digitalisasi untuk</span></span>
+    <span class="ln"><span class="in">Meningkatkan</span></span>
+    <span class="ln"><span class="in">Daya Saing</span></span>
+    <span class="ln"><span class="in hl">UMKM Ikan Asap</span></span>
+  </div>
+  <div id="ul"></div>
+  <div id="sweep"></div>
+
+  <div id="divider"></div>
+  <div id="card">
+    <div class="row"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V10M9.5 21V10M14.5 21V10M19 21V10M2 10l10-6 10 6z"/></svg></div>
+      <div><div class="lab">PENYELENGGARA</div><div class="val"><b>Fakultas Ekonomi dan Bisnis</b><br>Universitas Pekalongan</div></div></div>
+    <div class="row"><div class="ic"><svg viewBox="0 0 24 24"><path d="M2 12c3-4.5 7-6 11-6 3.5 0 6 2.5 7 6-1 3.5-3.5 6-7 6-4 0-8-1.5-11-6z"/><path d="M20 12l2.5-3.5v7z"/><circle cx="15.5" cy="10.5" r=".8" fill="#fff"/><path d="M6 6.5c.6-1.4.3-2.6-.4-3.6M9 5.5c.6-1.3.3-2.4-.3-3.3"/></svg></div>
+      <div><div class="lab">MITRA UMKM</div><div class="val"><b>Safina Ikan Asap</b></div></div></div>
+    <div class="row"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
+      <div><div class="lab">LOKASI</div><div class="val">Desa Bukur, Kec. Wonokerto<br>Kabupaten Pekalongan</div></div></div>
+    <div class="row"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+      <div><div class="lab">TAHUN PELAKSANAAN</div><div class="val"><b>2026</b></div></div></div>
+  </div>
+  <div id="footer">FEB UNIKAL <span>&times;</span> SAFINA IKAN ASAP</div>
+
+  <div id="vig"></div><div id="grain"></div><div id="flash"></div><div id="black"></div>
+</div>
+<script src="../tools/motion.js"></script>
+<script>
+// ---- timing constants shared by motion and sound
+const T_LOGO = 1.45, T_KICK = 2.05, T_TITLE = 2.55, LN = 0.27, T_HL = T_TITLE + 4*LN, T_DIV = 4.25, T_ROW = 4.55, RW = 0.36,
+      T_FOOT = 6.2, T_SWEEP = 7.1, T_PSWEEP = 8.25, T_OUT = 9.55, DUR = 10;
+
+const cues = [
+  {t:0, sfx:'pad', dur:DUR, root:49, gain:-15},
+  {t:T_LOGO, sfx:'pulse', dur:T_OUT-T_LOGO, bpm:96, f:45, gain:-21},
+  {t:0.05, sfx:'whoosh', dur:1.2, f0:150, f1:1500, peak:.7, gain:-12},           // scan line rising
+  {t:0.6, sfx:'tick', gain:-16}, {t:0.8, sfx:'tick', f:3400, gain:-17}, {t:1.0, sfx:'tick', gain:-18},
+  {t:T_LOGO-0.08, sfx:'riser', dur:1.35, gain:-7},
+  {t:T_LOGO-0.02, sfx:'reverse_swell', dur:1.0, gain:-9},
+  {t:T_LOGO, sfx:'logo_hit', gain:0},
+  {t:T_LOGO+0.25, sfx:'shimmer', base:988, gain:-11, pan:.2},
+  {t:T_KICK-0.05, sfx:'swish', gain:-10, pan:-.6},
+  {t:T_KICK, sfx:'typing', dur:0.6, rate:22, gain:-11, pan:-.3},
+];
+for (let i = 0; i < 5; i++) cues.push({t:T_TITLE + i*LN - 0.08, sfx:'whoosh', dur:0.55, f0:250, f1:3500, peak:.55, gain:-8 - (i%2), pan:-.5 + i*.25});
+cues.push({t:T_HL+0.12, sfx:'impact', dur:1.6, f0:120, f1:40, punch:.6, gain:-6},
+          {t:T_HL+0.15, sfx:'chime', f:1175, gain:-12, pan:.4},
+          {t:T_DIV, sfx:'swish', gain:-9, pan:.5},
+          {t:T_DIV+0.05, sfx:'click', gain:-14});
+for (let i = 0; i < 4; i++) cues.push({t:T_ROW + i*RW - 0.05, sfx:'whoosh', dur:0.45, f0:400, f1:5000, peak:.5, gain:-10, pan:-.7},
+                                      {t:T_ROW + i*RW + 0.12, sfx:'tick', f:2400 + i*300, gain:-11, pan:-.6});
+cues.push({t:T_FOOT, sfx:'click', gain:-13}, {t:T_FOOT+0.08, sfx:'shimmer', base:1318, dur:1.4, gain:-16},
+          {t:T_SWEEP, sfx:'whoosh', dur:1.0, f0:800, f1:7000, peak:.5, gain:-13, pan:-.4},
+          {t:T_SWEEP+0.45, sfx:'shimmer', base:880, gain:-14, pan:.3},
+          {t:7.9, sfx:'tick', gain:-18}, {t:8.05, sfx:'tick', f:3300, gain:-19},
+          {t:T_PSWEEP, sfx:'swish', gain:-12, pan:.6}, {t:T_PSWEEP+0.2, sfx:'chime', f:1568, gain:-15, pan:.5},
+          {t:T_OUT-0.02, sfx:'reverse_swell', dur:0.9, gain:-9},
+          {t:T_OUT, sfx:'boom', gain:-4}, {t:T_OUT, sfx:'sub_drop', dur:1.0, gain:-8});
+window.SCENE = {width:1080, height:1920, duration:DUR, fps:60, cues};
+
+window.preload = () => Promise.all([...document.images].map(i => i.complete ? 1 : new Promise(r => i.onload = r)));
+M.grain('#grain');
+const lines = [...document.querySelectorAll('#title .in')];
+const rows = [...document.querySelectorAll('.row')];
+const kt = M.$('#kt'), KTXT = kt.textContent;
+const ctx = M.$('#smoke').getContext('2d');
+
+function smoke(t) {
+  ctx.clearRect(0, 0, 1080, 1920);
+  const amt = M.tw(t, 0, 1.4, 0, 1, 'outCubic');
+  for (let i = 0; i < 64; i++) {
+    const r1 = M.rand(i), r2 = M.rand(i + 100), r3 = M.rand(i + 200);
+    const P = 6 + r1 * 5, ph = ((t + r2 * P) % P) / P;
+    const x = 80 + r3 * 920 + Math.sin(t * .35 + i) * 70 + ph * (r1 - .5) * 260;
+    const y = 2050 - ph * 1550;
+    const rad = 90 + ph * 330;
+    const a = Math.sin(ph * Math.PI) * 0.075 * amt;
+    const g = ctx.createRadialGradient(x, y, 0, x, y, rad);
+    g.addColorStop(0, `rgba(215,225,240,${a})`); g.addColorStop(1, 'rgba(215,225,240,0)');
+    ctx.fillStyle = g; ctx.fillRect(x - rad, y - rad, rad * 2, rad * 2);
+  }
+}
+
+window.seek = t => {
+  smoke(t);
+  const [sx, sy] = M.shake(t, T_LOGO, 7, 10);
+  const [hx, hy] = M.shake(t, T_HL + 0.12, 4, 12);
+  M.css('#stage', {transform:`translate(${sx + hx}px,${sy + hy}px) scale(${M.tw(t, 0, DUR, 1.05, 1.0, 'linear')})`});
+  M.css('#black', {opacity: Math.max(1 - M.prog(t, 0, .5), M.E.inCubic(M.prog(t, T_OUT, DUR - T_OUT)))});
+  M.css('#grid', {opacity: M.tw(t, .1, 1.2, 0, .35), backgroundPosition:`0 ${-t * 14}px`});
+  M.css('#scan', {top: M.tw(t, 0.05, 1.3, 1950, -20, 'inOutCubic') + 'px', opacity: M.life(t, .05, 1.35, .2, .2)});
+  M.css('#topbar', {width: M.tw(t, T_LOGO, .8, 0, 1080, 'outExpo') + 'px'});
+  M.css('#wm', {opacity: M.tw(t, T_ROW, 1.5, 0, 1), transform:`translateX(${M.tw(t, T_ROW, DUR - T_ROW, 60, 0, 'outCubic')}px)`});
+
+  // logo plate
+  const pp = M.prog(t, T_LOGO, .6);
+  M.css('#plate', {opacity: Math.min(1, pp * 2.5), transform:`scale(${M.lerp(1.18, 1, M.E.outExpo(pp))})`, filter:`blur(${M.tw(t, T_LOGO, .35, 14, 0)}px)`});
+  M.css('#plateLine', {width: M.tw(t, T_LOGO + .2, .9, 0, 900, 'outExpo') + 'px'});
+  M.css('#plateSweep', {left: M.tw(t, T_PSWEEP, .9, -200, 1000, 'inOutCubic') + 'px', opacity: t > T_PSWEEP && t < T_PSWEEP + .95 ? 1 : 0});
+  M.css('#flash', {opacity: M.flash(t, T_LOGO, .22) * .55 + M.flash(t, T_HL + .12, .12) * .12});
+
+  // kicker typing
+  const n = Math.floor(M.prog(t, T_KICK, .6) * KTXT.length);
+  kt.textContent = KTXT.slice(0, n) + (t > T_KICK && t < T_KICK + 1.0 && Math.floor(t * 8) % 2 ? '|' : '');
+  M.css('#kicker .bar', {width: M.tw(t, T_KICK - .05, .5, 0, 60, 'outExpo') + 'px'});
+
+  // title lines: masked rise
+  lines.forEach((el, i) => { const s = T_TITLE + i * LN;
+    M.css(el, {transform:`translateY(${M.tw(t, s, .7, 115, 0, 'outExpo')}%)`, opacity: M.prog(t, s, .15)}); });
+  M.css('#vbar', {height: M.tw(t, T_TITLE, 1.5, 0, 470, 'outCubic') + 'px'});
+  const hl = lines[4].getBoundingClientRect(), st = M.$('#stage').getBoundingClientRect();
+  M.css('#ul', {top: (M.$('#title').offsetTop + M.$('#title .ln:last-child').offsetTop + M.$('#title .ln:last-child').offsetHeight - 2) + 'px',
+                width: M.tw(t, T_HL + .12, .6, 0, lines[4].offsetWidth, 'outExpo') + 'px'});
+  M.css('#sweep', {backgroundPosition: `${M.tw(t, T_SWEEP, 1.1, 100, 0, 'inOutCubic')}% 0`, opacity: t > T_SWEEP && t < T_SWEEP + 1.15 ? 1 : 0});
+
+  // info card
+  M.css('#divider', {width: M.tw(t, T_DIV, .7, 0, 900, 'outExpo') + 'px'});
+  const cp = M.prog(t, T_DIV + .1, .5);
+  M.css('#card', {opacity: M.E.outCubic(cp), transform:`translateY(${M.lerp(40, 0, M.E.outCubic(cp))}px)`});
+  rows.forEach((r, i) => { const s = T_ROW + i * RW;
+    M.css(r, {opacity: M.prog(t, s, .25), transform:`translateX(${M.tw(t, s, .6, -70, 0, 'outExpo')}px)`});
+    M.css(r.querySelector('.ic'), {transform:`scale(${M.tw(t, s + .1, .5, 0.2, 1, 'outBack')})`}); });
+  M.css('#footer', {opacity: M.prog(t, T_FOOT, .5), letterSpacing: M.tw(t, T_FOOT, 1.2, 14, 6) + 'px'});
+
+  M.css('#grain', {transform:`translate(${(M.rand(Math.floor(t * 24)) - .5) * 40}px,${(M.rand(Math.floor(t * 24) + 9) - .5) * 40}px)`});
+};
+seek(0);
+</script></body></html>
