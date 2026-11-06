@@ -1,0 +1,127 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<style>
+  :root{--navy0:#04122b;--blue:#1e88e5;--sky:#4fb3ff;--yellow:#ffc928;--orange:#f7a21b;--white:#ffffff;--mist:#cfd9ea}
+  html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:var(--navy0)}
+  #stage{position:absolute;inset:0;overflow:hidden;transform-origin:50% 45%;
+    background:radial-gradient(ellipse 110% 55% at 50% 42%,#0f3473 0%,#0a2350 40%,#04122b 80%)}
+  #grid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(79,179,255,.55) 1.6px,transparent 2px);background-size:36px 36px;
+    -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.7) 0%,transparent 30%,transparent 70%,rgba(0,0,0,.7) 100%)}
+  #smoke{position:absolute;inset:0}
+  #topbar,#botbar{position:absolute;left:0;height:10px;background:linear-gradient(90deg,var(--blue),var(--sky) 45%,var(--yellow) 55%,var(--orange))}
+  #topbar{top:0} #botbar{bottom:0;right:0;left:auto}
+
+  #kicker{position:absolute;left:0;right:0;top:560px;text-align:center;font:800 46px Montserrat;color:var(--yellow);letter-spacing:16px;padding-left:16px}
+  #kl,#kr{position:absolute;top:588px;height:3px;background:var(--yellow)}
+  #title{position:absolute;left:70px;right:70px;top:660px;text-align:center;font:900 80px/1.13 'Playfair Display';color:var(--white)}
+  #title .ln{display:block;overflow:hidden;padding-bottom:6px}
+  #title .in{display:inline-block}
+  #title .hl{color:var(--yellow)}
+  #div{position:absolute;top:1170px;left:50%;height:2px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,var(--yellow),transparent)}
+  #univ{position:absolute;left:0;right:0;top:1210px;text-align:center;font:700 40px Montserrat;color:var(--white);white-space:nowrap}
+  #sweep{position:absolute;left:0;top:540px;width:1080px;height:760px;pointer-events:none;mix-blend-mode:overlay;
+    background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.75) 50%,transparent 60%);background-size:300% 100%}
+
+  #plate{position:absolute;left:170px;top:1430px;width:740px;height:200px;border-radius:24px;background:#fff;
+    box-shadow:0 30px 80px rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;gap:44px;overflow:hidden}
+  #plate img.unikal{height:152px}
+  #plate img.dikti{height:94px}
+  #plate .dv{width:3px;height:120px;background:linear-gradient(180deg,transparent,#c9d3e3,transparent)}
+  #plateLine{position:absolute;left:0;bottom:0;height:7px;background:linear-gradient(90deg,var(--blue),var(--yellow))}
+  #plateSweep{position:absolute;top:-20px;bottom:-20px;width:150px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.95),transparent);mix-blend-mode:overlay}
+
+  #vig{position:absolute;inset:0;background:radial-gradient(ellipse 85% 75% at 50% 45%,transparent 55%,rgba(0,0,0,.55) 100%)}
+  #grain{position:absolute;inset:-60px;opacity:.07;mix-blend-mode:overlay}
+  #flash{position:absolute;inset:0;background:#fff;opacity:0}
+  #black{position:absolute;inset:0;background:#000}
+</style></head>
+<body><div id="stage">
+  <div id="grid"></div><canvas id="smoke" width="1080" height="1920"></canvas><div id="topbar"></div><div id="botbar"></div>
+  <div id="kl"></div><div id="kr"></div>
+  <div id="kicker">TIM PKM</div>
+  <div id="title">
+    <span class="ln"><span class="in">Inovasi dan</span></span>
+    <span class="ln"><span class="in">Digitalisasi untuk</span></span>
+    <span class="ln"><span class="in">Meningkatkan</span></span>
+    <span class="ln"><span class="in">Daya Saing</span></span>
+    <span class="ln"><span class="in hl">UMKM Ikan Asap</span></span>
+  </div>
+  <div id="div"></div>
+  <div id="univ">UNIVERSITAS PEKALONGAN</div>
+  <div id="sweep"></div>
+  <div id="plate"><img class="unikal" src="../assets/img/unikal.png"><div class="dv"></div><img class="dikti" src="../assets/img/diktisaintek.png"><div id="plateSweep"></div><div id="plateLine"></div></div>
+  <div id="vig"></div><div id="grain"></div><div id="flash"></div><div id="black"></div>
+</div>
+<script src="../tools/motion.js"></script>
+<script>
+const T_KICK = 0.3, T_TITLE = 0.6, LN = 0.15, T_DIV = 1.45, T_UNIV = 1.6, T_LOGO = 2.3, T_SWEEP = 3.0, T_OUT = 3.95, DUR = 4.6;
+
+const cues = [
+  {t:0, sfx:'pad', dur:DUR, root:49, gain:-15},
+  {t:0.0, sfx:'reverse_swell', dur:0.6, gain:-12},
+  {t:T_KICK, sfx:'impact', dur:1.4, f0:110, f1:40, punch:.5, gain:-7},
+  {t:T_KICK, sfx:'swish', gain:-10},
+  {t:T_KICK+0.05, sfx:'tick', gain:-12, pan:-.4}, {t:T_KICK+0.12, sfx:'tick', f:3300, gain:-12, pan:.4},
+];
+for (let i = 0; i < 5; i++) cues.push({t:T_TITLE + i*LN - 0.06, sfx:'whoosh', dur:0.42, f0:300, f1:4000, peak:.5, gain:-9 - (i%2), pan:(i%2 ? .4 : -.4)});
+cues.push({t:T_TITLE + 4*LN + 0.1, sfx:'chime', f:1175, dur:1.2, gain:-13},
+          {t:T_DIV, sfx:'swish', gain:-10, pan:.3},
+          {t:T_UNIV, sfx:'shimmer', base:988, dur:1.4, gain:-12},
+          {t:T_UNIV+0.05, sfx:'click', gain:-13},
+          {t:T_LOGO-0.03, sfx:'riser', dur:0.7, gain:-10},
+          {t:T_LOGO, sfx:'logo_hit', gain:0},
+          {t:T_LOGO+0.3, sfx:'tick', gain:-16},
+          {t:T_SWEEP, sfx:'whoosh', dur:0.9, f0:800, f1:7000, peak:.5, gain:-13, pan:-.3},
+          {t:T_SWEEP+0.4, sfx:'chime', f:1568, dur:1.2, gain:-14, pan:.4},
+          {t:T_OUT-0.02, sfx:'reverse_swell', dur:0.6, gain:-10},
+          {t:T_OUT, sfx:'boom', gain:-3}, {t:T_OUT, sfx:'sub_drop', dur:0.9, gain:-8});
+window.SCENE = {width:1080, height:1920, duration:DUR, fps:60, cues};
+
+window.preload = () => Promise.all([...document.images].map(i => i.complete ? 1 : new Promise(r => i.onload = r)));
+M.grain('#grain');
+const lines = [...document.querySelectorAll('#title .in')];
+const ctx = M.$('#smoke').getContext('2d');
+function smoke(t) {
+  ctx.clearRect(0, 0, 1080, 1920);
+  for (let i = 0; i < 64; i++) {
+    const r1 = M.rand(i), r2 = M.rand(i + 100), r3 = M.rand(i + 200);
+    const P = 6 + r1 * 5, ph = ((t + 4 + r2 * P) % P) / P;
+    const x = 80 + r3 * 920 + Math.sin(t * .35 + i) * 70 + ph * (r1 - .5) * 260, y = 2050 - ph * 1550, rad = 90 + ph * 330;
+    const a = Math.sin(ph * Math.PI) * 0.07;
+    const g = ctx.createRadialGradient(x, y, 0, x, y, rad);
+    g.addColorStop(0, `rgba(215,225,240,${a})`); g.addColorStop(1, 'rgba(215,225,240,0)');
+    ctx.fillStyle = g; ctx.fillRect(x - rad, y - rad, rad * 2, rad * 2);
+  }
+}
+
+window.seek = t => {
+  smoke(t);
+  const [sx, sy] = M.shake(t, T_LOGO, 6, 10), [kx, ky] = M.shake(t, T_KICK, 4, 12);
+  M.css('#stage', {transform:`translate(${sx + kx}px,${sy + ky}px) scale(${M.tw(t, 0, DUR, 1.04, 1.0, 'linear')})`});
+  M.css('#black', {opacity: Math.max(1 - M.E.outCubic(M.prog(t, 0, .35)), M.E.inCubic(M.prog(t, T_OUT, DUR - T_OUT - .05)))});
+  M.css('#grid', {opacity: .3, backgroundPosition:`0 ${-t * 14}px`});
+  M.css('#topbar', {width: M.tw(t, T_KICK, .8, 0, 1080, 'outExpo') + 'px'});
+  M.css('#botbar', {width: M.tw(t, T_LOGO, .8, 0, 1080, 'outExpo') + 'px'});
+
+  const kp = M.prog(t, T_KICK, .5);
+  M.css('#kicker', {opacity: kp * 2, letterSpacing: M.lerp(40, 16, M.E.outExpo(kp)) + 'px', filter:`blur(${M.lerp(10, 0, M.E.outCubic(kp))}px)`});
+  const lw = M.tw(t, T_KICK + .1, .6, 0, 150, 'outExpo');
+  M.css('#kl', {width: lw + 'px', left: (330 - lw) + 'px'}); M.css('#kr', {width: lw + 'px', left: '750px'});
+
+  lines.forEach((el, i) => { const s = T_TITLE + i * LN;
+    M.css(el, {transform:`translateY(${M.tw(t, s, .6, 115, 0, 'outExpo')}%)`, opacity: M.prog(t, s, .12)}); });
+  M.css('#div', {width: M.tw(t, T_DIV, .6, 0, 760, 'outExpo') + 'px'});
+  const up = M.prog(t, T_UNIV, .6);
+  M.css('#univ', {opacity: up * 1.6, letterSpacing: M.lerp(26, 9, M.E.outExpo(up)) + 'px', paddingLeft: M.lerp(26, 9, M.E.outExpo(up)) + 'px'});
+  M.css('#sweep', {backgroundPosition: `${M.tw(t, T_SWEEP, 1.0, 100, 0, 'inOutCubic')}% 0`, opacity: t > T_SWEEP && t < T_SWEEP + 1.05 ? 1 : 0});
+
+  const pp = M.prog(t, T_LOGO, .55);
+  M.css('#plate', {opacity: Math.min(1, pp * 2.5), transform:`translateY(${M.lerp(60, 0, M.E.outExpo(pp))}px) scale(${M.lerp(1.12, 1, M.E.outExpo(pp))})`, filter:`blur(${M.tw(t, T_LOGO, .3, 12, 0)}px)`});
+  M.css('#plateLine', {width: M.tw(t, T_LOGO + .15, .8, 0, 740, 'outExpo') + 'px'});
+  M.css('#plateSweep', {left: M.tw(t, T_SWEEP + .35, .7, -200, 900, 'inOutCubic') + 'px', opacity: t > T_SWEEP + .35 && t < T_SWEEP + 1.1 ? 1 : 0});
+  M.css('#flash', {opacity: M.flash(t, T_LOGO, .2) * .5 + M.flash(t, T_KICK, .12) * .15});
+  M.css('#grain', {transform:`translate(${(M.rand(Math.floor(t * 24)) - .5) * 40}px,${(M.rand(Math.floor(t * 24) + 9) - .5) * 40}px)`});
+};
+seek(0);
+</script></body></html>
