@@ -1,0 +1,42 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<style>
+  :root{--obsidian:#1a1614;--brown:#2d241e;--gold:#b38b4d;--brass:#d4af37;--paper:#fdfcfb}
+  html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:var(--obsidian)}
+  #stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(ellipse at 50% 55%,#2d241e 0%,#1a1614 70%)}
+  .title{position:absolute;left:0;right:0;top:420px;text-align:center;font:900 140px 'Playfair Display';color:var(--paper);letter-spacing:4px}
+  .sub{position:absolute;left:0;right:0;top:600px;text-align:center;font:500 30px Montserrat;color:var(--brass);letter-spacing:14px;text-transform:uppercase}
+  .line{position:absolute;top:585px;left:50%;height:2px;background:linear-gradient(90deg,transparent,var(--brass),transparent);transform:translateX(-50%)}
+  #flash{position:absolute;inset:0;background:#fff;mix-blend-mode:screen;opacity:0}
+  #grain{position:absolute;inset:-60px;opacity:.08;mix-blend-mode:overlay;pointer-events:none}
+</style></head>
+<body><div id="stage">
+  <div class="title" id="title">TEMPLATE</div><div class="line" id="line"></div><div class="sub" id="sub">pipeline check</div>
+  <div id="grain"></div><div id="flash"></div>
+</div>
+<script src="../tools/motion.js"></script>
+<script>
+const HIT = 1.5;
+window.SCENE = { width:1920, height:1080, duration:4, fps:60, cues:[
+  {t:0,   sfx:'pad', dur:4, gain:-14},
+  {t:HIT, sfx:'riser', dur:1.4, gain:-6},
+  {t:HIT-0.05, sfx:'reverse_swell', gain:-8},
+  {t:HIT, sfx:'logo_hit', gain:0},
+  {t:2.2, sfx:'whoosh', dur:0.6, gain:-6, pan:-0.4},
+  {t:2.5, sfx:'shimmer', gain:-8, pan:0.3},
+  {t:3.4, sfx:'tick', gain:-6},
+]};
+M.grain('#grain');
+const chars = M.split('#title');
+window.seek = t => {
+  const [sx, sy] = M.shake(t, HIT, 16);
+  M.css('#stage', {transform:`translate(${sx}px,${sy}px) scale(${M.tw(t,0,4,1.06,1,'outCubic')})`});
+  chars.forEach((c,i) => { const s = HIT + i*0.03; M.css(c,{opacity:M.prog(t,s,.25), transform:`translateY(${M.tw(t,s,.6,60,0,'outBack')}px)`, filter:`blur(${M.tw(t,s,.4,12,0)}px)`}); });
+  M.css('#line', {width: M.tw(t,2.2,.7,0,900,'outExpo')+'px'});
+  M.css('#sub', {opacity:M.prog(t,2.5,.5), letterSpacing: M.tw(t,2.5,1.2,30,14)+'px'});
+  M.css('#flash', {opacity: M.flash(t,HIT,.2)*.8});
+  M.css('#grain', {transform:`translate(${(M.rand(Math.floor(t*24))-.5)*40}px,${(M.rand(Math.floor(t*24)+9)-.5)*40}px)`});
+};
+seek(0);
+</script></body></html>
