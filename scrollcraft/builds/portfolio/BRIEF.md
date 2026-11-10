@@ -15,7 +15,7 @@ Authored from CV weight, approved by Jen:
 | 02 | Research & AIK (FEBIC 2026, Dean Research, SSC 15) | medium |
 | 03 | Stage: speaking and leadership | rising |
 | 04 | Field: MSME community service, Pempek BOOM, JKafKo | warm |
-| 05 | PEAK: GenRe Indonesia Ambassador 2024 + AYIMUN / SABAH Bridge Malaysia | highest |
+| 05 | PEAK: GenRe Indonesia Ambassador 2024, AYIMUN Kuala Lumpur 2022, Global Millennial MUN international webinar 2021, jury of Duta Budaya DIY 2026 | highest |
 | 06 | Archive: all certificates, full timeline | calm |
 | 07 | Close: contact via email | warm |
 
