@@ -14,3 +14,8 @@
 4. Filled empty floors with real-data graphics: an animated Java map (Pekalongan programmes and Pempek BOOM, Bandung sourcing, distribution arcs without invented destinations) and the FEBIC path model with its betas. No sales chart: only an average yearly figure exists.
 5. End card: portrait background removed locally, enlarged as a papercut figure over the record. Source is 582 px wide, so it is slightly soft.
 6. Music removed; sound effects kept (mean level now about -24 dB).
+
+## Final touch: image quality
+- Every photo re-processed from the original uploads (not the compressed copies): Lanczos upscale to at least its 4K display size, light denoise, unsharp mask, WebP quality 93. The cutout was rebuilt from the 3x portrait.
+- AI super-resolution (Real-ESRGAN) was not used: running a downloaded binary was blocked in this session. Detail the source never had cannot be recovered; sharpening improves edges and removes compression mush.
+- Master rendered at 2160x3840 (`--resolution portrait-4k --quality delivery`); the Instagram file is a Lanczos downscale at CRF 16.
