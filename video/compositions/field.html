@@ -1,0 +1,53 @@
+<template>
+  <style>
+    @font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+    @font-face { font-family: "Geist"; src: url("assets/fonts/geist.woff2") format("woff2"); font-weight: 100 900; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #1d140d; color: #f3eee4; }
+    #f-copy { position: absolute; left: 150px; top: 250px; width: 1600px; }
+    #f-l1, #f-l2 { font: 400 124px/1.04 "Fraunces"; letter-spacing: -0.02em; }
+    #f-l1 span, #f-l2 span { display: inline-block; margin-right: 0.22em; }
+    #f-l2 .gold { color: #c9a45c; }
+    #f-list { margin-top: 56px; font: 400 34px/1.5 "Geist"; color: #cdbfae; max-width: 1300px; }
+    #f-deck { position: absolute; inset: 0;
+      background:
+        repeating-linear-gradient(92deg, rgba(0,0,0,0.05) 0 3px, transparent 3px 11px, rgba(255,220,180,0.025) 11px 13px, transparent 13px 29px),
+        linear-gradient(180deg, #33231a, #24180f); }
+    .rec { position: absolute; left: 260px; top: 100px; width: 880px; height: 880px; border-radius: 50%; box-shadow: 0 30px 70px rgba(0,0,0,0.6); }
+    .spin { position: absolute; inset: 0; border-radius: 50%;
+      background: repeating-radial-gradient(circle at 50% 50%, #0f1013 0 1.5px, #1c1d23 2px 3.2px), #121318; }
+    .sheen { position: absolute; inset: 0; border-radius: 50%;
+      background: conic-gradient(from 20deg, transparent 0 11%, rgba(255,255,255,0.07) 15%, transparent 21% 61%, rgba(255,255,255,0.05) 65%, transparent 71%); }
+    .label { position: absolute; left: 50%; top: 50%; width: 330px; height: 330px; margin: -165px 0 0 -165px; border-radius: 50%;
+      background: radial-gradient(circle, #d6b46c, #c9a45c 60%, #a8853f); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #1a1712; }
+    .label .side { font: 600 28px/1 "Geist"; letter-spacing: 0.28em; text-transform: uppercase; margin-bottom: 92px; }
+    .label .nm { font: 400 30px/1.1 "Fraunces"; max-width: 260px; }
+    .hole { position: absolute; left: 50%; top: 50%; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: #0b0b0d; }
+  </style>
+  <div id="root" data-composition-id="field" data-width="1920" data-height="1080">
+    <div id="f-copy">
+      <h2 id="f-l1"><span>Four</span><span>MSME</span><span>programmes.</span></h2>
+      <h2 id="f-l2"><span>One</span><span class="gold">family</span><span>brand</span><span>grown.</span></h2>
+      <p id="f-list">Batik, smoked fish, cassava crackers, and Pempek BOOM.</p>
+    </div>
+    <div id="f-deck">
+      <div class="rec">
+        <div class="spin" id="f-spin">
+          <div class="sheen"></div>
+          <div class="label" data-layout-ignore><span class="side">Side A</span><span class="nm">Miranto Zaenal Arief</span></div>
+          <div class="hole"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#f-l1 span", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.07, ease: "power2.out" }, 0.1);
+    tl.fromTo("#f-l2 span", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.07, ease: "power2.out" }, 0.9);
+    tl.fromTo("#f-list", { color: "#4a3a2c" }, { color: "#cdbfae", duration: 0.35, ease: "none" }, 1.4);
+    // The record comes home: the plinth slides in from the right, carrying it.
+    tl.fromTo("#f-deck", { x: 1920 }, { x: 0, duration: 0.85, ease: "power3.inOut" }, 2.7);
+    tl.fromTo("#f-copy", { x: 0 }, { x: -500, filter: "blur(12px)", opacity: 0, duration: 0.6, ease: "power3.in" }, 2.75);
+    tl.fromTo("#f-spin", { rotation: -180 }, { rotation: 0, duration: 0.95, ease: "power2.out" }, 2.7);
+    window.__timelines["field"] = tl;
+  </script>
+</template>
