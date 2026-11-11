@@ -59,6 +59,7 @@ def person_jsonld(lang):
                 "description": META["en"]["desc"],
                 "address": {"@type": "PostalAddress", "addressLocality": "Pekalongan",
                             "addressRegion": "Central Java", "addressCountry": "ID"},
+                "sameAs": ["https://www.linkedin.com/in/miranto-zaenal-arief-440467392/"],
                 "affiliation": {"@type": "CollegeOrUniversity", "name": "Universitas Pekalongan"},
                 "alumniOf": [
                     {"@type": "CollegeOrUniversity", "name": "Universitas Pekalongan"},
