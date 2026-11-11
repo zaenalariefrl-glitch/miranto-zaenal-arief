@@ -1,0 +1,971 @@
+<!doctype html>
+<html lang="{{LANG}}" data-lang="{{LANG}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+{{HEAD}}
+<meta name="theme-color" content="#0b1426">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%230b1426'/><circle cx='16' cy='16' r='6' fill='%23c9a45c'/><circle cx='16' cy='16' r='1.4' fill='%230b1426'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,500&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+  /* Six colours and two faces. Navy and gold from the brief; the serif earns
+     its place because the page is set as an LP sleeve and its liner notes. */
+  :root {
+    --sc-canvas:     #0b1426;
+    --sc-surface:    #121d33;
+    --sc-ink:        #f3eee4;
+    --sc-ink-soft:   #aab1c0;
+    --sc-accent:     #c9a45c;
+    --sc-accent-ink: #0b1426;
+    --sc-font-display: "Fraunces", Georgia, serif;
+    --sc-font-text:    "Geist", system-ui, sans-serif;
+
+    --paper: #f1ebdf;
+    --paper-ink: #1a1712;
+    --paper-soft: #5d554a;
+    --umber: #1d140d;
+    --umber-surface: #2a1e14;
+    --gold-soft: color-mix(in oklab, var(--sc-accent) 55%, var(--sc-ink));
+  }
+
+  body { background: var(--sc-canvas); }
+
+  /* ---------- language switch ---------- */
+  html[data-lang="en"] [lang="id"],
+  html[data-lang="id"] [lang="en"] { display: none !important; }
+
+  /* ---------- chrome ---------- */
+  .bar {
+    position: fixed; inset: 0 0 auto 0; z-index: 70;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: var(--sc-4) var(--sc-gutter);
+    pointer-events: none;
+  }
+  .bar > * { pointer-events: auto; }
+  .mark {
+    font-family: var(--sc-font-display); font-size: var(--sc-t-lg);
+    letter-spacing: 0.02em; color: var(--sc-ink); text-decoration: none;
+    mix-blend-mode: difference;
+  }
+  .mark i { color: var(--sc-accent); font-style: normal; }
+  .lang {
+    display: inline-flex; border: 1px solid var(--sc-hairline-strong);
+    border-radius: var(--sc-r-pill); padding: 3px; gap: 2px;
+    background: color-mix(in oklab, var(--sc-canvas) 70%, transparent);
+    backdrop-filter: blur(8px);
+  }
+  .lang a {
+    border: 0; background: transparent; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center;
+    font-size: var(--sc-t-xs); letter-spacing: var(--sc-track-wide);
+    padding: 0.45rem 0.8rem; border-radius: var(--sc-r-pill); color: var(--sc-ink-soft);
+    min-height: 32px;
+  }
+  .lang a[aria-current="page"] { background: var(--sc-accent); color: var(--sc-accent-ink); }
+  .lang a:focus-visible, .player button:focus-visible, a:focus-visible, .cert:focus-visible, .chip:focus-visible {
+    outline: 2px solid var(--sc-accent); outline-offset: 3px;
+  }
+
+  /* ---------- shared type ---------- */
+  .track-no {
+    font-family: var(--sc-font-text); font-size: var(--sc-t-xs);
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--sc-accent);
+    display: block; margin-bottom: var(--sc-4);
+  }
+  .sc-display { font-weight: 400; font-variation-settings: "opsz" 144; }
+  .sc-display em { font-style: italic; color: var(--gold-soft); }
+  .caption { font-size: var(--sc-t-xs); color: var(--sc-ink-soft); letter-spacing: 0.02em; margin-top: var(--sc-2); }
+
+  /* =========================================================
+     A1 · SLEEVE (hero). Layered: ground word, vinyl, sleeve, type.
+     ========================================================= */
+  .hero-stage {
+    overflow: hidden;
+    display: grid; grid-template-columns: 1.05fr 1fr; align-items: center;
+    padding: 0 var(--sc-gutter); gap: clamp(1.5rem, 4vw, 5rem);
+    background:
+      radial-gradient(60% 70% at 72% 50%, color-mix(in oklab, var(--sc-accent) 9%, transparent), transparent 70%),
+      var(--sc-canvas);
+  }
+  .hero-ground {
+    position: absolute; left: -2vw; bottom: -6vh; z-index: 0;
+    font-family: var(--sc-font-display); font-style: italic;
+    font-size: clamp(9rem, 26vw, 26rem); line-height: 0.8; letter-spacing: -0.05em;
+    color: color-mix(in oklab, var(--sc-ink) 4%, transparent);
+    transform: translateY(calc(var(--sc-p, 0) * -14vh));
+    pointer-events: none; user-select: none;
+  }
+  .hero-copy { position: relative; z-index: 3; }
+  .hero-copy h1 { font-size: clamp(3rem, 1.6rem + 5.4vw, 6.6rem); line-height: 0.98; margin: 0 0 var(--sc-5); }
+  .hero-copy .lede { font-family: var(--sc-font-display); font-style: italic; font-size: var(--sc-t-xl); line-height: 1.25; color: var(--sc-ink); max-width: 22ch; margin: 0 0 var(--sc-5); }
+  .hero-copy .role { color: var(--sc-ink-soft); max-width: 44ch; margin: 0; }
+
+  .sleeve-wrap { position: relative; z-index: 2; width: min(100%, 34rem); aspect-ratio: 1; justify-self: start; }
+  .vinyl {
+    position: absolute; inset: 3%; border-radius: 50%; z-index: 1;
+    background:
+      radial-gradient(circle at 50% 50%, var(--sc-accent) 0 15%, #8e7240 15.4% 16%, #0a0a0c 16.4% 17%, transparent 17.2%),
+      repeating-radial-gradient(circle at 50% 50%, #111216 0 1.1px, #1b1c22 1.6px 2.4px),
+      #121318;
+    box-shadow: 0 20px 50px hsl(220 40% 2% / 0.55);
+    transform: translateX(calc(var(--sc-p, 0) * 52%)) rotate(calc(var(--sc-p, 0) * 300deg));
+  }
+  .vinyl::after { /* sheen, so rotation is visible */
+    content: ""; position: absolute; inset: 0; border-radius: 50%;
+    background: conic-gradient(from 20deg, transparent 0 12%, rgb(255 255 255 / 0.07) 16%, transparent 22% 62%, rgb(255 255 255 / 0.05) 66%, transparent 72%);
+  }
+  .sleeve {
+    position: absolute; inset: 0; z-index: 2; margin: 0;
+    background: #0e1830; border: 1px solid color-mix(in oklab, var(--sc-accent) 45%, transparent);
+    box-shadow: var(--sc-e3); overflow: hidden;
+    transform: translateX(calc(var(--sc-p, 0) * -6%));
+  }
+  .sleeve img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; display: block; filter: saturate(0.92) contrast(1.04); }
+  .sleeve::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgb(8 12 24 / 0.85));
+  }
+  .sleeve figcaption {
+    position: absolute; left: var(--sc-5); right: var(--sc-5); bottom: var(--sc-4); z-index: 1;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: var(--sc-t-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--sc-ink);
+  }
+  .sleeve figcaption b { color: var(--sc-accent); font-weight: 500; }
+
+  /* =========================================================
+     A2 · RESEARCH. Liner-notes paper, hard cut.
+     ========================================================= */
+  .paper { background: var(--paper); color: var(--paper-ink); }
+  .paper .sc-body, .paper .caption { color: var(--paper-soft); }
+  .paper .track-no { color: #8a6a2c; }
+  .research { padding-block: clamp(3.5rem, 7vw, 8rem) var(--sc-section); }
+  .research-head { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 7rem); align-items: end; }
+  .research-head h2 { margin: 0; color: var(--paper-ink); }
+  .research-head .sc-body { font-size: var(--sc-t-lg); line-height: 1.5; }
+  .aik-term { font-family: var(--sc-font-display); font-style: italic; color: var(--paper-ink); }
+  .figures { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #cfc5b2; border-bottom: 1px solid #cfc5b2; margin-top: var(--sc-9); }
+  .figure { padding: var(--sc-6) var(--sc-5) var(--sc-6) 0; }
+  .figure + .figure { padding-left: var(--sc-5); border-left: 1px solid #cfc5b2; }
+  .figure .num { font-family: var(--sc-font-display); font-size: clamp(3rem, 2rem + 4vw, 5.6rem); line-height: 1; letter-spacing: -0.03em; display: block; color: var(--paper-ink); }
+  .figure .num small { font-size: 0.42em; font-style: italic; margin-right: 0.15em; color: #8a6a2c; }
+  .figure p { margin: var(--sc-3) 0 0; font-size: var(--sc-t-sm); color: var(--paper-soft); max-width: 30ch; }
+  .papers { margin-top: var(--sc-9); display: grid; gap: 0; }
+  .paper-item { display: grid; grid-template-columns: 7rem minmax(0, 1fr) minmax(0, 0.8fr); gap: var(--sc-6); padding: var(--sc-6) 0; border-top: 1px solid #d9d0bf; }
+  .paper-item:last-child { border-bottom: 1px solid #d9d0bf; }
+  .paper-item .when { font-size: var(--sc-t-sm); color: var(--paper-soft); }
+  .paper-item h3 { font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-lg); line-height: 1.3; margin: 0 0 var(--sc-2); color: var(--paper-ink); }
+  .paper-item .venue { font-size: var(--sc-t-sm); color: #8a6a2c; margin: 0; }
+  .paper-item ul { margin: 0; padding-left: 1.1em; font-size: var(--sc-t-sm); color: var(--paper-soft); }
+  .paper-item li + li { margin-top: var(--sc-2); }
+
+  /* =========================================================
+     A3 · STAGE. Lateral rail: the tour.
+     ========================================================= */
+  .stage-act [data-sc-stage] { background: var(--sc-canvas); display: flex; align-items: center; }
+  .rail { display: flex; gap: clamp(1rem, 2vw, 1.75rem); padding-inline: var(--sc-gutter); align-items: stretch; }
+  .rail > * { flex: 0 0 auto; }
+  .rail-lead { width: clamp(18rem, 30vw, 28rem); display: flex; flex-direction: column; justify-content: center; padding-right: var(--sc-6); }
+  .rail-lead h2 { margin: 0 0 var(--sc-5); }
+  .gig {
+    width: clamp(16rem, 22vw, 20rem); min-height: clamp(24rem, 58vh, 32rem);
+    background: var(--sc-surface); border-radius: var(--sc-r-md); box-shadow: var(--sc-edge), var(--sc-e2);
+    padding: var(--sc-5); display: flex; flex-direction: column; gap: var(--sc-3);
+  }
+  .gig .who { font-size: var(--sc-t-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-accent); }
+  .gig h3 { font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-xl); line-height: 1.12; margin: 0; }
+  .gig p { margin: 0; color: var(--sc-ink-soft); font-size: var(--sc-t-sm); }
+  .gig ul { margin: 0; padding: 0; list-style: none; font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+  .gig ul li { padding: var(--sc-2) 0; border-top: 1px solid var(--sc-hairline); }
+  .gig ul li b { color: var(--sc-ink); font-weight: 500; display: block; }
+  .gig--photo { padding: 0; overflow: hidden; width: clamp(18rem, 30vw, 27rem); position: relative; }
+  .gig--photo img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+  .gig--photo .gig-cap {
+    position: absolute; inset: auto 0 0 0; padding: var(--sc-6) var(--sc-5) var(--sc-5);
+    background: linear-gradient(180deg, transparent, rgb(6 10 20 / 0.92) 55%);
+  }
+  .gig--photo .gig-cap p { color: var(--sc-ink); }
+  .gig--tall { width: clamp(14rem, 18vw, 17rem); }
+  .gig--tall img { object-position: 50% 30%; }
+  .rail-end { width: clamp(16rem, 24vw, 22rem); display: flex; align-items: flex-end; padding-bottom: var(--sc-6); }
+  .rail-end p { font-family: var(--sc-font-display); font-style: italic; font-size: var(--sc-t-xl); line-height: 1.3; margin: 0; }
+
+  /* =========================================================
+     A4 · FIELD. Umber ground, quiet before the peak.
+     ========================================================= */
+  .field { background: var(--umber); padding-block: clamp(3.5rem, 7vw, 8rem) var(--sc-section); }
+  .field-head { max-width: 46rem; }
+  .field-head h2 { margin: 0 0 var(--sc-5); }
+  .field-wipe { margin-top: var(--sc-8); }
+  .field-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); margin-top: var(--sc-8); }
+  .field-grid h3 { font-size: var(--sc-t-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--sc-accent); font-weight: 500; margin: 0 0 var(--sc-4); }
+  .ledger { list-style: none; margin: 0; padding: 0; }
+  .ledger li { padding: var(--sc-5) 0; border-top: 1px solid color-mix(in oklab, var(--sc-ink) 14%, transparent); }
+  .ledger li:last-child { border-bottom: 1px solid color-mix(in oklab, var(--sc-ink) 14%, transparent); }
+  .ledger b { font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-lg); display: block; line-height: 1.3; margin-bottom: var(--sc-2); }
+  .ledger span { color: var(--sc-ink-soft); font-size: var(--sc-t-sm); display: block; }
+  .ledger .tag { color: var(--gold-soft); font-size: var(--sc-t-xs); letter-spacing: 0.08em; margin-top: var(--sc-2); }
+  .field-statement {
+    font-family: var(--sc-font-display); font-size: clamp(2rem, 1.2rem + 3.4vw, 4.2rem); line-height: 1.08; letter-spacing: -0.02em;
+    margin: 0; padding: 0.06em 0 0.12em; max-width: 20ch;
+  }
+
+  /* =========================================================
+     B1 · THE CLIMB (peak). Largest span, pinned, steps cross.
+     ========================================================= */
+  .climb-stage {
+    overflow: hidden;
+    background:
+      radial-gradient(70% 60% at 30% 40%, color-mix(in oklab, var(--sc-accent) 12%, transparent), transparent 70%),
+      #081022;
+  }
+  .climb-rail {
+    position: absolute; right: var(--sc-gutter); top: 50%; translate: 0 -50%; z-index: 30;
+    width: 2px; height: min(56vh, 30rem); background: color-mix(in oklab, var(--sc-ink) 14%, transparent);
+  }
+  .climb-rail::before {
+    content: ""; position: absolute; left: 0; bottom: 0; width: 100%;
+    height: calc(var(--sc-p, 0) * 100%); background: var(--sc-accent);
+  }
+  .climb-head { position: absolute; left: var(--sc-gutter); top: clamp(4.5rem, 11vh, 7rem); z-index: 30; max-width: 40rem; }
+  .climb-head h2 { margin: 0; font-size: var(--sc-t-2xl); }
+  .step {
+    position: absolute; inset: 0; z-index: 20;
+    display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr); align-items: center;
+    gap: clamp(1.5rem, 5vw, 6rem); padding: clamp(13rem, 31vh, 15rem) calc(var(--sc-gutter) + 3rem) clamp(4.5rem, 10vh, 6rem) var(--sc-gutter);
+  }
+  .step figure { margin: 0; height: 100%; max-height: min(56vh, calc(100svh - 20rem)); display: flex; align-items: center; justify-content: center; }
+  .step figure img {
+    width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; border-radius: var(--sc-r-sm);
+    box-shadow: 0 30px 60px hsl(220 50% 2% / 0.6), 0 0 0 1px color-mix(in oklab, var(--sc-accent) 30%, transparent);
+  }
+  .step .year {
+    font-family: var(--sc-font-display); font-style: italic; color: var(--sc-accent);
+    font-size: clamp(4rem, 2.6rem + 6vw, 9rem); line-height: 0.9; letter-spacing: -0.04em; display: block; margin-bottom: var(--sc-4);
+  }
+  .step h3 { font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-2xl); line-height: 1.08; margin: 0 0 var(--sc-4); max-width: 16ch; }
+  .step p { color: var(--sc-ink-soft); margin: 0; max-width: 46ch; }
+  .step .proof { margin-top: var(--sc-4); font-size: var(--sc-t-xs); letter-spacing: 0.04em; color: var(--gold-soft); }
+  .step--peak h3 { font-size: var(--sc-t-3xl); }
+  @media (min-width: 861px) and (max-height: 860px) {
+    .climb-head { top: 5.5rem; }
+    .climb-head h2 { font-size: var(--sc-t-xl); }
+    .step { padding-top: 12rem; }
+    .step .year { font-size: clamp(3.5rem, 2rem + 5vw, 6.5rem); }
+    .step--peak h3 { font-size: var(--sc-t-2xl); }
+  }
+
+  /* =========================================================
+     B2 · ARCHIVE. Every record, verifiable.
+     ========================================================= */
+  .archive { background: var(--sc-canvas); padding-block: clamp(3.5rem, 7vw, 8rem) var(--sc-section); }
+  .archive-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: var(--sc-6); }
+  .archive-head h2 { margin: 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: var(--sc-2); }
+  .chip {
+    border: 1px solid var(--sc-hairline-strong); background: transparent; color: var(--sc-ink-soft);
+    border-radius: var(--sc-r-pill); padding: 0.55rem 1rem; font-size: var(--sc-t-sm); cursor: pointer; min-height: 40px;
+    transition: background-color var(--sc-d-fast) var(--sc-ease-out), color var(--sc-d-fast) var(--sc-ease-out);
+  }
+  .chip[aria-pressed="true"] { background: var(--sc-ink); color: var(--sc-canvas); border-color: var(--sc-ink); }
+  .certs { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: var(--sc-5); margin-top: var(--sc-7); }
+  .cert {
+    background: var(--sc-surface); border-radius: var(--sc-r-md); overflow: hidden; cursor: zoom-in; text-align: left;
+    border: 0; padding: 0; box-shadow: var(--sc-edge), var(--sc-e1); display: flex; flex-direction: column;
+    transition: transform var(--sc-d-base) var(--sc-ease-out), box-shadow var(--sc-d-base) var(--sc-ease-out);
+  }
+  @media (hover: hover) { .cert:hover { transform: translateY(-3px); box-shadow: var(--sc-edge), var(--sc-e3); } }
+  .cert img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: top; display: block; background: #e9e4da; }
+  .cert span { padding: var(--sc-4); display: block; }
+  .cert b { display: block; font-weight: 500; font-size: var(--sc-t-sm); line-height: 1.35; }
+  .cert small { display: block; color: var(--sc-ink-soft); font-size: var(--sc-t-xs); margin-top: var(--sc-1); }
+  .cert[hidden] { display: none; }
+
+  .credits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 4vw, 4rem); margin-top: var(--sc-10); padding-top: var(--sc-7); border-top: 1px solid var(--sc-hairline); }
+  .credits h3 { font-size: var(--sc-t-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--sc-accent); font-weight: 500; margin: 0 0 var(--sc-4); }
+  .credits dl { margin: 0; }
+  .credits dt { font-weight: 500; }
+  .credits dd { margin: 0 0 var(--sc-4); color: var(--sc-ink-soft); font-size: var(--sc-t-sm); }
+  .credits p { margin: 0; color: var(--sc-ink-soft); font-size: var(--sc-t-sm); line-height: 1.7; }
+
+  dialog.lightbox { border: 0; padding: 0; background: transparent; max-width: min(94vw, 70rem); max-height: 92vh; }
+  dialog.lightbox::backdrop { background: rgb(4 8 16 / 0.86); backdrop-filter: blur(6px); }
+  dialog.lightbox img { max-width: 100%; max-height: 84vh; display: block; border-radius: var(--sc-r-sm); }
+  dialog.lightbox p { color: var(--sc-ink); margin: var(--sc-3) 0 0; font-size: var(--sc-t-sm); }
+  dialog.lightbox button { position: absolute; top: 8px; right: 8px; border: 0; border-radius: var(--sc-r-pill); background: var(--sc-ink); color: var(--sc-canvas); width: 40px; height: 40px; cursor: pointer; font-size: 1.1rem; }
+
+  /* =========================================================
+     B3 · LINER NOTES (close). Holds.
+     ========================================================= */
+  .close-stage {
+    display: grid; grid-template-rows: 1fr auto; overflow: hidden;
+    background:
+      radial-gradient(55% 60% at 80% 60%, color-mix(in oklab, var(--sc-accent) 14%, transparent), transparent 70%),
+      var(--sc-canvas);
+  }
+  .close-inner { align-self: center; padding-inline: var(--sc-gutter); max-width: 62rem; }
+  .close-inner h2 { margin: 0 0 var(--sc-6); }
+  .close-line { font-size: var(--sc-t-lg); color: var(--sc-ink-soft); margin: 0; max-width: 44ch; }
+  .close-line a { color: var(--sc-ink); text-decoration-color: var(--sc-accent); text-underline-offset: 0.25em; text-decoration-thickness: 1px; font-family: var(--sc-font-display); font-style: italic; font-size: 1.15em; }
+  .close-line a:hover { color: var(--sc-accent); }
+  .foot {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sc-3);
+    padding: var(--sc-5) var(--sc-gutter) calc(var(--sc-5) + 5.5rem);
+    border-top: 1px solid var(--sc-hairline); font-size: var(--sc-t-xs); color: var(--sc-ink-soft);
+  }
+
+  /* =========================================================
+     SIGNATURE · the record player. Scroll is the needle.
+     ========================================================= */
+  .player {
+    position: fixed; left: clamp(0.75rem, 2vw, 1.75rem); bottom: clamp(0.75rem, 2vw, 1.75rem); z-index: 80;
+    display: flex; align-items: center; gap: var(--sc-3);
+  }
+  .deck {
+    position: relative; width: 104px; height: 104px; border-radius: 14px;
+    background: linear-gradient(160deg, #1a2440, #0d1528); box-shadow: var(--sc-edge), var(--sc-e3);
+    border: 1px solid color-mix(in oklab, var(--sc-accent) 25%, transparent);
+  }
+  .platter {
+    all: unset; cursor: pointer; position: absolute; left: 8px; top: 8px; width: 80px; height: 80px; border-radius: 50%;
+    perspective: 400px;
+  }
+  .record {
+    position: absolute; inset: 0; border-radius: 50%; transform-style: preserve-3d;
+    transition: transform 0.9s var(--sc-ease-in-out);
+  }
+  .record.is-b { transform: rotateY(180deg); }
+  .face {
+    position: absolute; inset: 0; border-radius: 50%; backface-visibility: hidden;
+    background:
+      repeating-radial-gradient(circle, #121318 0 1px, #1e1f26 1.5px 2.2px), #121318;
+    display: grid; place-items: center;
+  }
+  .face--b { transform: rotateY(180deg); }
+  .spin { position: absolute; inset: 0; border-radius: 50%; display: grid; place-items: center; }
+  .spin::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 0deg, transparent 0 10%, rgb(255 255 255 / 0.1) 14%, transparent 20% 60%, rgb(255 255 255 / 0.07) 64%, transparent 70%); }
+  .label {
+    width: 34px; height: 34px; border-radius: 50%; background: var(--sc-accent); color: var(--sc-accent-ink);
+    display: grid; place-items: center; font: 600 10px/1 var(--sc-font-text); letter-spacing: 0.04em; position: relative; z-index: 1;
+  }
+  .face--b .label { background: var(--paper); }
+  .label::after { content: ""; position: absolute; width: 4px; height: 4px; border-radius: 50%; background: #0b0b0d; }
+  .label span { transform: translateY(-8px); }
+  .tonearm {
+    position: absolute; right: 6px; top: 6px; width: 10px; height: 64px; z-index: 3; pointer-events: none;
+    transform-origin: 5px 5px; transform: rotate(var(--arm, 16deg));
+    transition: transform 0.25s linear;
+  }
+  .tonearm::before { content: ""; position: absolute; left: 0; top: 0; width: 10px; height: 10px; border-radius: 50%; background: #c8ccd6; box-shadow: 0 1px 2px #000; }
+  .tonearm::after { content: ""; position: absolute; left: 4px; top: 6px; width: 2px; height: 52px; background: linear-gradient(#d9dde6, #8d93a1); border-radius: 2px; }
+  .tonearm i { position: absolute; left: 1px; bottom: -4px; width: 8px; height: 10px; background: var(--sc-accent); border-radius: 2px; }
+  .deck-meta { display: flex; flex-direction: column; gap: 4px; }
+  .now { font-size: var(--sc-t-xs); color: var(--sc-ink); max-width: 13rem; line-height: 1.3; background: color-mix(in oklab, var(--sc-canvas) 78%, transparent); backdrop-filter: blur(8px); padding: 6px 10px; border-radius: 8px; }
+  .now small { display: block; color: var(--sc-accent); letter-spacing: 0.14em; text-transform: uppercase; font-size: 10px; }
+  .deck-btns { display: flex; gap: 6px; }
+  .deck-btns button {
+    border: 1px solid var(--sc-hairline-strong); background: color-mix(in oklab, var(--sc-canvas) 80%, transparent); backdrop-filter: blur(8px);
+    color: var(--sc-ink); border-radius: var(--sc-r-pill); font-size: var(--sc-t-xs); padding: 0.4rem 0.75rem; cursor: pointer; min-height: 32px;
+  }
+  .deck-btns button[aria-pressed="true"] { background: var(--sc-accent); color: var(--sc-accent-ink); border-color: var(--sc-accent); }
+  .tracklist {
+    position: absolute; left: 0; bottom: calc(100% + 10px); width: min(20rem, calc(100vw - 1.5rem));
+    background: var(--sc-surface); border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-md);
+    box-shadow: var(--sc-e3); padding: var(--sc-3); margin: 0; list-style: none;
+  }
+  .tracklist[hidden] { display: none; }
+  .tracklist a { display: flex; gap: var(--sc-3); padding: 0.55rem 0.6rem; border-radius: 8px; color: var(--sc-ink); text-decoration: none; font-size: var(--sc-t-sm); }
+  .tracklist a:hover, .tracklist a[aria-current="true"] { background: color-mix(in oklab, var(--sc-accent) 16%, transparent); }
+  .tracklist a b { color: var(--sc-accent); font-weight: 500; width: 1.6rem; }
+  .tracklist li.side { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sc-ink-soft); padding: 0.5rem 0.6rem 0.2rem; }
+
+  /* =========================================================
+     Phone composition
+     ========================================================= */
+  @media (max-width: 860px) {
+    .hero-stage { grid-template-columns: 1fr; grid-template-rows: auto auto; align-content: center; gap: var(--sc-6); padding-top: 4.5rem; }
+    .sleeve-wrap { order: -1; width: min(66vw, 18rem); justify-self: start; }
+    .vinyl { transform: translateX(calc(14% + var(--sc-p, 0) * 30%)) rotate(calc(var(--sc-p, 0) * 300deg)); }
+    .hero-copy h1 { font-size: var(--sc-t-3xl); }
+    .hero-copy .lede { font-size: var(--sc-t-lg); }
+    .research-head, .field-grid { grid-template-columns: 1fr; }
+    .figures { grid-template-columns: 1fr; }
+    .figure + .figure { padding-left: 0; border-left: 0; border-top: 1px solid #cfc5b2; }
+    .paper-item { grid-template-columns: 1fr; gap: var(--sc-3); }
+    .gig { min-height: 62vh; width: 78vw; }
+    .gig--photo, .gig--tall { width: 80vw; }
+    .rail-lead { width: 84vw; }
+    .climb-head { top: 4.25rem; }
+    .climb-head h2 { font-size: var(--sc-t-xl); }
+    .step { grid-template-columns: 1fr; grid-template-rows: minmax(0, 0.9fr) auto; align-content: center; padding: 8.5rem var(--sc-gutter) 8.5rem; gap: var(--sc-5); }
+    .step figure { max-height: 34vh; }
+    .step figure img { max-height: 34vh; }
+    .step .year { font-size: var(--sc-t-3xl); margin-bottom: var(--sc-2); }
+    .step h3, .step--peak h3 { font-size: var(--sc-t-xl); }
+    .step p { font-size: var(--sc-t-sm); }
+    .climb-rail { right: 0.6rem; height: 40vh; }
+    .credits { grid-template-columns: 1fr; }
+    .certs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sc-3); }
+    .cert span { padding: var(--sc-3); }
+    .sleeve figcaption { white-space: nowrap; letter-spacing: 0.1em; font-size: 10px; left: var(--sc-3); right: var(--sc-3); }
+    .deck { width: 84px; height: 84px; }
+    .platter { width: 64px; height: 64px; left: 7px; top: 9px; }
+    .tonearm { height: 52px; }
+    .tonearm::after { height: 40px; }
+    .now { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .vinyl, .sleeve, .hero-ground { transform: none; }
+    .record { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<span data-sc-progress></span>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<header class="bar">
+  <a class="mark" href="#t01" aria-label="Miranto Zaenal Arief, back to top">M<i>Z</i>A</a>
+  <div class="lang" role="group" aria-label="Language">
+    <a href="{{HREF_EN}}" hreflang="en" {{CUR_EN}}>EN</a>
+    <a href="{{HREF_ID}}" hreflang="id" {{CUR_ID}}>ID</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- A1 · SLEEVE -->
+  <section id="t01" data-track="A1" data-title-en="Sleeve" data-title-id="Sampul" data-sc-act="pin" data-sc-span="1.7">
+    <div data-sc-stage class="hero-stage">
+      <div class="hero-ground" aria-hidden="true">mza</div>
+      <div class="hero-copy" data-sc-cue="0 0.86 0">
+        <h1 class="sc-display">Miranto Zaenal Arief</h1>
+        <p class="lede">
+          <span lang="en">Researcher by method, leader by practice, and still just getting started.</span>
+          <span lang="id">Peneliti lewat metode, pemimpin lewat praktik, dan baru saja memulai.</span>
+        </p>
+        <p class="role">
+          <span lang="en">International Management, Universitas Pekalongan. Lead author of the Artificial Illusion of Knowledge (AIK) construct. Duta GenRe Indonesia 2024.</span>
+          <span lang="id">Manajemen Internasional, Universitas Pekalongan. Penulis utama konstruk Artificial Illusion of Knowledge (AIK). Duta GenRe Indonesia 2024.</span>
+        </p>
+      </div>
+      <div class="sleeve-wrap">
+        <div class="vinyl" aria-hidden="true"></div>
+        <figure class="sleeve">
+          <img src="assets/img/01-portrait-hero.webp" width="582" height="776" alt="Miranto Zaenal Arief in a black jacket, arms crossed, in front of a wall of certificates and trophies.">
+          <figcaption><span>Pekalongan, Jawa Tengah</span><b>Vol. 1</b></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- A2 · RESEARCH -->
+  <section id="t02" data-track="A2" data-title-en="The Question" data-title-id="Pertanyaan" class="paper research">
+    <div class="sc-wrap">
+      <div class="research-head" data-sc-in data-sc-stagger="70">
+        <div>
+          <span class="track-no">A2 · <span lang="en">Research</span><span lang="id">Riset</span></span>
+          <h2 class="sc-display sc-display--lg">
+            <span lang="en">When AI answers for us, do we <em>still</em> think?</span>
+            <span lang="id">Saat AI menjawab untuk kita, apakah kita <em>masih</em> berpikir?</span>
+          </h2>
+        </div>
+        <p class="sc-body">
+          <span lang="en">My research tests how students who hand their thinking to generative AI end up reasoning, and names a risk I call the <span class="aik-term">Artificial Illusion of Knowledge (AIK)</span>: the feeling of understanding something that the machine, not the mind, has worked out. It rests on Dual-Process Theory and Cognitive Load Theory, and is measured with PLS-SEM.</span>
+          <span lang="id">Riset saya menguji bagaimana mahasiswa yang menyerahkan proses berpikirnya kepada AI generatif akhirnya bernalar, dan menamai satu risiko yang saya sebut <span class="aik-term">Artificial Illusion of Knowledge (AIK)</span>: rasa paham atas sesuatu yang sebenarnya dikerjakan mesin, bukan pikiran. Landasannya Dual-Process Theory dan Cognitive Load Theory, diukur dengan PLS-SEM.</span>
+        </p>
+      </div>
+
+      <div class="figures" data-sc-in data-sc-stagger="90">
+        <div class="figure">
+          <span class="num" data-sc-count="0 183">183</span>
+          <p><span lang="en">management students analysed in the FEBIC 2026 study, screened from 263 responses under pre-set rules.</span><span lang="id">mahasiswa manajemen dianalisis dalam studi FEBIC 2026, disaring dari 263 respons dengan aturan yang ditetapkan sejak awal.</span></p>
+        </div>
+        <div class="figure">
+          <span class="num"><small>β</small><span data-sc-count="0 0.573">0.573</span></span>
+          <p><span lang="en">self-regulated learning to reasoning depth. Cognitive outsourcing ran the other way (β = −0.189).</span><span lang="id">pengaruh self-regulated learning terhadap kedalaman penalaran. Cognitive outsourcing justru berlawanan arah (β = −0,189).</span></p>
+        </div>
+        <div class="figure">
+          <span class="num"><small>R²</small><span data-sc-count="0 0.499">0.499</span></span>
+          <p><span lang="en">variance in scientific reasoning depth explained in the Dean Research study (n = 100, p &lt; 0.001).</span><span lang="id">varians kedalaman penalaran ilmiah yang terjelaskan dalam studi Dean Research (n = 100, p &lt; 0,001).</span></p>
+        </div>
+      </div>
+
+      <div class="papers" data-sc-in data-sc-stagger="70">
+        <article class="paper-item">
+          <span class="when">2026</span>
+          <div>
+            <h3>Cognitive Outsourcing to Generative AI, Self-Regulated Learning, and Reasoning Depth among Management Students</h3>
+            <p class="venue"><span lang="en">Conference paper, FEBIC 2026, Universitas Pekalongan, with faculty supervisor</span><span lang="id">Makalah konferensi, FEBIC 2026, Universitas Pekalongan, bersama dosen pembimbing</span></p>
+          </div>
+          <ul>
+            <li><span lang="en">PLS-SEM with moderation, bootstrap, robustness and predictive checks.</span><span lang="id">PLS-SEM dengan moderasi, bootstrap, uji robustness, dan uji prediktif.</span></li>
+            <li><span lang="en">Extends AIK as an exploratory pathway (outsourcing to AIK, β = 0.405).</span><span lang="id">Mengembangkan AIK sebagai jalur eksploratif (outsourcing ke AIK, β = 0,405).</span></li>
+          </ul>
+        </article>
+        <article class="paper-item">
+          <span class="when">2026</span>
+          <div>
+            <h3>The Impact of Generative AI-Based Cognitive Outsourcing on Students' Scientific Reasoning Depth</h3>
+            <p class="venue">Dean Research, Universitas Pekalongan</p>
+          </div>
+          <ul>
+            <li><span lang="en">Introduced the AIK construct.</span><span lang="id">Memperkenalkan konstruk AIK.</span></li>
+            <li><span lang="en">Self-regulated learning strengthens reasoning depth (coefficient 0.622, p &lt; 0.001).</span><span lang="id">Self-regulated learning memperkuat kedalaman penalaran (koefisien 0,622, p &lt; 0,001).</span></li>
+          </ul>
+        </article>
+        <article class="paper-item">
+          <span class="when">2026</span>
+          <div>
+            <h3>Nurturing Student Reasoning in the Society 5.0 Era: A Human-Centered AI-Based Higher Education Ecosystem</h3>
+            <p class="venue"><span lang="en">Soedirman Science Competition 15, Universitas Jenderal Soedirman, co-authored with Beni Alfandia</span><span lang="id">Soedirman Science Competition ke-15, Universitas Jenderal Soedirman, bersama Beni Alfandia</span></p>
+          </div>
+          <ul>
+            <li><span lang="en">Field study of 100 students who use generative AI.</span><span lang="id">Studi lapangan pada 100 mahasiswa pengguna AI generatif.</span></li>
+            <li><span lang="en">Proposes AI Transparency Statements and a Critical Synthesis Manual.</span><span lang="id">Mengusulkan AI Transparency Statement dan Critical Synthesis Manual.</span></li>
+          </ul>
+        </article>
+        <article class="paper-item">
+          <span class="when">2026</span>
+          <div>
+            <h3><span lang="en">Further studies</span><span lang="id">Studi lain</span></h3>
+            <p class="venue"><span lang="en">With faculty, Universitas Pekalongan</span><span lang="id">Bersama dosen, Universitas Pekalongan</span></p>
+          </div>
+          <ul>
+            <li><span lang="en">Service satisfaction at Kajen Regional General Hospital.</span><span lang="id">Kepuasan layanan di RSUD Kajen.</span></li>
+            <li><span lang="en">Outcome-Based Education (OBE) curriculum research.</span><span lang="id">Riset kurikulum Outcome-Based Education (OBE).</span></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- A3 · STAGE (pan) -->
+  <section id="t03" data-track="A3" data-title-en="On Stage" data-title-id="Di Panggung" class="stage-act" data-sc-act="pan" data-sc-span="5.2">
+    <div data-sc-stage>
+      <div class="rail" data-sc-pan="0.06">
+        <div class="rail-lead">
+          <span class="track-no">A3 · <span lang="en">Stage &amp; leadership</span><span lang="id">Panggung &amp; kepemimpinan</span></span>
+          <h2 class="sc-display sc-display--lg"><span lang="en">Twelve stages, one message.</span><span lang="id">Dua belas panggung, satu pesan.</span></h2>
+          <p class="sc-body"><span lang="en">Universities, schools, a national library and a state ombudsman. Young people can lead, and they should be heard.</span><span lang="id">Kampus, sekolah, perpustakaan nasional, hingga ombudsman. Anak muda bisa memimpin, dan layak didengar.</span></p>
+        </div>
+
+        <article class="gig">
+          <span class="who"><span lang="en">Leadership</span><span lang="id">Kepemimpinan</span></span>
+          <h3><span lang="en">Chair, ISR Student Research Unit</span><span lang="id">Ketua UKM ISR</span></h3>
+          <p>Interdisciplinary Scientific Research, Universitas Pekalongan</p>
+          <ul>
+            <li><b><span lang="en">Student Executive Board</span><span lang="id">BEM</span></b><span lang="en">Ministry of Home Affairs, UNIKAL</span><span lang="id">Kementerian Dalam Negeri, UNIKAL</span></li>
+            <li><b>GenRe Forum DIY</b><span lang="en">Creative Economy Division</span><span lang="id">Divisi Ekonomi Kreatif</span></li>
+            <li><b>Business Law Community, FH UII</b><span lang="en">Human Resource, IPTL Division</span><span lang="id">Human Resource, Divisi IPTL</span></li>
+            <li><b>PIK-M AUSHAF, UII</b><span lang="en">Human Development Index Division</span><span lang="id">Divisi Peningkatan IPM</span></li>
+            <li><b><span lang="en">Scout Council, Pekalongan City</span><span lang="id">Dewan Kerja Saka, Kota Pekalongan</span></b><span lang="en">Planning and Development</span><span lang="id">Perencanaan dan Pengembangan</span></li>
+          </ul>
+        </article>
+
+        <figure class="gig gig--photo">
+          <img src="assets/img/03-talkshow-teenage-brain.webp" width="1280" height="960" loading="lazy" alt="Talkshow on stage in an auditorium; a large screen shows a slide titled Inside the Teenage Brain.">
+          <figcaption class="gig-cap">
+            <span class="who"><span lang="en">Talkshow</span><span lang="id">Talkshow</span></span>
+            <p><span lang="en">Youth health talkshow as a GenRe ambassador.</span><span lang="id">Talkshow kesehatan remaja sebagai Duta GenRe.</span></p>
+          </figcaption>
+        </figure>
+
+        <article class="gig">
+          <span class="who"><span lang="en">Speaker</span><span lang="id">Pembicara</span></span>
+          <h3><span lang="en">Leadership &amp; AI</span><span lang="id">Kepemimpinan &amp; AI</span></h3>
+          <p><span lang="en">National seminar by the Islamic Students Association (HMI): leadership integrity and intellect in the age of AI.</span><span lang="id">Seminar nasional HMI: integritas kepemimpinan dan intelektualitas di era kecerdasan buatan.</span></p>
+          <ul>
+            <li><b>UIN Sunan Kalijaga</b><span lang="en">Gen Z, a resilient generation in the digital era</span><span lang="id">Gen Z, Generasi Tangguh di Era Digitalisasi</span></li>
+            <li><b>HUMANIS, Universitas 'Aisyiyah Yogyakarta</b><span lang="en">Entrepreneurial spirit among Gen Z</span><span lang="id">Menumbuhkan jiwa kewirausahaan Gen Z</span></li>
+            <li><b>Business Law Community, FH UII</b><span lang="en">Job finding strategy and LinkedIn optimisation</span><span lang="id">Strategi mencari kerja dan optimasi LinkedIn</span></li>
+          </ul>
+        </article>
+
+        <figure class="gig gig--photo gig--tall">
+          <img src="assets/img/03-stage-screen-genre-diy.webp" width="739" height="1600" loading="lazy" alt="Miranto speaking into a microphone on stage, his face projected on a large screen behind him.">
+          <figcaption class="gig-cap">
+            <span class="who">GenRe DIY</span>
+            <p><span lang="en">On stage, on screen.</span><span lang="id">Di panggung, di layar.</span></p>
+          </figcaption>
+        </figure>
+
+        <article class="gig">
+          <span class="who"><span lang="en">Public service &amp; health</span><span lang="id">Layanan publik &amp; kesehatan</span></span>
+          <h3><span lang="en">Where it matters</span><span lang="id">Di tempat yang penting</span></h3>
+          <ul>
+            <li><b>Ombudsman DIY</b><span lang="en">Care About Public Services</span><span lang="id">Peduli Pelayanan Publik</span></li>
+            <li><b>Universitas Gadjah Mada</b><span lang="en">Anti-Drug Ambassador selection</span><span lang="id">Pemilihan Duta Anti Napza UGM</span></li>
+            <li><b><span lang="en">Anti-Narcotics Task Force, Region IV DIY</span><span lang="id">Satgas Anti Narkoba, Wilayah IV DIY</span></b><span lang="en">Upgrading session</span><span lang="id">Sesi upgrading</span></li>
+            <li><b>Universitas Sarjanawiyata Tamansiswa</b><span lang="en">Students Against Drugs talkshow</span><span lang="id">Talkshow Mahasiswa Anti Narkoba</span></li>
+            <li><b>SMA Negeri 1 Ngaglik</b><span lang="en">World AIDS Day</span><span lang="id">Hari AIDS Sedunia</span></li>
+          </ul>
+        </article>
+
+        <article class="gig">
+          <span class="who"><span lang="en">Moderator &amp; mentor</span><span lang="id">Moderator &amp; mentor</span></span>
+          <h3><span lang="en">Holding the room</span><span lang="id">Memandu forum</span></h3>
+          <ul>
+            <li><b><span lang="en">National Library of Indonesia</span><span lang="id">Perpustakaan Nasional RI</span></b><span lang="en">Moderator, community literacy programme</span><span lang="id">Moderator, Peningkatan Indeks Literasi Masyarakat</span></li>
+            <li><b>Business Law Community, FH UII</b><span lang="en">Moderator of three webinars and a legal opinion workshop</span><span lang="id">Moderator tiga webinar dan satu workshop legal opinion</span></li>
+            <li><b>SABAH Bridge, Sleman</b><span lang="en">Speaker, Kemah Budaya Beswan DIY</span><span lang="id">Pemateri, Kemah Budaya Beswan DIY</span></li>
+            <li><b><span lang="en">Management Student Association, UNIKAL</span><span lang="id">HIMA Manajemen, UNIKAL</span></b><span lang="en">Peer tutor, accounting</span><span lang="id">Tutor sebaya, akuntansi</span></li>
+          </ul>
+        </article>
+
+        <div class="rail-end">
+          <p><span lang="en">Every stage taught me to listen before I speak.</span><span lang="id">Setiap panggung mengajari saya mendengar sebelum bicara.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- A4 · FIELD -->
+  <section id="t04" data-track="A4" data-title-en="Ground Work" data-title-id="Turun ke Lapangan" class="field">
+    <div class="sc-wrap">
+      <div class="field-head" data-sc-in data-sc-stagger="70">
+        <span class="track-no">A4 · <span lang="en">Field</span><span lang="id">Lapangan</span></span>
+        <h2 class="sc-display sc-display--lg"><span lang="en">Theory has to survive a market stall.</span><span lang="id">Teori harus lolos uji di lapak pasar.</span></h2>
+        <p class="sc-body"><span lang="en">Batik makers, a smoked fish producer, a cassava cracker kitchen and my own family business in Pekalongan. This is where marketing stops being a slide.</span><span lang="id">Perajin batik, produsen ikan asap, dapur kerupuk singkong, dan usaha keluarga saya sendiri di Pekalongan. Di sinilah pemasaran berhenti jadi sekadar slide.</span></p>
+      </div>
+
+      <div class="field-wipe" data-sc-reveal="left" data-sc-reveal-at="0.1 0.5">
+        <p class="field-statement"><span lang="en">Four MSME programmes. One family brand grown.</span><span lang="id">Empat program pendampingan UMKM. Satu usaha keluarga dibesarkan.</span></p>
+      </div>
+
+      <div class="field-grid">
+        <div data-sc-in data-sc-stagger="60">
+          <h3><span lang="en">Community service</span><span lang="id">Pengabdian</span></h3>
+          <ul class="ledger">
+            <li><b><span lang="en">Cassava cracker MSME</span><span lang="id">UMKM kerupuk singkong</span></b><span><span lang="en">Digital capacity and financial governance to lift performance.</span><span lang="id">Kapasitas digital dan tata kelola keuangan untuk meningkatkan kinerja.</span></span><span class="tag">PKM Berdampak 2026</span></li>
+            <li><b><span lang="en">Batik MSMEs, green branding</span><span lang="id">UMKM batik, green branding</span></b><span><span lang="en">Eco-content marketing, then storytelling for sustainability, over two sessions.</span><span lang="id">Eco-content marketing, lalu storytelling for sustainability, dalam dua sesi.</span></span><span class="tag"><span lang="en">Community service programme</span><span lang="id">Program pengabdian masyarakat</span></span></li>
+            <li><b><span lang="en">Safina smoked fish</span><span lang="id">Ikan asap Safina</span></b><span><span lang="en">Innovation and digitalisation for competitiveness.</span><span lang="id">Inovasi dan digitalisasi untuk daya saing.</span></span><span class="tag"><span lang="en">Faculty of Economics and Business, UNIKAL</span><span lang="id">FEB UNIKAL</span></span></li>
+            <li><b><span lang="en">Love, Pride, and Understand the Rupiah</span><span lang="id">Cinta, Bangga, Paham Rupiah</span></b><span><span lang="en">Financial literacy outreach with the Pekalongan City Community Learning Center.</span><span lang="id">Edukasi literasi keuangan bersama PKBM Kota Pekalongan.</span></span></li>
+          </ul>
+        </div>
+        <div data-sc-in data-sc-stagger="60">
+          <h3><span lang="en">Business</span><span lang="id">Bisnis</span></h3>
+          <ul class="ledger">
+            <li><b>Pempek BOOM</b><span><span lang="en">Digital marketing and distribution since 2023. Distribution across provinces and about 6% average annual sales growth through online market optimisation.</span><span lang="id">Pemasaran digital dan distribusi sejak 2023. Jaringan distribusi lintas provinsi dan pertumbuhan penjualan rata-rata sekitar 6% per tahun lewat optimasi pasar online.</span></span></li>
+            <li><b>Coiss Studios · JKafKo</b><span><span lang="en">Head of Merchandising and Sourcing for a kaftan and koko line. Surveyed 8 vendors in Bandung and built a price-per-metre database (Rp15,311 to Rp31,715).</span><span lang="id">Head of Merchandising &amp; Sourcing lini kaftan dan koko. Survei 8 vendor di Bandung dan menyusun basis data harga per meter (Rp15.311 sampai Rp31.715).</span></span></li>
+            <li><b><span lang="en">English tutor</span><span lang="id">Tutor bahasa Inggris</span></b><span><span lang="en">Private lessons for a six-year-old, with original materials built around the learner's own drawing.</span><span lang="id">Les privat untuk anak usia enam tahun, dengan materi orisinal yang dibangun dari gambar si anak sendiri.</span></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- B1 · THE CLIMB (peak) -->
+  <section id="t05" data-track="B1" data-title-en="The Climb" data-title-id="Pendakian" data-sc-act="pin" data-sc-span="5.4">
+    <div data-sc-stage class="climb-stage">
+      <div class="climb-head" data-sc-cue="0 1 0 0">
+        <span class="track-no">B1 · <span lang="en">The climb</span><span lang="id">Pendakian</span></span>
+        <h2 class="sc-display"><span lang="en">From Pekalongan to the national stage.</span><span lang="id">Dari Pekalongan ke panggung nasional.</span></h2>
+      </div>
+      <div class="climb-rail" aria-hidden="true"></div>
+
+      <div class="step" data-sc-cue="0 0.16 0 0.1">
+        <figure><img src="assets/cert/cert-global-millennial-mun-2021.webp" width="1400" height="993" loading="lazy" alt="Certificate of appreciation from Global Millennial Model United Nations naming Miranto Zaenal Arief as speaker."></figure>
+        <div>
+          <span class="year">2021</span>
+          <h3><span lang="en">First international stage</span><span lang="id">Panggung internasional pertama</span></h3>
+          <p><span lang="en">Speaker at an international webinar by Global Millennial MUN: how to keep our well-being while pursuing self-development.</span><span lang="id">Pembicara webinar internasional Global Millennial MUN: menjaga kesejahteraan diri dalam proses pengembangan diri.</span></p>
+          <p class="proof"><span lang="en">Recognised by the Ministry of Education, Culture, Research, and Technology</span><span lang="id">Diakui Kemendikbudristek</span></p>
+        </div>
+      </div>
+
+      <div class="step" data-sc-cue="0.155 0.31 0.1 0.1">
+        <figure><img src="assets/cert/proof-ayimun-2022-email.webp" width="1051" height="543" loading="lazy" alt="Email from Asia Youth International MUN announcing that Miranto Zaenal Arief was selected to join AYIMUN Malaysia 2022."></figure>
+        <div>
+          <span class="year">2022</span>
+          <h3><span lang="en">Delegate, Kuala Lumpur</span><span lang="id">Delegasi, Kuala Lumpur</span></h3>
+          <p><span lang="en">Selected as an Indonesian delegate to the Asia Youth International Model United Nations in Malaysia.</span><span lang="id">Terpilih sebagai delegasi Indonesia di Asia Youth International Model United Nations, Malaysia.</span></p>
+          <p class="proof"><span lang="en">Selection letter, 6 August 2022</span><span lang="id">Surat seleksi, 6 Agustus 2022</span></p>
+        </div>
+      </div>
+
+      <div class="step" data-sc-cue="0.305 0.46 0.1 0.1">
+        <figure><img src="assets/img/05-genre-diy-2023-tamansari.webp" width="1280" height="1600" loading="lazy" alt="Miranto and his female counterpart in navy Javanese attire wearing sashes reading Duta GenRe DIY 2023 Juara 1."></figure>
+        <div>
+          <span class="year">2023</span>
+          <h3><span lang="en">Duta GenRe DIY, first place</span><span lang="id">Juara 1 Putra, Duta GenRe DIY</span></h3>
+          <p><span lang="en">First place, male category, Planning Generation (GenRe) Ambassador of the Special Region of Yogyakarta.</span><span lang="id">Juara 1 Putra Duta Generasi Berencana (GenRe) tingkat Daerah Istimewa Yogyakarta.</span></p>
+          <p class="proof"><span lang="en">Charter from BKKBN DIY, 28 March 2023</span><span lang="id">Piagam BKKBN DIY, 28 Maret 2023</span></p>
+        </div>
+      </div>
+
+      <div class="step" data-sc-cue="0.455 0.61 0.1 0.1">
+        <figure><img src="assets/cert/cert-gubernur-diy-genre-mahasiswa-2023.webp" width="800" height="1280" loading="lazy" alt="Charter of appreciation from the Governor of Yogyakarta, Hamengku Buwono X, naming Miranto Zaenal Arief Terbaik I Putera."></figure>
+        <div>
+          <span class="year">2023</span>
+          <h3><span lang="en">Signed by the Sultan</span><span lang="id">Ditandatangani Sri Sultan</span></h3>
+          <p><span lang="en">Best I, male, in the university student GenRe ambassador selection for the Special Region of Yogyakarta.</span><span lang="id">Terbaik I Putera seleksi Duta Mahasiswa GenRe tingkat Daerah Istimewa Yogyakarta.</span></p>
+          <p class="proof"><span lang="en">Governor's charter signed by Hamengku Buwono X, 13 July 2023</span><span lang="id">Piagam Gubernur DIY, ditandatangani Hamengku Buwono X, 13 Juli 2023</span></p>
+        </div>
+      </div>
+
+      <div class="step step--peak" data-sc-cue="0.605 0.84 0.08 0.08">
+        <figure><img src="assets/img/05-genre-indonesia-auditorium-selfie.webp" width="960" height="1280" loading="lazy" alt="Group selfie on an auditorium stage with Miranto wearing a Duta GenRe Indonesia sash, a full audience behind."></figure>
+        <div>
+          <span class="year">2024</span>
+          <h3>Duta GenRe Indonesia</h3>
+          <p><span lang="en">Representing the Special Region of Yogyakarta at the national GenRe Ambassador Appreciation and Jamboree, Denpasar, Bali.</span><span lang="id">Mewakili Daerah Istimewa Yogyakarta pada Apresiasi Duta dan Jambore Ajang Kreativitas GenRe tingkat nasional, Denpasar, Bali.</span></p>
+          <p class="proof"><span lang="en">BKKBN certificate No. 2769/PK.02.00/F2/2024, 17 to 21 September 2024</span><span lang="id">Sertifikat BKKBN No. 2769/PK.02.00/F2/2024, 17 sampai 21 September 2024</span></p>
+        </div>
+      </div>
+
+      <div class="step" data-sc-cue="0.835 1 0.1 0">
+        <figure><img src="assets/cert/cert-juri-duta-budaya-diy-2026.webp" width="1280" height="963" loading="lazy" alt="Certificate naming Miranto Zaenal Arief as a member of the jury for the Duta Budaya DIY selection."></figure>
+        <div>
+          <span class="year">2026</span>
+          <h3><span lang="en">Now on the jury</span><span lang="id">Kini menjadi juri</span></h3>
+          <p><span lang="en">From contestant to judge: member of the jury for the 7th generation Duta Budaya DIY selection.</span><span lang="id">Dari peserta menjadi penilai: Dewan Juri Pemilihan Duta Budaya DIY generasi ke-7.</span></p>
+          <p class="proof"><span lang="en">16 November 2025 to 13 February 2026</span><span lang="id">16 November 2025 sampai 13 Februari 2026</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- B2 · ARCHIVE -->
+  <section id="t06" data-track="B2" data-title-en="The Archive" data-title-id="Arsip" class="archive">
+    <div class="sc-wrap">
+      <div class="archive-head" data-sc-in data-sc-stagger="60">
+        <div>
+          <span class="track-no">B2 · <span lang="en">Archive</span><span lang="id">Arsip</span></span>
+          <h2 class="sc-display sc-display--lg"><span lang="en">Every record, on file.</span><span lang="id">Semua rekam jejak, terarsip.</span></h2>
+        </div>
+        <div class="chips" role="group" aria-label="Filter">
+          <button class="chip" type="button" data-filter="all" aria-pressed="true"><span lang="en">All</span><span lang="id">Semua</span></button>
+          <button class="chip" type="button" data-filter="award" aria-pressed="false"><span lang="en">Awards</span><span lang="id">Penghargaan</span></button>
+          <button class="chip" type="button" data-filter="speaker" aria-pressed="false"><span lang="en">Speaker</span><span lang="id">Pembicara</span></button>
+          <button class="chip" type="button" data-filter="moderator" aria-pressed="false">Moderator</button>
+          <button class="chip" type="button" data-filter="intl" aria-pressed="false"><span lang="en">International</span><span lang="id">Internasional</span></button>
+        </div>
+      </div>
+
+      <div class="certs" id="certs" data-sc-in data-sc-stagger="40">
+        <button type="button" class="cert" data-kind="award" data-full="assets/cert/cert-genre-indonesia-2024.webp"><img src="assets/cert/cert-genre-indonesia-2024-thumb.webp" loading="lazy" width="520" height="390" alt="Certificate: Duta GenRe Indonesia 2024"><span><b><span lang="en">Duta GenRe Indonesia 2024</span><span lang="id">Duta GenRe Indonesia 2024</span></b><small>BKKBN · Denpasar, Bali · 2024</small></span></button>
+        <button type="button" class="cert" data-kind="award" data-full="assets/cert/cert-gubernur-diy-genre-mahasiswa-2023.webp"><img src="assets/cert/cert-gubernur-diy-genre-mahasiswa-2023-thumb.webp" loading="lazy" width="520" height="390" alt="Certificate: Best I Male, Student GenRe Ambassador DIY"><span><b><span lang="en">Best I Male, Student GenRe Ambassador DIY</span><span lang="id">Terbaik I Putera, Duta Mahasiswa GenRe DIY</span></b><small>Governor of DIY · 2023</small></span></button>
+        <button type="button" class="cert" data-kind="award" data-full="assets/cert/cert-bkkbn-diy-genre-juara1-2023.webp"><img src="assets/cert/cert-bkkbn-diy-genre-juara1-2023-thumb.webp" loading="lazy" width="520" height="390" alt="Certificate: First Place Male, Duta GenRe DIY"><span><b><span lang="en">First Place Male, Duta GenRe DIY</span><span lang="id">Juara 1 Putra, Duta GenRe DIY</span></b><small>BKKBN DIY · 2023</small></span></button>
+        <button type="button" class="cert" data-kind="award" data-full="assets/cert/cert-juri-duta-budaya-diy-2026.webp"><img src="assets/cert/cert-juri-duta-budaya-diy-2026-thumb.webp" loading="lazy" width="520" height="390" alt="Certificate: Jury, Duta Budaya DIY selection"><span><b><span lang="en">Jury, Duta Budaya DIY selection</span><span lang="id">Dewan Juri, Pemilihan Duta Budaya DIY</span></b><small>Duta Budaya DIY · 2025 to 2026</small></span></button>
+        <button type="button" class="cert" data-kind="intl" data-full="assets/cert/proof-ayimun-2022-email.webp"><img src="assets/cert/proof-ayimun-2022-email-thumb.webp" loading="lazy" width="520" height="390" alt="Certificate: Selected delegate, AYIMUN Malaysia"><span><b><span lang="en">Selected delegate, AYIMUN Malaysia</span><span lang="id">Delegasi terpilih, AYIMUN Malaysia</span></b><small>Asia Youth International MUN · 2022</small></span></button>
+        <button type="button" class="cert" data-kind="speaker intl" data-full="assets/cert/cert-global-millennial-mun-2021.webp"><img src="assets/cert/cert-global-millennial-mun-2021-thumb.webp" loading="lazy" width="520" height="390" alt="Certificate: Speaker, international webinar"><span><b><span lang="en">Speaker, international webinar</span><span lang="id">Pembicara, webinar internasional</span></b><small>Global Millennial MUN · 2021</small></span></button>
+        <button type="button" class="cert" data-kind="speaker" data-full="assets/cert/cert-uin-suka-2024.webp"><img src="assets/cert/cert-uin-suka-2024-thumb.webp" loading="lazy" width="520" height="390" alt="Certificate: Speaker, Gen Z in the digital era"><span><b><span lang="en">Speaker, Gen Z in the digital era</span><span lang="id">Pemateri, Gen Z Generasi Tangguh</span></b><small>UIN Sunan Kalijaga · 2024</small></span></button>
+        <button type="button" class="cert" data-kind="speaker" data-full="assets/cert/cert-humanis-unisa-2023.webp"><img src="assets/cert/cert-humanis-unisa-2023-thumb.webp" loading="lazy" width="520" height="390" alt="Certificate: Speaker, Gen Z entrepreneurship"><span><b><span lang="en">Speaker, Gen Z entrepreneurship</span><span lang="id">Pemateri, kewirausahaan Gen Z</span></b><small>HUMANIS, Universitas &#39;Aisyiyah Yogyakarta · 2023</small></span></button>
+        <button type="button" class="cert" data-kind="speaker" data-full="assets/cert/cert-ugm-duta-anti-napza-2023.webp"><img src="assets/cert/cert-ugm-duta-anti-napza-2023-thumb.webp" loading="lazy" width="520" height="390" alt="Certificate: Speaker, Anti-Drug Ambassador selection"><span><b><span lang="en">Speaker, Anti-Drug Ambassador selection</span><span lang="id">Pembicara, Pemilihan Duta Anti Napza</span></b><small>Universitas Gadjah Mada · 2023</small></span></button>
+        <button type="button" class="cert" data-kind="speaker" data-full="assets/cert/cert-ust-anti-narkoba-2023.webp"><img src="assets/cert/cert-ust-anti-narkoba-2023-thumb.webp" loading="lazy" width="520" height="390" alt="Certificate: Speaker, Students Against Drugs"><span><b><span lang="en">Speaker, Students Against Drugs</span><span lang="id">Pemateri, Mahasiswa Anti Narkoba</span></b><small>Universitas Sarjanawiyata Tamansiswa · 2023</small></span></button>
+        <button type="button" class="cert" data-kind="speaker" data-full="assets/cert/cert-sman1-ngaglik-aids-2023.webp"><img src="assets/cert/cert-sman1-ngaglik-aids-2023-thumb.webp" loading="lazy" width="520" height="390" alt="Certificate: Speaker, World AIDS Day"><span><b><span lang="en">Speaker, World AIDS Day</span><span lang="id">Narasumber, Hari AIDS Sedunia</span></b><small>SMA Negeri 1 Ngaglik · 2023</small></span></button>
+        <button type="button" class="cert" data-kind="speaker" data-full="assets/cert/cert-sabah-bridge-kemah-budaya-2023.webp"><img src="assets/cert/cert-sabah-bridge-kemah-budaya-2023-thumb.webp" loading="lazy" width="520" height="390" alt="Certificate: Speaker, Kemah Budaya Beswan DIY"><span><b><span lang="en">Speaker, Kemah Budaya Beswan DIY</span><span lang="id">Pemateri, Kemah Budaya Beswan DIY</span></b><small>SABAH Bridge · Sleman · 2023</small></span></button>
+        <button type="button" class="cert" data-kind="moderator" data-full="assets/cert/cert-perpusnas-moderator-2021.webp"><img src="assets/cert/cert-perpusnas-moderator-2021-thumb.webp" loading="lazy" width="520" height="390" alt="Certificate: Moderator, community literacy index"><span><b><span lang="en">Moderator, community literacy index</span><span lang="id">Moderator, Peningkatan Indeks Literasi</span></b><small>Perpustakaan Nasional RI · 2021</small></span></button>
+        <button type="button" class="cert" data-kind="moderator" data-full="assets/cert/cert-blc-uii-moderator-25aug2023.webp"><img src="assets/cert/cert-blc-uii-moderator-25aug2023-thumb.webp" loading="lazy" width="520" height="390" alt="Certificate: Moderator, investment policy webinar"><span><b><span lang="en">Moderator, investment policy webinar</span><span lang="id">Moderator, webinar kebijakan investasi</span></b><small>Business Law Community, FH UII · 2023</small></span></button>
+        <button type="button" class="cert" data-kind="moderator" data-full="assets/cert/cert-blc-uii-moderator-26aug2023.webp"><img src="assets/cert/cert-blc-uii-moderator-26aug2023-thumb.webp" loading="lazy" width="520" height="390" alt="Certificate: Moderator, divestment dispute webinar"><span><b><span lang="en">Moderator, divestment dispute webinar</span><span lang="id">Moderator, webinar sengketa divestasi</span></b><small>Business Law Community, FH UII · 2023</small></span></button>
+        <button type="button" class="cert" data-kind="moderator" data-full="assets/cert/cert-blc-uii-moderator-27aug2023.webp"><img src="assets/cert/cert-blc-uii-moderator-27aug2023-thumb.webp" loading="lazy" width="520" height="390" alt="Certificate: Moderator, legal opinion workshop"><span><b><span lang="en">Moderator, legal opinion workshop</span><span lang="id">Moderator, workshop legal opinion</span></b><small>Business Law Community, FH UII · 2023</small></span></button>
+      </div>
+
+      <div class="credits" data-sc-in data-sc-stagger="70">
+        <div>
+          <h3><span lang="en">Education</span><span lang="id">Pendidikan</span></h3>
+          <dl>
+            <dt>Universitas Pekalongan</dt>
+            <dd><span lang="en">Bachelor's, International Management, Faculty of Economics and Business (International Class), 2025 to 2029 (expected)</span><span lang="id">S1 Manajemen Internasional, Fakultas Ekonomi dan Bisnis (Kelas Internasional), 2025 sampai 2029 (perkiraan)</span></dd>
+            <dt>Universitas Islam Indonesia</dt>
+            <dd><span lang="en">Business Law (non-degree), 2022 to 2024</span><span lang="id">Hukum Bisnis (non-gelar), 2022 sampai 2024</span></dd>
+          </dl>
+        </div>
+        <div>
+          <h3><span lang="en">Skills</span><span lang="id">Keahlian</span></h3>
+          <p><span lang="en">PLS-SEM and statistical analysis, digital marketing, online market optimisation, distribution network management, event and programme management, public speaking, cross-cultural communication.</span><span lang="id">PLS-SEM dan analisis statistik, pemasaran digital, optimasi pasar online, manajemen jaringan distribusi, manajemen acara dan program, public speaking, komunikasi lintas budaya.</span></p>
+        </div>
+        <div>
+          <h3><span lang="en">Languages</span><span lang="id">Bahasa</span></h3>
+          <p><span lang="en">Indonesian, English, Javanese.</span><span lang="id">Indonesia, Inggris, Jawa.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- B3 · LINER NOTES (close) -->
+  <section id="t07" data-track="B3" data-title-en="Liner Notes" data-title-id="Catatan Sampul" data-sc-act="pin" data-sc-span="1.1">
+    <div data-sc-stage class="close-stage">
+      <div class="close-inner">
+        <span class="track-no" data-sc-cue="0 1 0 0">B3 · <span lang="en">Liner notes</span><span lang="id">Catatan sampul</span></span>
+        <h2 class="sc-display sc-display--lg" data-sc-cue="0 1 0 0"><span lang="en">Researcher by method, leader by practice, and still just getting started.</span><span lang="id">Peneliti lewat metode, pemimpin lewat praktik, dan baru saja memulai.</span></h2>
+        <p class="close-line" data-sc-cue="0 1 0 0"><span lang="en">For research, speaking, or collaboration, write to</span><span lang="id">Untuk riset, undangan bicara, atau kolaborasi, kirim email ke</span> <a href="mailto:zaenalariefrl@gmail.com">zaenalariefrl@gmail.com</a></p>
+      </div>
+      <footer class="foot">
+        <span>© 2026 Miranto Zaenal Arief · Pekalongan</span>
+        <span><span lang="en">Music: original bossa nova composed for this page.</span><span lang="id">Musik: bossa nova orisinal yang dibuat khusus untuk halaman ini.</span></span>
+      </footer>
+    </div>
+  </section>
+
+</main>
+
+<!-- SIGNATURE: the record player -->
+<div class="player" id="player">
+  <ol class="tracklist" id="tracklist" hidden></ol>
+  <div class="deck">
+    <button class="platter" id="platter" type="button" aria-pressed="false">
+      <span class="visually-hidden" id="platter-label">Play music</span>
+      <span class="record" id="record">
+        <span class="face face--a"><span class="spin" id="spinA"><span class="label"><span>A</span></span></span></span>
+        <span class="face face--b"><span class="spin" id="spinB"><span class="label"><span>B</span></span></span></span>
+      </span>
+    </button>
+    <span class="tonearm" id="tonearm" aria-hidden="true"><i></i></span>
+  </div>
+  <div class="deck-meta">
+    <p class="now" id="now" aria-live="polite"><small>A1</small>Sleeve</p>
+    <div class="deck-btns">
+      <button type="button" id="tl-btn" aria-expanded="false" aria-controls="tracklist"><span lang="en">Tracklist</span><span lang="id">Daftar lagu</span></button>
+    </div>
+  </div>
+  <audio id="music" src="assets/audio/after-hours-bossa.mp3" loop preload="none"></audio>
+</div>
+
+<dialog class="lightbox" id="lightbox">
+  <button type="button" id="lb-close" aria-label="Close">✕</button>
+  <img id="lb-img" alt="">
+  <p id="lb-cap"></p>
+</dialog>
+
+<style>
+  .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+
+<script src="scrollcraft.js"></script>
+<script>ScrollCraft.mount(document.body);</script>
+<script>
+(function () {
+  var root = document.documentElement;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- language ---------- */
+  function setLang(l) {
+    updateNow(true);
+    renderTracklist();
+    syncPlatterLabel();
+  }
+  var initial = root.dataset.lang;
+
+  /* ---------- archive filter + lightbox ---------- */
+  var chips = document.querySelectorAll('.chip');
+  chips.forEach(function (ch) {
+    ch.addEventListener('click', function () {
+      var f = ch.dataset.filter;
+      chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c === ch)); });
+      document.querySelectorAll('.cert').forEach(function (el) {
+        el.hidden = !(f === 'all' || el.dataset.kind.split(' ').indexOf(f) > -1);
+      });
+    });
+  });
+  var lb = document.getElementById('lightbox'), lbImg = document.getElementById('lb-img'), lbCap = document.getElementById('lb-cap');
+  document.getElementById('certs').addEventListener('click', function (e) {
+    var b = e.target.closest('.cert'); if (!b) return;
+    lbImg.src = b.dataset.full;
+    var t = b.querySelector('b [lang="' + root.dataset.lang + '"]');
+    lbImg.alt = t ? t.textContent : '';
+    lbCap.textContent = (t ? t.textContent : '') + ' · ' + b.querySelector('small').textContent;
+    if (lb.showModal) lb.showModal();
+  });
+  document.getElementById('lb-close').addEventListener('click', function () { lb.close(); });
+  lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
+
+  /* ---------- the record player ---------- */
+  var tracks = Array.prototype.slice.call(document.querySelectorAll('[data-track]'));
+  var tl = document.getElementById('tracklist'), tlBtn = document.getElementById('tl-btn');
+  var now = document.getElementById('now'), arm = document.getElementById('tonearm');
+  var record = document.getElementById('record');
+  var spinA = document.getElementById('spinA'), spinB = document.getElementById('spinB');
+  var platter = document.getElementById('platter'), music = document.getElementById('music');
+  var current = -1, playing = false, spinDeg = 0, last = performance.now();
+
+  function title(t) { return t.getAttribute('data-title-' + root.dataset.lang); }
+
+  function renderTracklist() {
+    var html = '', side = '';
+    tracks.forEach(function (t, i) {
+      var s = t.dataset.track.charAt(0);
+      if (s !== side) { side = s; html += '<li class="side">' + (root.dataset.lang === 'id' ? 'Sisi ' : 'Side ') + s + '</li>'; }
+      html += '<li><a href="#' + t.id + '"' + (i === current ? ' aria-current="true"' : '') + '><b>' + t.dataset.track + '</b>' + title(t) + '</a></li>';
+    });
+    tl.innerHTML = html;
+  }
+  tlBtn.addEventListener('click', function () {
+    var open = tl.hidden; tl.hidden = !open; tlBtn.setAttribute('aria-expanded', String(open));
+    if (open) renderTracklist();
+  });
+  tl.addEventListener('click', function (e) {
+    if (e.target.closest('a')) { tl.hidden = true; tlBtn.setAttribute('aria-expanded', 'false'); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !tl.hidden) { tl.hidden = true; tlBtn.setAttribute('aria-expanded', 'false'); tlBtn.focus(); }
+  });
+  document.addEventListener('click', function (e) {
+    if (!tl.hidden && !e.target.closest('#player')) { tl.hidden = true; tlBtn.setAttribute('aria-expanded', 'false'); }
+  });
+
+  function updateNow(force) {
+    var mid = innerHeight * 0.45, idx = 0;
+    tracks.forEach(function (t, i) { if (t.getBoundingClientRect().top <= mid) idx = i; });
+    if (idx === current && !force) return;
+    current = idx;
+    var t = tracks[idx];
+    now.innerHTML = '<small>' + t.dataset.track + '</small>' + title(t);
+    record.classList.toggle('is-b', t.dataset.track.charAt(0) === 'B');
+    if (!tl.hidden) renderTracklist();
+  }
+
+  function syncPlatterLabel() {
+    var l = root.dataset.lang === 'id' ? (playing ? 'Hentikan musik' : 'Putar musik') : (playing ? 'Pause music' : 'Play music');
+    document.getElementById('platter-label').textContent = l;
+    platter.setAttribute('aria-pressed', String(playing));
+    platter.title = l;
+  }
+
+  function fade(to, ms, done) {
+    var from = music.volume, t0 = performance.now();
+    (function step(t) {
+      var k = Math.min(1, (t - t0) / ms);
+      music.volume = from + (to - from) * k;
+      if (k < 1) requestAnimationFrame(step); else if (done) done();
+    })(t0);
+  }
+  platter.addEventListener('click', function () {
+    if (!playing) {
+      music.volume = 0;
+      var p = music.play();
+      if (p && p.catch) p.catch(function () { playing = false; syncPlatterLabel(); });
+      fade(0.32, 1200);
+      playing = true;
+    } else {
+      fade(0, 500, function () { music.pause(); });
+      playing = false;
+    }
+    syncPlatterLabel();
+  });
+
+  function frame(t) {
+    var dt = Math.min(0.05, (t - last) / 1000); last = t;
+    var max = document.documentElement.scrollHeight - innerHeight;
+    var prog = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+    // The needle travels from the outer groove to the run-out as the page is read.
+    arm.style.setProperty('--arm', (14 + prog * 24).toFixed(2) + 'deg');
+    if (!reduce) {
+      if (playing) spinDeg += dt * 200;             // 33 rpm, roughly
+      var deg = spinDeg + scrollY * 0.35;           // and the scroll turns it too
+      spinA.style.transform = 'rotate(' + deg + 'deg)';
+      spinB.style.transform = 'rotate(' + (-deg) + 'deg)';
+    }
+    updateNow(false);
+    requestAnimationFrame(frame);
+  }
+
+  setLang(initial);
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

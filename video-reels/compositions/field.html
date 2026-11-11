@@ -1,0 +1,111 @@
+<template>
+  <style>
+    @font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+    @font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces-italic.woff2") format("woff2"); font-weight: 100 900; font-style: italic; }
+    @font-face { font-family: "Geist"; src: url("assets/fonts/geist.woff2") format("woff2"); font-weight: 100 900; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #1d140d; color: #f3eee4; }
+    #f-tex { position: absolute; left: -20px; top: 1500px; font: italic 400 300px/0.95 "Fraunces"; letter-spacing: -0.04em; color: #2c1f15; white-space: nowrap; }
+    #f-copy { position: absolute; left: 90px; top: 200px; width: 900px; }
+    .kick { font: 600 28px/1 "Geist"; letter-spacing: 0.22em; text-transform: uppercase; color: #c9a45c; }
+    #f-l1 { margin-top: 22px; font: 400 84px/1.04 "Fraunces"; letter-spacing: -0.02em; }
+    #f-l1 span { display: inline-block; margin-right: 0.22em; }
+    #f-l1 .gold { color: #c9a45c; }
+    .grp { margin-top: 30px; }
+    .grp h3 { font: 600 28px/1 "Geist"; letter-spacing: 0.2em; text-transform: uppercase; color: #d9c08d; margin-bottom: 8px; }
+    .it { padding: 12px 0; border-top: 1px solid rgba(243,238,228,0.14); }
+    .it b { display: block; font: 400 36px/1.2 "Fraunces"; }
+    .it span { display: block; font: 400 28px/1.32 "Geist"; color: #cdbfae; margin-top: 3px; }
+    #f-deck { position: absolute; inset: 0;
+      background:
+        repeating-linear-gradient(92deg, rgba(0,0,0,0.05) 0 3px, transparent 3px 11px, rgba(255,220,180,0.025) 11px 13px, transparent 13px 29px),
+        linear-gradient(180deg, #33231a, #24180f); }
+    .rec { position: absolute; left: 160px; top: 200px; width: 760px; height: 760px; border-radius: 50%; box-shadow: 0 30px 70px rgba(0,0,0,0.6); }
+    .spin { position: absolute; inset: 0; border-radius: 50%;
+      background: repeating-radial-gradient(circle at 50% 50%, #0f1013 0 1.5px, #1c1d23 2px 3.2px), #121318; }
+    .sheen { position: absolute; inset: 0; border-radius: 50%;
+      background: conic-gradient(from 20deg, transparent 0 11%, rgba(255,255,255,0.07) 15%, transparent 21% 61%, rgba(255,255,255,0.05) 65%, transparent 71%); }
+    .label { position: absolute; left: 50%; top: 50%; width: 290px; height: 290px; margin: -145px 0 0 -145px; border-radius: 50%;
+      background: radial-gradient(circle, #d6b46c, #c9a45c 60%, #a8853f); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #1a1712; }
+    .label .side { font: 600 28px/1 "Geist"; letter-spacing: 0.28em; text-transform: uppercase; margin-bottom: 80px; }
+    .label .nm { font: 400 28px/1.1 "Fraunces"; max-width: 220px; }
+    .hole { position: absolute; left: 50%; top: 50%; width: 20px; height: 20px; margin: -10px 0 0 -10px; border-radius: 50%; background: #0b0b0d; }
+
+    #f-mapwrap { position: absolute; left: 40px; top: 1110px; width: 1000px; height: 420px; }
+    #f-map { position: absolute; left: 0; top: 0; overflow: visible; }
+    #f-land { fill: #2e2116; stroke: #c9a45c; stroke-width: 2; stroke-dasharray: 1; }
+    .f-arc { fill: none; stroke: #c9a45c; stroke-width: 3; stroke-dasharray: 1; opacity: 0.9; }
+    .f-arc--src { stroke: #f1ebdf; stroke-width: 2.5; }
+    .f-pin circle { fill: #c9a45c; }
+    #f-pin-bd circle { fill: #f1ebdf; }
+    .f-pin .ring { fill: none; stroke: #c9a45c; stroke-width: 2; }
+    #f-maplab { position: absolute; inset: 0; }
+    .ml { position: absolute; font: 400 28px/1.25 "Geist"; color: #e6dccb; white-space: nowrap; }
+    .ml b { display: block; font: 400 36px/1.1 "Fraunces"; color: #f3eee4; }
+    .ml--arc { left: 50px; top: 330px; color: #d9c08d; font-size: 28px; }
+  </style>
+  <div id="root" data-composition-id="field" data-width="1080" data-height="1920">
+    <div id="f-tex" data-layout-ignore>Pekalongan</div>
+    <div id="f-copy" data-hold>
+      <p class="kick">A4 · Field</p>
+      <h2 id="f-l1"><span>Four</span><span>MSME</span><span>programmes.</span><span>One</span><span class="gold">family</span><span>brand</span><span>grown.</span></h2>
+      <div class="grp" id="f-g1">
+        <h3>Community service</h3>
+        <div class="it"><b>Cassava cracker MSME</b><span>Digital capacity and financial governance. PKM Berdampak 2026</span></div>
+        <div class="it"><b>Batik MSMEs, two sessions</b><span>Eco-content marketing and green branding</span></div>
+        <div class="it"><b>Safina smoked fish</b><span>Innovation and digitalisation for competitiveness</span></div>
+      </div>
+      <div class="grp" id="f-g2">
+        <h3>Business</h3>
+        <div class="it"><b>Pempek BOOM</b><span>Distribution across provinces, about 6% average yearly sales growth</span></div>
+        <div class="it"><b>Coiss Studios · JKafKo</b><span>Head of sourcing: 8 vendors surveyed, price per metre database</span></div>
+      </div>
+    </div>
+    <div id="f-mapwrap">
+      <svg id="f-map" viewBox="-20 -20 940 337" width="1000" data-layout-ignore>
+        <path id="f-land" d="M460.4,198.3 L463.3,198.7 L465.1,191.5 L471.6,184.8 L472.5,175.9 L483.4,175.9 L482.9,179.4 L494.5,171.2 L500.6,165.8 L505.5,185.1 L509.7,190.0 L513.9,190.6 L520.2,188.9 L526.4,189.4 L529.0,192.5 L532.3,192.0 L530.8,199.4 L529.7,211.6 L532.6,219.6 L532.5,223.1 L536.9,227.6 L522.1,225.7 L513.6,221.7 L500.0,217.6 L494.4,214.9 L491.4,211.4 L479.5,207.4 L470.1,202.0 L460.4,198.3Z M350.7,92.4 L353.0,97.3 L362.1,100.9 L369.0,95.1 L377.3,102.0 L392.9,104.3 L401.4,102.9 L407.8,100.7 L415.3,95.9 L419.8,100.9 L431.9,103.0 L443.7,107.7 L458.8,109.1 L471.8,105.5 L474.2,102.7 L479.5,102.9 L480.1,106.6 L485.5,107.6 L492.7,112.1 L500.0,111.0 L504.0,108.4 L511.9,97.9 L514.3,91.7 L518.4,86.3 L523.5,72.5 L523.0,69.3 L526.8,64.9 L537.2,61.2 L544.7,60.9 L555.3,62.3 L556.8,70.0 L560.4,78.4 L564.6,83.7 L571.4,87.0 L578.8,86.5 L584.9,88.2 L594.8,84.6 L597.8,80.4 L604.4,82.4 L616.5,93.0 L613.3,95.7 L612.2,100.1 L609.2,100.9 L608.6,107.0 L604.6,111.5 L608.9,113.3 L610.0,122.1 L605.9,134.6 L602.6,135.5 L593.7,142.0 L592.7,148.8 L584.2,148.7 L572.4,143.4 L574.5,139.1 L565.7,140.4 L564.4,144.6 L564.4,151.9 L562.5,154.6 L566.1,168.3 L569.6,172.0 L568.8,181.8 L573.5,185.4 L578.3,185.1 L578.2,188.6 L581.2,194.9 L577.1,202.3 L573.5,203.9 L568.9,201.0 L565.1,203.1 L564.5,210.6 L562.1,214.9 L558.8,213.5 L555.0,216.4 L548.0,214.7 L543.8,220.0 L543.2,228.3 L536.9,227.6 L532.5,223.1 L532.6,219.6 L529.7,211.6 L530.8,199.4 L532.3,192.0 L529.0,192.5 L526.4,189.4 L520.2,188.9 L513.9,190.6 L509.7,190.0 L505.5,185.1 L500.6,165.8 L494.5,171.2 L482.9,179.4 L483.4,175.9 L472.5,175.9 L471.6,184.8 L465.1,191.5 L463.3,198.7 L460.4,198.3 L449.7,194.3 L430.5,189.5 L410.5,186.2 L405.9,187.3 L401.8,183.2 L392.3,181.1 L376.3,179.6 L371.0,180.7 L365.9,185.1 L363.1,182.3 L360.4,182.8 L360.1,182.2 L359.1,181.5 L356.9,181.8 L355.0,180.4 L354.0,172.7 L350.5,171.6 L348.3,178.4 L342.2,172.5 L343.6,166.4 L340.9,161.1 L340.0,155.1 L335.2,147.6 L329.7,148.5 L325.7,147.0 L325.3,142.9 L327.7,138.3 L325.3,131.9 L332.1,128.7 L338.4,130.0 L341.1,126.8 L345.9,125.7 L347.8,116.4 L344.3,114.4 L344.7,106.4 L350.2,100.1 L350.7,92.4Z M353.9,181.5 L354.5,182.1 L358.2,181.7 L359.6,182.7 L360.2,182.9 L361.6,182.9 L362.6,182.7 L365.4,188.0 L357.9,185.7 L349.0,184.2 L350.6,179.6 L353.9,181.5Z M155.1,31.5 L152.4,32.1 L152.0,39.4 L154.8,40.4 L160.1,52.6 L159.3,56.7 L143.7,56.8 L137.5,54.2 L134.6,56.3 L131.4,52.3 L128.3,56.6 L130.6,62.1 L125.7,65.2 L125.4,72.4 L128.2,77.4 L128.0,87.8 L135.6,94.3 L128.6,99.2 L127.8,103.5 L124.4,107.2 L124.9,114.1 L123.3,115.5 L112.6,113.4 L110.1,109.6 L101.7,106.9 L96.8,104.3 L93.7,100.6 L87.1,98.8 L80.1,98.9 L67.3,102.0 L58.9,100.8 L51.5,101.7 L46.1,103.7 L39.5,103.2 L29.9,98.7 L23.3,97.6 L20.3,101.5 L17.8,99.5 L15.6,92.6 L19.8,93.9 L30.1,84.0 L31.8,87.3 L31.2,91.7 L38.7,99.9 L42.6,93.4 L42.3,90.9 L50.7,83.5 L53.4,77.5 L52.5,75.3 L55.5,68.5 L61.6,72.7 L66.9,71.1 L70.8,66.7 L72.0,63.0 L71.3,57.6 L72.0,46.6 L77.3,30.1 L86.0,23.2 L90.2,12.9 L95.1,12.6 L98.7,16.7 L97.4,21.9 L103.5,25.9 L108.8,24.6 L110.9,19.6 L115.3,18.6 L124.2,22.5 L125.0,25.0 L132.0,28.1 L137.8,24.3 L141.1,26.5 L147.0,24.5 L151.7,24.7 L155.1,31.5Z M616.5,93.0 L629.3,97.3 L639.2,94.1 L642.3,94.2 L647.4,102.9 L650.4,105.8 L660.6,106.7 L666.9,104.1 L683.1,103.5 L693.1,107.2 L695.4,101.9 L700.8,106.1 L701.3,114.4 L705.4,119.8 L702.8,127.7 L706.9,131.4 L707.4,136.9 L712.3,134.5 L717.5,135.8 L722.5,144.6 L721.6,148.2 L721.9,159.4 L720.6,161.3 L724.4,166.9 L723.1,170.4 L728.5,174.1 L737.2,177.0 L742.1,177.2 L747.9,183.3 L752.0,185.3 L757.4,184.6 L763.7,189.0 L768.9,188.0 L782.3,180.8 L791.0,182.0 L799.6,184.4 L803.2,181.8 L810.4,184.1 L815.4,179.5 L824.1,180.9 L833.2,172.3 L836.5,175.1 L839.3,180.9 L843.2,182.5 L849.8,182.7 L852.7,181.0 L857.0,185.4 L864.6,185.7 L872.1,190.7 L873.1,198.4 L869.1,201.4 L869.9,214.8 L867.1,220.0 L861.7,248.0 L865.0,258.2 L871.5,267.9 L873.8,266.1 L878.1,268.9 L883.2,270.1 L886.3,275.1 L885.3,278.4 L879.7,281.2 L869.1,278.2 L862.8,277.9 L865.2,273.6 L863.9,270.0 L859.9,266.7 L851.3,264.7 L850.5,268.5 L838.8,265.9 L834.6,268.1 L832.4,264.0 L827.7,265.3 L825.1,260.7 L821.7,262.5 L813.0,259.4 L810.9,254.1 L805.5,257.6 L797.6,254.6 L795.0,249.9 L786.3,248.7 L777.1,244.0 L773.6,245.8 L771.5,241.5 L764.0,236.2 L760.2,235.1 L744.3,235.2 L735.1,239.0 L731.8,244.3 L726.1,246.7 L717.4,244.7 L713.9,247.6 L707.0,250.2 L696.1,246.1 L685.9,245.7 L679.6,243.7 L675.5,239.8 L669.4,241.2 L658.1,238.3 L647.8,238.5 L642.0,235.0 L635.4,236.7 L624.1,232.6 L623.5,235.7 L618.0,236.1 L617.9,238.9 L614.4,243.5 L610.1,238.9 L599.7,239.9 L590.2,234.7 L575.7,231.9 L569.6,234.6 L563.1,232.3 L554.3,232.2 L543.2,228.3 L543.8,220.0 L548.0,214.7 L555.0,216.4 L558.8,213.5 L562.1,214.9 L564.5,210.6 L565.1,203.1 L568.9,201.0 L573.5,203.9 L577.1,202.3 L581.2,194.9 L578.2,188.6 L578.3,185.1 L573.5,185.4 L568.8,181.8 L569.6,172.0 L566.1,168.3 L562.5,154.6 L564.4,151.9 L564.4,144.6 L565.7,140.4 L574.5,139.1 L572.4,143.4 L584.2,148.7 L592.7,148.8 L593.7,142.0 L602.6,135.5 L605.9,134.6 L610.0,122.1 L608.9,113.3 L604.6,111.5 L608.6,107.0 L609.2,100.9 L612.2,100.1 L613.3,95.7 L616.5,93.0Z M796.8,105.5 L811.6,105.3 L822.3,103.4 L829.7,105.3 L838.4,109.3 L841.7,114.2 L833.7,116.8 L829.1,117.1 L825.0,121.3 L819.4,122.6 L819.6,128.6 L800.6,126.2 L793.7,127.8 L790.8,131.1 L788.8,137.7 L768.1,135.9 L746.2,137.2 L734.1,134.6 L725.2,131.3 L719.2,130.6 L711.8,132.2 L708.9,130.0 L710.6,125.5 L707.3,122.9 L708.3,118.9 L712.1,119.7 L717.9,114.6 L723.3,106.6 L741.5,104.9 L748.6,106.2 L776.8,105.4 L784.0,106.4 L796.8,105.5Z M707.5,10.2 L697.2,7.7 L698.5,2.8 L707.2,-2.4 L711.3,-0.7 L712.8,4.0 L711.9,7.9 L707.5,10.2Z M856.6,122.8 L860.6,121.0 L864.0,123.6 L867.9,132.0 L866.0,133.3 L859.6,131.5 L855.3,125.1 L856.6,122.8Z M155.1,31.5 L157.0,33.0 L167.7,34.1 L169.6,32.4 L178.4,31.5 L178.4,40.4 L175.9,46.8 L172.5,47.7 L173.7,52.8 L172.9,57.2 L160.1,52.6 L154.8,40.4 L152.0,39.4 L152.4,32.1 L155.1,31.5Z M124.9,114.1 L124.4,107.2 L127.8,103.5 L128.6,99.2 L135.6,94.3 L128.0,87.8 L128.2,77.4 L125.4,72.4 L125.7,65.2 L130.6,62.1 L128.3,56.6 L131.4,52.3 L134.6,56.3 L137.5,54.2 L143.7,56.8 L159.3,56.7 L160.1,52.6 L172.9,57.2 L173.7,52.8 L172.5,47.7 L175.9,46.8 L178.4,40.4 L178.4,31.5 L182.7,30.5 L181.7,22.7 L184.5,15.0 L190.5,17.0 L193.8,21.2 L198.7,21.9 L209.0,19.2 L216.9,24.7 L224.1,36.3 L230.3,39.4 L238.6,40.8 L241.7,45.7 L248.0,44.8 L257.2,39.8 L263.8,45.3 L268.2,46.3 L283.3,54.2 L288.2,54.0 L291.8,51.2 L291.7,47.5 L301.7,46.0 L307.2,48.7 L307.9,53.8 L313.5,61.8 L318.6,65.9 L323.7,68.2 L323.8,76.8 L325.2,85.9 L327.1,91.4 L329.9,94.7 L336.6,94.5 L337.1,98.1 L344.6,98.9 L350.7,92.4 L350.2,100.1 L344.7,106.4 L344.3,114.4 L347.8,116.4 L345.9,125.7 L341.1,126.8 L338.4,130.0 L332.1,128.7 L325.3,131.9 L327.7,138.3 L325.3,142.9 L325.7,147.0 L329.7,148.5 L335.2,147.6 L340.0,155.1 L340.9,161.1 L343.6,166.4 L342.2,172.5 L348.3,178.4 L344.7,180.6 L340.1,179.0 L334.7,180.7 L328.1,179.5 L321.3,180.9 L320.6,186.6 L318.4,190.4 L313.6,192.3 L297.9,190.9 L285.1,188.4 L267.1,183.7 L258.8,184.1 L253.5,178.8 L244.0,177.2 L243.5,174.2 L236.8,169.0 L217.4,161.7 L213.8,162.2 L203.4,161.2 L188.1,157.9 L167.7,156.1 L161.3,156.3 L136.4,153.6 L132.1,150.4 L127.3,149.1 L122.6,144.8 L123.1,138.0 L125.1,133.5 L130.4,133.1 L130.5,127.8 L138.2,121.2 L138.6,114.4 L129.1,111.6 L124.9,114.1Z" pathLength="1" />
+        <path class="f-arc" id="f-arc-w" d="M429.6,105.8 Q229.60000000000002,-14.200000000000003 -10,65.8" pathLength="1" />
+        <path class="f-arc" id="f-arc-e" d="M429.6,105.8 Q659.6,-24.200000000000003 910,115.8" pathLength="1" />
+        <path class="f-arc f-arc--src" id="f-arc-b" d="M237.5,107.6 Q333.55,177.6 429.6,105.8" pathLength="1" />
+        <g id="f-pin-pk" class="f-pin"><circle cx="429.6" cy="105.8" r="11" /><circle class="ring" cx="429.6" cy="105.8" r="11" /></g>
+        <g id="f-pin-bd" class="f-pin"><circle cx="237.5" cy="107.6" r="9" /></g>
+      </svg>
+      <div id="f-maplab">
+        <p class="ml" id="f-lab-pk" style="left:520px; top:150px"><b>Pekalongan</b>MSME programmes, Pempek BOOM</p>
+        <p class="ml" id="f-lab-bd" style="left:60px; top:178px"><b>Bandung</b>Fabric sourcing, 8 vendors</p>
+        <p class="ml ml--arc" id="f-lab-arc">Pempek BOOM distribution across provinces</p>
+      </div>
+    </div>
+    <div id="f-deck">
+      <div class="rec">
+        <div class="spin" id="f-spin">
+          <div class="sheen"></div>
+          <div class="label" data-layout-ignore><span class="side">Side A</span><span class="nm">Miranto Zaenal Arief</span></div>
+          <div class="hole"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#f-copy .kick", { opacity: 0 }, { opacity: 1, duration: 0.25 }, 0.1);
+    tl.fromTo("#f-l1 span", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.08, ease: "power2.out" }, 0.25);
+    tl.fromTo("#f-g1 h3, #f-g1 .it", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, stagger: 0.3, ease: "power2.out" }, 1.3);
+    tl.fromTo("#f-g2 h3, #f-g2 .it", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, stagger: 0.3, ease: "power2.out" }, 2.8);
+    tl.fromTo("#f-tex", { x: 0 }, { x: -220, duration: 9.091, ease: "none" }, 0);
+    tl.fromTo("#f-land", { strokeDashoffset: 1, fillOpacity: 0 }, { strokeDashoffset: 0, duration: 1.2, ease: "power2.inOut" }, 3.3);
+    tl.to("#f-land", { fillOpacity: 1, duration: 0.5 }, 4.2);
+    tl.fromTo("#f-pin-pk", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 4.6);
+    tl.fromTo("#f-pin-pk .ring", { scale: 1, opacity: 0.9, transformOrigin: "50% 50%" }, { scale: 3.2, opacity: 0, duration: 1.0, ease: "power2.out" }, 4.75);
+    tl.fromTo("#f-lab-pk", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2 }, 4.8);
+    tl.fromTo("#f-pin-bd", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.45, ease: "back.out(1.6)" }, 5.4);
+    tl.fromTo("#f-arc-b", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.7, ease: "power2.inOut" }, 5.5);
+    tl.fromTo("#f-lab-bd", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2 }, 5.6);
+    tl.fromTo(["#f-arc-w", "#f-arc-e"], { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.9, stagger: 0.15, ease: "power2.inOut" }, 6.3);
+    tl.fromTo("#f-lab-arc", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2 }, 6.8);
+    tl.to("#f-mapwrap", { x: -500, filter: "blur(12px)", opacity: 0, duration: 0.6, ease: "power3.in" }, 8.25);
+    tl.fromTo("#f-deck", { x: 1080 }, { x: 0, duration: 0.85, ease: "power3.inOut" }, 8.2);
+    tl.fromTo("#f-copy", { x: 0 }, { x: -500, filter: "blur(12px)", opacity: 0, duration: 0.6, ease: "power3.in" }, 8.25);
+    tl.fromTo("#f-spin", { rotation: -180 }, { rotation: 0, duration: 0.88, ease: "power2.out" }, 8.2);
+    window.__timelines["field"] = tl;
+  </script>
+</template>

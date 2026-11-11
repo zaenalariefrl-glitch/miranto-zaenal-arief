@@ -1,0 +1,75 @@
+<template>
+  <style>
+    @font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+    @font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces-italic.woff2") format("woff2"); font-weight: 100 900; font-style: italic; }
+    @font-face { font-family: "Geist"; src: url("assets/fonts/geist.woff2") format("woff2"); font-weight: 100 900; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0b1426; color: #f3eee4; }
+    #c-year { position: absolute; left: 90px; top: 180px; width: 900px; height: 230px; overflow: hidden; z-index: 5; }
+    .yr { position: absolute; left: 0; top: 0; font: italic 400 220px/230px "Fraunces"; letter-spacing: -0.04em; color: #c9a45c; }
+    #c-rail { position: absolute; left: 640px; top: 200px; width: 350px; height: 190px; z-index: 5; }
+    #c-rail .track { position: absolute; left: 0; right: 0; top: 95px; height: 2px; background: rgba(243,238,228,0.18); }
+    #c-rail .fill { position: absolute; left: 0; top: 95px; height: 2px; width: 350px; background: #c9a45c; transform-origin: 0 50%; }
+    #c-rail .dot { position: absolute; top: 88px; width: 16px; height: 16px; border-radius: 50%; background: #0b1426; border: 2px solid #c9a45c; }
+    .txt { position: absolute; left: 90px; top: 430px; width: 900px; z-index: 5; }
+    .txt h3 { font: 400 70px/1.04 "Fraunces"; letter-spacing: -0.02em; margin-bottom: 18px; }
+    .txt p { font: 400 34px/1.4 "Geist"; color: #d3d8e2; }
+    .txt .pf { font-size: 28px; color: #d9c08d; margin-top: 14px; }
+    .print { position: absolute; left: 90px; top: 770px; width: 900px; height: 1090px; display: flex; align-items: flex-start; justify-content: center; }
+    .ghost { position: absolute; left: -10px; bottom: -40px; font: italic 400 420px/1 "Fraunces"; letter-spacing: -0.05em; color: rgba(201,164,92,0.13); z-index: 0; }
+    .print img { position: relative; z-index: 1; }
+    .print img { max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; border-radius: 6px;
+      box-shadow: 0 24px 60px rgba(2,6,16,0.55), 0 0 0 1px rgba(201,164,92,0.35); }
+    .print.duo { flex-direction: column; align-items: center; justify-content: flex-start; gap: 26px; }
+    .print.duo img { max-height: 1090px; }
+    #c-p5 img { max-height: 1060px; }
+    #c-t5 h3 { font-size: 84px; }
+  </style>
+  <div id="root" data-composition-id="climb" data-width="1080" data-height="1920">
+    <div id="c-year" data-layout-allow-overflow data-layout-allow-overlap>
+      <span class="yr" data-layout-allow-overlap id="y1">2021</span><span class="yr" data-layout-allow-overlap id="y2">2022</span><span class="yr" data-layout-allow-overlap id="y3">2023</span><span class="yr" data-layout-allow-overlap id="y4">2023</span><span class="yr" data-layout-allow-overlap id="y5">2024</span><span class="yr" data-layout-allow-overlap id="y6">2026</span>
+    </div>
+    <div id="c-rail" data-layout-ignore>
+      <div class="track"></div><div class="fill" id="c-fill"></div>
+      <div class="dot" style="left:0"></div><div class="dot" style="left:64px"></div><div class="dot" style="left:130px"></div><div class="dot" style="left:196px"></div><div class="dot" style="left:262px"></div><div class="dot" style="left:334px"></div>
+    </div>
+
+    <div class="print duo" id="c-p1"><span class="ghost" data-layout-ignore>2021</span><img src="assets/img/cert-global-millennial-mun-2021.webp" alt="Global Millennial MUN certificate of appreciation, speaker"></div>
+    <div class="print duo" id="c-p2"><span class="ghost" data-layout-ignore>2022</span><img src="assets/img/proof-ayimun-2022-email.webp" alt="AYIMUN Malaysia 2022 selection email"></div>
+    <div class="print duo" id="c-p3"><span class="ghost" data-layout-ignore>2023</span><img src="assets/img/05-genre-diy-2023-tamansari.webp" alt="Duta GenRe DIY 2023 first place sashes" style="max-height:1060px"></div>
+    <div class="print" id="c-p4"><span class="ghost" data-layout-ignore>2023</span><img src="assets/img/cert-gubernur-diy-genre-mahasiswa-2023.webp" alt="Charter from the Governor of Yogyakarta"></div>
+    <div class="print duo" id="c-p5"><span class="ghost" data-layout-ignore>2024</span><img src="assets/img/05-genre-indonesia-auditorium-selfie.webp" alt="Duta GenRe Indonesia sash on an auditorium stage"></div>
+    <div class="print" id="c-p6"><span class="ghost" data-layout-ignore>2026</span><img src="assets/img/cert-juri-duta-budaya-diy-2026.webp" alt="Jury certificate, Duta Budaya DIY selection"></div>
+
+    <div class="txt" id="c-t1"><h3>First international stage</h3><p>Speaker at a Global Millennial MUN international webinar on well-being.</p><p class="pf">Recognised by the Ministry of Education</p></div>
+    <div class="txt" id="c-t2"><h3>Selected delegate</h3><p>Chosen for the Asia Youth International Model United Nations in Malaysia.</p><p class="pf">Selection letter, 6 August 2022</p></div>
+    <div class="txt" id="c-t3"><h3>First place, Duta GenRe DIY</h3><p>First place, male category, Planning Generation Ambassador of Yogyakarta.</p><p class="pf">BKKBN DIY, 28 March 2023</p></div>
+    <div class="txt" id="c-t4"><h3>Signed by Sri Sultan</h3><p>Best I, male, in the student GenRe ambassador selection for Yogyakarta.</p><p class="pf">Governor's charter, 13 July 2023</p></div>
+    <div class="txt" id="c-t5"><h3>Duta GenRe Indonesia</h3><p>Representing Yogyakarta at the national Appreciation and Jamboree, Denpasar, Bali.</p><p class="pf">BKKBN No. 2769/PK.02.00/F2/2024</p></div>
+    <div class="txt" id="c-t6"><h3>From contestant to judge</h3><p>Member of the jury for the 7th generation Duta Budaya DIY selection.</p><p class="pf">November 2025 to February 2026</p></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const B = 1.81818;
+    // Bars per step; 2024 is the payoff and holds longest. 13 bars in all.
+    const len = [2, 2, 2, 2, 3, 2].map(v => v * B);
+    const S = []; let acc = 0; for (const l of len) { S.push(acc); acc += l; }
+    tl.set(["#y2", "#y3", "#y4", "#y5", "#y6"], { yPercent: 100 }, 0);
+    tl.fromTo("#c-fill", { scaleX: 0 }, { scaleX: 1, duration: acc, ease: "none" }, 0);
+    for (let i = 0; i < 6; i++) {
+      const n = i + 1, s = S[i], e = S[i] + len[i];
+      const print = "#c-p" + n, txt = "#c-t" + n + " > *";
+      tl.fromTo(print + " img", { scale: 1.0 }, { scale: 1.05, duration: len[i], ease: "none" }, s);
+      if (i > 0) {
+        tl.to("#y" + i, { yPercent: -100, duration: 0.16, ease: "power3.in" }, s - 0.18);
+        tl.fromTo("#y" + n, { yPercent: 100 }, { yPercent: 0, duration: 0.3, ease: "expo.out" }, s - 0.02);
+      }
+      tl.fromTo(print, { opacity: 0, y: 120, filter: "blur(12px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease: "expo.out" }, s);
+      tl.fromTo(txt, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, stagger: 0.12, ease: "power2.out" }, s + 0.12);
+      if (i < 5) {
+        tl.to(print, { opacity: 0, y: -60, filter: "blur(10px)", duration: 0.22, ease: "power3.in" }, e - 0.22);
+        tl.to(txt, { opacity: 0, filter: "blur(6px)", duration: 0.15, ease: "power2.in" }, e - 0.18);
+      }
+    }
+    window.__timelines["climb"] = tl;
+  </script>
+</template>

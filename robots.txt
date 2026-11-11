@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zaenalariefrl-glitch.github.io/miranto-zaenal-arief/sitemap.xml
