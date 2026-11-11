@@ -2,3 +2,5 @@
 node_modules/
 *.mp4
 renders/
+work-*/
+.*.hf-transaction-*/
