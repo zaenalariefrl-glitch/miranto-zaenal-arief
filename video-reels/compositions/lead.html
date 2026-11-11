@@ -1,0 +1,41 @@
+<template>
+  <style>
+    @font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+    @font-face { font-family: "Geist"; src: url("assets/fonts/geist.woff2") format("woff2"); font-weight: 100 900; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0b1426; color: #f3eee4; }
+    #l-photo { position: absolute; left: 0; right: 0; top: 1240px; bottom: 0; overflow: hidden; }
+    #l-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; }
+    #l-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #0b1426 0%, rgba(11,20,38,0.2) 28%, rgba(11,20,38,0) 60%, rgba(11,20,38,0.4)); }
+    #l-copy { position: absolute; left: 90px; top: 200px; width: 900px; }
+    .kick { font: 600 28px/1 "Geist"; letter-spacing: 0.22em; text-transform: uppercase; color: #c9a45c; }
+    #l-title { margin: 22px 0 14px; font: 400 92px/1.02 "Fraunces"; letter-spacing: -0.02em; }
+    #l-sub { font: 400 34px/1.4 "Geist"; color: #d3d8e2; margin-bottom: 26px; }
+    .org { display: flex; justify-content: space-between; gap: 24px; padding: 15px 0; border-top: 1px solid rgba(243,238,228,0.16); }
+    .org b { font: 400 36px/1.2 "Fraunces"; }
+    .org span { font: 400 28px/1.3 "Geist"; color: #c3c9d6; text-align: right; max-width: 380px; }
+  </style>
+  <div id="root" data-composition-id="lead" data-width="1080" data-height="1920">
+    <div id="l-photo"><img src="assets/img/05-genre-diy-museum-sandi.webp" alt="Miranto with his GenRe DIY counterpart, wearing ambassador sashes"></div>
+    <div id="l-copy">
+      <p class="kick">Leadership</p>
+      <h2 id="l-title">Chair, ISR Student Research Unit</h2>
+      <p id="l-sub">Interdisciplinary Scientific Research, Universitas Pekalongan</p>
+      <div class="org"><b>Student Executive Board</b><span>Ministry of Home Affairs, UNIKAL</span></div>
+      <div class="org"><b>GenRe Forum DIY</b><span>Creative Economy Division</span></div>
+      <div class="org"><b>Business Law Community</b><span>Human Resource, FH UII</span></div>
+      <div class="org"><b>PIK-M AUSHAF, UII</b><span>Human Development Index</span></div>
+      <div class="org"><b>Scout Council, Pekalongan</b><span>Planning and Development</span></div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#l-copy .kick", { opacity: 0 }, { opacity: 1, duration: 0.25 }, 0.1);
+    tl.fromTo("#l-title", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 0.25);
+    tl.fromTo("#l-sub", { opacity: 0 }, { opacity: 1, duration: 0.25 }, 0.6);
+    tl.fromTo(".org", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, stagger: 0.25, ease: "power2.out" }, 0.9);
+    tl.fromTo("#l-photo img", { scale: 1.12, yPercent: 4 }, { scale: 1.0, yPercent: 0, duration: 5.454, ease: "power1.out" }, 0);
+    tl.to("#l-copy", { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power2.in" }, 5.15);
+    tl.to("#l-photo", { opacity: 0, duration: 0.3, ease: "power2.in" }, 5.12);
+    window.__timelines["lead"] = tl;
+  </script>
+</template>

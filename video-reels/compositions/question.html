@@ -4,43 +4,73 @@
     @font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces-italic.woff2") format("woff2"); font-weight: 100 900; font-style: italic; }
     @font-face { font-family: "Geist"; src: url("assets/fonts/geist.woff2") format("woff2"); font-weight: 100 900; }
     #root { position: absolute; inset: 0; overflow: hidden; background: #f1ebdf; color: #1a1712; }
-    #q-wrap { position: absolute; inset: 0; }
-    #q-line { position: absolute; left: 90px; top: 230px; width: 880px; font: 400 92px/1.04 "Fraunces"; letter-spacing: -0.02em; }
+    #q-tex { position: absolute; left: -30px; top: 1250px; font: italic 400 640px/1 "Fraunces"; letter-spacing: -0.05em; color: #e3d9c6; white-space: nowrap; }
+    .kick { font: 600 28px/1 "Geist"; letter-spacing: 0.22em; text-transform: uppercase; color: #8a6a2c; }
+    /* Page A: the question */
+    #q-a { position: absolute; left: 90px; top: 200px; width: 900px; }
+    #q-line { margin-top: 26px; font: 400 112px/1.03 "Fraunces"; letter-spacing: -0.02em; }
     #q-line span { display: inline-block; margin-right: 0.22em; }
     #q-line em { font-style: italic; }
-    .q-fig { position: absolute; left: 90px; width: 860px; }
-    #q-fig1 { top: 600px; }
-    #q-fig2 { top: 860px; padding-top: 30px; border-top: 2px solid #cfc5b2; }
-    .q-num { font: 400 170px/1 "Fraunces"; letter-spacing: -0.03em; display: block; }
-    .q-num small { font: italic 400 76px/1 "Fraunces"; color: #8a6a2c; margin-right: 10px; }
-    .q-cap { font: 400 32px/1.3 "Geist"; color: #5d554a; margin-top: 12px; }
-    #q-aik { position: absolute; left: 90px; top: 1160px; width: 860px; font: 400 42px/1.2 "Fraunces"; }
-    #q-aik b { font-weight: 400; color: #8a6a2c; }
+    #q-para { margin-top: 50px; font: 400 46px/1.4 "Geist"; color: #3d372f; }
+    #q-para b { font-weight: 400; font-family: "Fraunces"; font-style: italic; color: #8a6a2c; }
+    #q-theory { margin-top: 44px; padding-top: 30px; border-top: 2px solid #cfc5b2; font: 400 38px/1.4 "Geist"; color: #5d554a; }
+    /* Page B: the evidence */
+    #q-b { position: absolute; left: 90px; top: 200px; width: 900px; }
+    #q-grid { margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; border-top: 2px solid #cfc5b2; }
+    .cell { padding: 26px 20px 30px 0; border-bottom: 2px solid #cfc5b2; }
+    .cell:nth-child(2n) { padding-left: 28px; border-left: 2px solid #cfc5b2; }
+    .num { font: 400 116px/1 "Fraunces"; letter-spacing: -0.03em; display: block; }
+    .num small { font: italic 400 56px/1 "Fraunces"; color: #8a6a2c; margin-right: 6px; }
+    .cap { font: 400 29px/1.3 "Geist"; color: #5d554a; margin-top: 10px; }
+    #q-papers { margin-top: 34px; }
+    #q-papers h3 { font: 600 28px/1 "Geist"; letter-spacing: 0.2em; text-transform: uppercase; color: #8a6a2c; margin-bottom: 14px; }
+    .pp { font: 400 34px/1.3 "Fraunces"; padding: 10px 0; border-bottom: 1px solid #d9d0bf; }
+    .pp span { font: 400 28px/1.3 "Geist"; color: #5d554a; display: block; }
   </style>
   <div id="root" data-composition-id="question" data-width="1080" data-height="1920">
-    <div id="q-wrap">
+    <div id="q-tex" data-layout-ignore>AIK</div>
+    <div id="q-a" data-hold>
+      <p class="kick">A2 · Research</p>
       <h2 id="q-line"><span>When</span><span>AI</span><span>answers</span><span>for</span><span>us,</span><span>do</span><span>we</span><span><em>still</em></span><span>think?</span></h2>
-      <div class="q-fig" id="q-fig1">
-        <span class="q-num" id="q-n1">183</span>
-        <p class="q-cap">management students analysed, FEBIC 2026</p>
+      <p id="q-para">My research tests what happens to students' reasoning when generative AI does their thinking, and names a risk: the <b>Artificial Illusion of Knowledge (AIK)</b>.</p>
+      <p id="q-theory">Grounded in Dual-Process Theory (Kahneman) and Cognitive Load Theory (Sweller). Measured with PLS-SEM.</p>
+    </div>
+    <div id="q-b" data-hold>
+      <p class="kick">The evidence</p>
+      <div id="q-grid">
+        <div class="cell"><span class="num" id="q-n1">183</span><p class="cap">students analysed, FEBIC 2026</p></div>
+        <div class="cell"><span class="num"><small>β</small><span id="q-n2">0.573</span></span><p class="cap">self-regulated learning to reasoning depth</p></div>
+        <div class="cell"><span class="num"><small>β</small>−0.189</span><p class="cap">cognitive outsourcing to reasoning depth</p></div>
+        <div class="cell"><span class="num"><small>R²</small><span id="q-n3">0.499</span></span><p class="cap">reasoning depth explained, Dean Research</p></div>
       </div>
-      <div class="q-fig" id="q-fig2">
-        <span class="q-num"><small>β</small><span id="q-n2">0.573</span></span>
-        <p class="q-cap">self-regulated learning to reasoning depth</p>
+      <div id="q-papers">
+        <h3>Three studies, 2026</h3>
+        <p class="pp">FEBIC 2026 conference paper<span>Universitas Pekalongan, with faculty supervisor</span></p>
+        <p class="pp">Dean Research<span>Universitas Pekalongan, n = 100</span></p>
+        <p class="pp">Soedirman Science Competition 15<span>Universitas Jenderal Soedirman</span></p>
       </div>
-      <p id="q-aik">My research names the <b>Artificial Illusion of Knowledge (AIK)</b></p>
     </div>
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
-    tl.fromTo("#q-line span", { color: "#cbc2b2" }, { color: "#1a1712", duration: 0.2, stagger: 0.08, ease: "none" }, 0.15);
-    tl.fromTo(["#q-fig1", "#q-fig2"], { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, stagger: 0.25, ease: "power2.out" }, 1.45);
-    const c1 = { v: 0 }, c2 = { v: 0 };
-    const n1 = document.getElementById("q-n1"), n2 = document.getElementById("q-n2");
-    tl.fromTo(c1, { v: 0 }, { v: 183, duration: 0.9, ease: "expo.out", onUpdate: () => { n1.textContent = Math.round(c1.v); } }, 1.45);
-    tl.fromTo(c2, { v: 0 }, { v: 0.573, duration: 0.9, ease: "expo.out", onUpdate: () => { n2.textContent = c2.v.toFixed(3); } }, 1.7);
-    tl.fromTo("#q-aik", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 2.75);
-    tl.to("#q-wrap", { x: -800, filter: "blur(18px)", opacity: 0, duration: 0.3, ease: "power3.in" }, 5.12);
+    // Page A
+    tl.fromTo("#q-a .kick", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.1);
+    tl.fromTo("#q-line span", { color: "#cbc2b2" }, { color: "#1a1712", duration: 0.2, stagger: 0.08, ease: "none" }, 0.2);
+    tl.fromTo("#q-para", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power2.out" }, 1.2);
+    tl.fromTo("#q-theory", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power2.out" }, 2.4);
+    tl.fromTo("#q-tex", { x: 0 }, { x: -320, duration: 14.545, ease: "none" }, 0);
+    // Page turn: A lifts away, B rises in.
+    tl.to("#q-a", { y: -260, opacity: 0, filter: "blur(10px)", duration: 0.35, ease: "power3.in" }, 7.6);
+    tl.fromTo("#q-b", { y: 260, opacity: 0, filter: "blur(10px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "expo.out" }, 7.9);
+    tl.fromTo(".cell", { opacity: 0 }, { opacity: 1, duration: 0.2, stagger: 0.25 }, 8.1);
+    const c1 = { v: 0 }, c2 = { v: 0 }, c3 = { v: 0 };
+    const n1 = document.getElementById("q-n1"), n2 = document.getElementById("q-n2"), n3 = document.getElementById("q-n3");
+    tl.fromTo(c1, { v: 0 }, { v: 183, duration: 0.9, ease: "expo.out", onUpdate: () => { n1.textContent = Math.round(c1.v); } }, 8.1);
+    tl.fromTo(c2, { v: 0 }, { v: 0.573, duration: 0.9, ease: "expo.out", onUpdate: () => { n2.textContent = c2.v.toFixed(3); } }, 8.35);
+    tl.fromTo(c3, { v: 0 }, { v: 0.499, duration: 0.9, ease: "expo.out", onUpdate: () => { n3.textContent = c3.v.toFixed(3); } }, 8.85);
+    tl.fromTo(".pp", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, stagger: 0.2 }, 9.4);
+    tl.fromTo("#q-papers h3", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 9.3);
+    tl.to("#q-b", { x: -800, filter: "blur(18px)", opacity: 0, duration: 0.3, ease: "power3.in" }, 14.21);
     window.__timelines["question"] = tl;
   </script>
 </template>

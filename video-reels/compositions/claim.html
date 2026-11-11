@@ -2,17 +2,37 @@
   <style>
     @font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
     @font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces-italic.woff2") format("woff2"); font-weight: 100 900; font-style: italic; }
+    @font-face { font-family: "Geist"; src: url("assets/fonts/geist.woff2") format("woff2"); font-weight: 100 900; }
     #root { position: absolute; inset: 0; overflow: hidden; background: #f1ebdf; color: #1a1712; }
-    #k-line { position: absolute; left: 90px; top: 340px; width: 880px; font: 400 112px/1.06 "Fraunces"; letter-spacing: -0.02em; }
+    #k-copy { position: absolute; left: 90px; top: 200px; width: 900px; }
+    .kick { font: 600 28px/1 "Geist"; letter-spacing: 0.22em; text-transform: uppercase; color: #8a6a2c; }
+    #k-line { margin-top: 28px; font: 400 118px/1.04 "Fraunces"; letter-spacing: -0.02em; }
     #k-line span { display: inline-block; margin-right: 0.22em; }
     #k-line .gold { font-style: italic; color: #8a6a2c; }
+    #k-sig { margin-top: 44px; padding-top: 24px; border-top: 2px solid #cfc5b2; font: 400 34px/1.4 "Geist"; color: #5d554a; }
+    #k-strip { position: absolute; left: 0; right: 0; top: 1170px; height: 700px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; padding: 0 16px; }
+    #k-strip div { overflow: hidden; border-radius: 6px; }
+    #k-strip img { width: 100%; height: 100%; object-fit: cover; display: block; }
   </style>
   <div id="root" data-composition-id="claim" data-width="1080" data-height="1920">
-    <h2 id="k-line"><span>Researcher</span><span>by</span><span>method,</span><span>leader</span><span>by</span><span>practice,</span><span>and</span><span>still</span><span>just</span><span>getting</span><span class="gold">started.</span></h2>
+    <div id="k-copy" data-hold>
+      <p class="kick">B3 · Liner notes</p>
+      <h2 id="k-line"><span>Researcher</span><span>by</span><span>method,</span><span>leader</span><span>by</span><span>practice,</span><span>and</span><span>still</span><span>just</span><span>getting</span><span class="gold">started.</span></h2>
+      <p id="k-sig">Miranto Zaenal Arief · Pekalongan, Central Java</p>
+    </div>
+    <div id="k-strip" data-layout-ignore>
+      <div><img src="assets/img/03-talkshow-teenage-brain.webp" alt="" style="object-position:40% 50%"></div>
+      <div><img src="assets/img/05-genre-diy-2023-tamansari.webp" alt="" style="object-position:50% 30%"></div>
+      <div><img src="assets/img/03-stage-screen-genre-diy.webp" alt="" style="object-position:50% 60%"></div>
+    </div>
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
-    tl.fromTo("#k-line span", { color: "#d3cab9" }, { color: (i, el) => el.classList.contains("gold") ? "#8a6a2c" : "#1a1712", duration: 0.2, stagger: 0.09, ease: "none" }, 0.1);
+    tl.fromTo("#k-copy .kick", { opacity: 0 }, { opacity: 1, duration: 0.25 }, 0.05);
+    tl.fromTo("#k-line span", { color: "#d3cab9" }, { color: (i, el) => el.classList.contains("gold") ? "#8a6a2c" : "#1a1712", duration: 0.2, stagger: 0.12, ease: "none" }, 0.15);
+    tl.fromTo("#k-sig", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 1.7);
+    tl.fromTo("#k-strip > div", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "expo.out" }, 0.3);
+    tl.fromTo("#k-strip img", { scale: 1.1 }, { scale: 1.0, duration: 5.454, ease: "power1.out" }, 0);
     window.__timelines["claim"] = tl;
   </script>
 </template>

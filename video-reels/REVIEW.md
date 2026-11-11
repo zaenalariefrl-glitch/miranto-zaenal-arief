@@ -1,8 +1,8 @@
-# REVIEW: Reels version (9:16)
+# REVIEW: Reels version (9:16), long cut
 
-Recomposed from `video/` (storyline A, "Side A, Side B"), not squeezed: 1080x1920, 30 fps, 38.2 s, same music, sound and timing.
+1080x1920, 30 fps, 85.5 s (47 bars at 132 BPM). Rebuilt for density and a slower pace on request.
 
-- Every line to be read sits between 168 px and 1330 px, clear of the Instagram status bar, caption and action rail; nothing readable is under the right-hand rail.
-- Layouts stacked vertically: record on top with the name below, numbers stacked, the stage-screen photo and the 2024 photo full bleed with scrims behind the text.
-- `hyperframes check`: no errors. Kept warnings: the rolling venue names (a deliberate slot roll) and the climb loop targets the linter resolves as `#c-p1`.
-- Not checked on a real phone, and the sound was measured, not heard.
+- Nine scenes: needle drop (with portrait below), research in two pages (question and AIK, then four real figures and three 2026 studies), stage (talkshow, then eight venues with topics), leadership (new), field (four programmes and two businesses), flip to Side B with a certificate strip, the climb in six steps (2021, 2022, 2023 BKKBN DIY, 2023 Governor, 2024 held three bars, 2026), the claim with a photo strip, end card with three facts and the address.
+- Text stays between 168 and 1330 px; below that only photos, certificates and decorative type fill the frame, clear of the Instagram caption and buttons.
+- `hyperframes check`: clean. Holds marked with `data-hold` where a page is meant to be read.
+- Not checked on a real phone; the sound was measured, not heard.
