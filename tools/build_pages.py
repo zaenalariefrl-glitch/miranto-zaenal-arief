@@ -85,6 +85,7 @@ def head(lang, prefix):
     return f"""<title>{m['title']}</title>
 <meta name="description" content="{m['desc']}">
 <meta name="author" content="Miranto Zaenal Arief">
+<meta name="google-site-verification" content="tugxu3GKRRHZMuRWRDecQ0keutQe8K_ENlFQDqSv9MA">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="{m['url']}">
 <link rel="alternate" hreflang="en" href="{META['en']['url']}">
