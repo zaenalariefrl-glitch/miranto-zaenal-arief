@@ -30,6 +30,7 @@
     #q-model { position: relative; margin-top: 40px; width: 900px; height: 340px; }
     #q-arrows { position: absolute; left: 0; top: 0; overflow: visible; }
     .q-arr { fill: none; stroke: #8a6a2c; stroke-width: 3; stroke-dasharray: 1; }
+    .q-head { fill: #8a6a2c; }
     .q-node { position: absolute; width: 360px; height: 90px; display: flex; align-items: center; padding: 0 22px; border: 2px solid #1a1712; font: 400 30px/1.15 "Geist"; color: #1a1712; background: #f1ebdf; }
     .q-node--out { background: #1a1712; color: #f1ebdf; }
     .q-node--aik { background: #8a6a2c; border-color: #8a6a2c; color: #f6f1e7; font-family: "Fraunces"; font-size: 40px; }
@@ -44,10 +45,12 @@
       <p id="q-theory">Grounded in Dual-Process Theory (Kahneman) and Cognitive Load Theory (Sweller). Measured with PLS-SEM.</p>
       <div id="q-model">
         <svg id="q-arrows" viewBox="0 0 900 330" width="900" height="330" data-layout-ignore>
-          <defs><marker id="q-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8a6a2c"/></marker></defs>
-          <path class="q-arr" id="q-a1" d="M372,45 L528,45" pathLength="1" marker-end="url(#q-head)"/>
-          <path class="q-arr" id="q-a2" d="M372,262 L528,78" pathLength="1" marker-end="url(#q-head)"/>
-          <path class="q-arr" id="q-a3" d="M372,285 L528,285" pathLength="1" marker-end="url(#q-head)"/>
+                    <path class="q-arr" id="q-a1" d="M372,45 L528,45" pathLength="1"/>
+          <path class="q-arr" id="q-a2" d="M372,262 L528,78" pathLength="1"/>
+          <path class="q-arr" id="q-a3" d="M372,285 L528,285" pathLength="1"/>
+          <path class="q-head" id="q-h1" d="M530,45 L512,36 L512,54 Z"/>
+          <path class="q-head" id="q-h2" d="M529,77 L524.9,95.2 L511.5,83.8 Z"/>
+          <path class="q-head" id="q-h3" d="M530,285 L512,276 L512,294 Z"/>
         </svg>
         <p class="q-node" id="q-nd1" style="left:0; top:0">Self-regulated learning</p>
         <p class="q-node" id="q-nd2" style="left:0; top:240px">Cognitive outsourcing to AI</p>
@@ -84,6 +87,7 @@
     tl.fromTo("#q-tex", { x: 0 }, { x: -320, duration: 14.545, ease: "none" }, 0);
     tl.fromTo(".q-node", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.15, ease: "expo.out" }, 3.2);
     tl.fromTo(".q-arr", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.6, stagger: 0.35, ease: "power2.inOut" }, 3.9);
+    tl.fromTo(".q-head", { opacity: 0 }, { opacity: 1, duration: 0.12, stagger: 0.35 }, 4.45);
     tl.fromTo(".q-beta", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, stagger: 0.35 }, 4.3);
     // Page turn: A lifts away, B rises in.
     tl.to("#q-a", { y: -260, opacity: 0, filter: "blur(10px)", duration: 0.35, ease: "power3.in" }, 7.6);
