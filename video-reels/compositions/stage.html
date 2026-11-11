@@ -1,0 +1,61 @@
+<template>
+  <style>
+    @font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+    @font-face { font-family: "Geist"; src: url("assets/fonts/geist.woff2") format("woff2"); font-weight: 100 900; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0b1426; color: #f3eee4; }
+    #s-a { position: absolute; inset: 0; }
+    #s-a-img { position: absolute; inset: 0; overflow: hidden; }
+    #s-a-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; display: block; }
+    #s-a-scrim { position: absolute; left: 0; right: 0; top: 760px; height: 700px; background: linear-gradient(180deg, rgba(8,12,24,0), rgba(8,12,24,0.88) 45%, rgba(8,12,24,0.88) 75%, rgba(8,12,24,0)); }
+    #s-a-title { position: absolute; left: 90px; top: 1030px; width: 860px; font: 400 116px/1 "Fraunces"; letter-spacing: -0.02em; }
+    #s-a-title span { display: inline-block; margin-right: 0.22em; }
+    #s-b { position: absolute; inset: 0; background: #0b1426; }
+    #s-b-img { position: absolute; inset: 0; overflow: hidden; }
+    #s-b-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; display: block; }
+    #s-b-scrim { position: absolute; left: 0; right: 0; top: 0; height: 760px; background: linear-gradient(180deg, rgba(8,12,24,0.92) 0%, rgba(8,12,24,0.88) 60%, rgba(8,12,24,0)); }
+    #s-b-lead { position: absolute; left: 90px; top: 250px; font: 600 30px/1 "Geist"; letter-spacing: 0.2em; text-transform: uppercase; color: #c9a45c; }
+    #s-b-roll { position: absolute; left: 90px; top: 300px; width: 920px; height: 90px; overflow: hidden; }
+    .roll { position: absolute; left: 0; top: 0; white-space: nowrap; font: 400 60px/90px "Fraunces"; letter-spacing: -0.01em; }
+    #s-b-foot { position: absolute; left: 90px; top: 420px; width: 860px; font: 400 34px/1.4 "Geist"; color: #d9dde6; }
+    #s-flood { position: absolute; inset: 0; background: #1d140d; }
+  </style>
+  <div id="root" data-composition-id="stage" data-width="1080" data-height="1920">
+    <div id="s-a">
+      <div id="s-a-img"><img id="s-a-photo" src="assets/img/03-talkshow-teenage-brain.webp" alt="Talkshow on a stage, slide titled Inside the Teenage Brain"></div>
+      <div id="s-a-scrim"></div>
+      <h2 id="s-a-title"><span>Twelve</span><span>stages,</span><span>one</span><span>message.</span></h2>
+    </div>
+    <div id="s-b">
+      <div id="s-b-img"><img id="s-b-photo" src="assets/img/03-stage-screen-genre-diy.webp" alt="Miranto speaking on stage, his face on the big screen behind"></div>
+      <div id="s-b-scrim"></div>
+      <p id="s-b-lead">On stage at</p>
+      <div id="s-b-roll" data-layout-allow-overflow>
+        <span class="roll" data-layout-allow-overlap id="r1">Universitas Gadjah Mada</span>
+        <span class="roll" data-layout-allow-overlap id="r2">UIN Sunan Kalijaga</span>
+        <span class="roll" data-layout-allow-overlap id="r3">Ombudsman DIY</span>
+        <span class="roll" data-layout-allow-overlap id="r4">National Library of Indonesia</span>
+      </div>
+      <p id="s-b-foot">Youth health, public service, leadership and AI.</p>
+    </div>
+    <div id="s-flood"></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#s-a-photo", { scale: 1.0 }, { scale: 1.08, duration: 2.9, ease: "none" }, 0);
+    tl.fromTo("#s-a-img", { x: 800, filter: "blur(18px)" }, { x: 0, filter: "blur(0px)", duration: 0.35, ease: "power3.out" }, 0);
+    tl.fromTo("#s-a-title span", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.07, ease: "power2.out" }, 0.45);
+    tl.fromTo("#s-b", { x: 1080 }, { x: 0, duration: 0.3, ease: "power3.inOut" }, 2.6);
+    tl.to("#s-a", { x: -800, filter: "blur(16px)", duration: 0.3, ease: "power3.inOut" }, 2.6);
+    tl.fromTo("#s-b-photo", { scale: 1.06 }, { scale: 1.0, duration: 2.4, ease: "power2.out" }, 2.6);
+    tl.set(["#r2", "#r3", "#r4"], { yPercent: 130 }, 0);
+    const rolls = ["#r1", "#r2", "#r3", "#r4"];
+    for (let i = 1; i < rolls.length; i++) {
+      const t = 3.18 + (i - 1) * 0.4545;
+      tl.to(rolls[i - 1], { yPercent: -130, duration: 0.18, ease: "power3.in" }, t);
+      tl.fromTo(rolls[i], { yPercent: 130 }, { yPercent: 0, duration: 0.22, ease: "expo.out" }, t + 0.06);
+    }
+    tl.fromTo("#s-b-foot", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2 }, 3.1);
+    tl.fromTo("#s-flood", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.inOut" }, 5.03);
+    window.__timelines["stage"] = tl;
+  </script>
+</template>
