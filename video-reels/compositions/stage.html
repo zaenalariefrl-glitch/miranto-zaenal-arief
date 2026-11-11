@@ -6,22 +6,23 @@
     .kick { font: 600 28px/1 "Geist"; letter-spacing: 0.22em; text-transform: uppercase; color: #c9a45c; }
     #s-a { position: absolute; inset: 0; }
     #s-a-img { position: absolute; inset: 0; overflow: hidden; }
-    #s-a-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; display: block; }
-    #s-a-scrim { position: absolute; left: 0; right: 0; top: 0; height: 1480px; background: linear-gradient(180deg, rgba(8,12,24,0.85) 0%, rgba(8,12,24,0.35) 30%, rgba(8,12,24,0.35) 45%, rgba(8,12,24,0.9) 68%, rgba(8,12,24,0.9) 88%, rgba(8,12,24,0)); }
+    #s-a-img img { width: 100%; height: 100%; object-fit: cover; object-position: 24% 45%; display: block; transform-origin: 30% 60%; }
+    #s-a-scrim { position: absolute; left: 0; right: 0; top: 0; height: 1120px; background: linear-gradient(180deg, rgba(8,12,24,0.88) 0%, rgba(8,12,24,0.55) 22%, rgba(8,12,24,0.82) 45%, rgba(8,12,24,0.88) 82%, rgba(8,12,24,0)); }
     #s-a-top { position: absolute; left: 90px; top: 210px; width: 900px; }
     #s-a-top p { font: 400 34px/1.4 "Geist"; color: #e1e4ec; margin-top: 18px; }
-    #s-a-title { position: absolute; left: 90px; top: 900px; width: 900px; font: 400 118px/1 "Fraunces"; letter-spacing: -0.02em; }
+    #s-a-title { position: absolute; left: 90px; top: 560px; width: 900px; font: 400 118px/1 "Fraunces"; letter-spacing: -0.02em; }
     #s-a-title span { display: inline-block; margin-right: 0.22em; }
-    #s-a-cap { position: absolute; left: 90px; top: 1150px; width: 900px; font: 400 34px/1.4 "Geist"; color: #d9dde6; }
+    #s-a-cap { position: absolute; left: 90px; top: 810px; width: 900px; font: 400 34px/1.4 "Geist"; color: #d9dde6; }
     #s-b { position: absolute; inset: 0; background: #0b1426; }
     #s-b-img { position: absolute; inset: 0; overflow: hidden; }
-    #s-b-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; }
-    #s-b-scrim { position: absolute; left: 0; right: 0; top: 0; height: 1560px; background: linear-gradient(180deg, rgba(8,12,24,0.94) 0%, rgba(8,12,24,0.92) 80%, rgba(8,12,24,0)); }
+    #s-b-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; display: block; }
+    #s-b-scrim { position: absolute; left: 0; right: 0; top: 0; height: 1000px; background: linear-gradient(180deg, rgba(8,12,24,0.94) 0%, rgba(8,12,24,0.9) 78%, rgba(8,12,24,0)); }
     #s-b-list { position: absolute; left: 90px; top: 200px; width: 900px; }
-    #s-b-list h3 { font: 400 72px/1.05 "Fraunces"; letter-spacing: -0.02em; margin: 18px 0 22px; }
-    .gig { padding: 13px 0; border-top: 1px solid rgba(243,238,228,0.16); }
-    .gig b { display: block; font: 400 38px/1.15 "Fraunces"; }
-    .gig span { display: block; font: 400 28px/1.3 "Geist"; color: #c3c9d6; margin-top: 4px; }
+    #s-b-list h3 { font: 400 64px/1.05 "Fraunces"; letter-spacing: -0.02em; margin: 14px 0 16px; }
+    #s-b-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; }
+    .gig { padding: 10px 0 12px; border-top: 1px solid rgba(243,238,228,0.16); }
+    .gig b { display: block; font: 400 32px/1.15 "Fraunces"; }
+    .gig span { display: block; font: 400 28px/1.25 "Geist"; color: #c3c9d6; margin-top: 4px; }
     #s-flood { position: absolute; inset: 0; background: #0b1426; }
   </style>
   <div id="root" data-composition-id="stage" data-width="1080" data-height="1920">
@@ -38,6 +39,7 @@
       <div id="s-b-list">
         <p class="kick">Speaker and moderator</p>
         <h3>On stage at</h3>
+        <div id="s-b-grid">
         <div class="gig"><b>Universitas Gadjah Mada</b><span>Anti-Drug Ambassador selection</span></div>
         <div class="gig"><b>UIN Sunan Kalijaga</b><span>Gen Z, a resilient generation in the digital era</span></div>
         <div class="gig"><b>Ombudsman DIY</b><span>Care About Public Services</span></div>
@@ -46,6 +48,7 @@
         <div class="gig"><b>Universitas Sarjanawiyata Tamansiswa</b><span>Students Against Drugs talkshow</span></div>
         <div class="gig"><b>HMI national seminar</b><span>Leadership integrity in the age of AI</span></div>
         <div class="gig"><b>SMA Negeri 1 Ngaglik</b><span>World AIDS Day</span></div>
+        </div>
       </div>
     </div>
     <div id="s-flood"></div>

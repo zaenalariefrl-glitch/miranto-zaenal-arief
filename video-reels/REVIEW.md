@@ -6,3 +6,11 @@
 - Text stays between 168 and 1330 px; below that only photos, certificates and decorative type fill the frame, clear of the Instagram caption and buttons.
 - `hyperframes check`: clean. Holds marked with `data-hold` where a page is meant to be read.
 - Not checked on a real phone; the sound was measured, not heard.
+
+## Revision round 1 (6 changes)
+1. Talkshow photo reframed so Miranto (seated left) is visible; title moved up and the dark band no longer covers him.
+2. "On stage at": scrim only behind the list (two columns), photo reframed past the screenshot's black bars, both speakers visible.
+3. Leadership photo replaced with YBW UII Expo 2024, all five people in frame; list arrives faster.
+4. Filled empty floors with real-data graphics: an animated Java map (Pekalongan programmes and Pempek BOOM, Bandung sourcing, distribution arcs without invented destinations) and the FEBIC path model with its betas. No sales chart: only an average yearly figure exists.
+5. End card: portrait background removed locally, enlarged as a papercut figure over the record. Source is 582 px wide, so it is slightly soft.
+6. Music removed; sound effects kept (mean level now about -24 dB).
