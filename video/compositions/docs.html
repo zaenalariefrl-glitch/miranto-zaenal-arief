@@ -26,28 +26,37 @@
         <h2 id="d-title">Documentary <em>Videos</em></h2>
         <p id="d-sub">The work, in motion.</p>
       </div>
-      <div class="d-card"><video id="d-v01" class="clip" src="assets/video/doc-01.mp4" data-start="0" data-duration="29.091" muted playsinline></video></div>
-      <div class="d-card"><video id="d-v02" class="clip" src="assets/video/doc-02.mp4" data-start="0" data-duration="29.091" muted playsinline></video></div>
-      <div class="d-card"><video id="d-v03" class="clip" src="assets/video/doc-03.mp4" data-start="0" data-duration="29.091" muted playsinline></video></div>
-      <div class="d-card"><video id="d-v04" class="clip" src="assets/video/doc-04.mp4" data-start="0" data-duration="29.091" muted playsinline></video></div>
-      <div class="d-card"><video id="d-v05" class="clip" src="assets/video/doc-05.mp4" data-start="0" data-duration="29.091" muted playsinline></video></div>
-      <div class="d-card"><video id="d-v06" class="clip" src="assets/video/doc-06.mp4" data-start="0" data-duration="29.091" muted playsinline></video></div>
-      <div class="d-card"><video id="d-v07" class="clip" src="assets/video/doc-07.mp4" data-start="0" data-duration="29.091" muted playsinline></video></div>
-      <div class="d-card"><video id="d-v08" class="clip" src="assets/video/doc-08.mp4" data-start="0" data-duration="29.091" muted playsinline></video></div>
-      <div class="d-card"><video id="d-v09" class="clip" src="assets/video/doc-09.mp4" data-start="0" data-duration="29.091" muted playsinline></video></div>
-      <div class="d-card"><video id="d-v10" class="clip" src="assets/video/doc-10.mp4" data-start="0" data-duration="29.091" muted playsinline></video></div>
-      <div id="d-end"><p>Ten moments from the stage, the classroom and the field.</p></div>
+      <div class="d-card"><video id="d-v01" class="clip" src="assets/video/doc-01.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div class="d-card"><video id="d-v02" class="clip" src="assets/video/doc-02.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div class="d-card"><video id="d-v03" class="clip" src="assets/video/doc-03.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div class="d-card"><video id="d-v04" class="clip" src="assets/video/doc-04.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div class="d-card"><video id="d-v05" class="clip" src="assets/video/doc-05.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div class="d-card"><video id="d-v06" class="clip" src="assets/video/doc-06.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div class="d-card"><video id="d-v07" class="clip" src="assets/video/doc-07.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div class="d-card"><video id="d-v08" class="clip" src="assets/video/doc-08.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div class="d-card"><video id="d-v09" class="clip" src="assets/video/doc-09.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div class="d-card"><video id="d-v10" class="clip" src="assets/video/doc-10.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div class="d-card"><video id="d-v11" class="clip" src="assets/video/doc-11.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div class="d-card"><video id="d-v12" class="clip" src="assets/video/doc-12.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div class="d-card"><video id="d-v13" class="clip" src="assets/video/doc-13.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div class="d-card"><video id="d-v14" class="clip" src="assets/video/doc-14.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div class="d-card"><video id="d-v15" class="clip" src="assets/video/doc-15.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div class="d-card"><video id="d-v16" class="clip" src="assets/video/doc-16.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div class="d-card"><video id="d-v17" class="clip" src="assets/video/doc-17.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div class="d-card"><video id="d-v18" class="clip" src="assets/video/doc-18.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div class="d-card"><video id="d-v19" class="clip" src="assets/video/doc-19.mp4" data-start="0" data-duration="56.364" muted playsinline></video></div>
+      <div id="d-end"><p>Moments from the stage, the classroom, the field and the feed.</p></div>
     </div>
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
-    // Rail: 120 + 640 + 10 x 428 + 360 + 11 gaps x 32 + 120 = 5872 px; travel = 5872 - 1920.
-    const TRAVEL = 5872 - 1920;
-    tl.fromTo("#d-rail", { x: 0 }, { x: -TRAVEL, duration: 27.4, ease: "power1.inOut" }, 0.9);
+    // Rail: 120 + 640 + 19 x 428 + 360 + 20 gaps x 32 + 120 = 10012 px; travel = 10012 - 1920.
+    const TRAVEL = 10012 - 1920;
+    tl.fromTo("#d-rail", { x: 0 }, { x: -TRAVEL, duration: 54.6, ease: "power1.inOut" }, 0.9);
     tl.fromTo("#d-lead > *", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, stagger: 0.18, ease: "power2.out" }, 0.1);
-    tl.fromTo(".d-card", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "expo.out" }, 0.3);
-    tl.fromTo("#d-end p", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 24.5);
-    tl.to("#d-rail", { opacity: 0, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, 28.75);
+    tl.fromTo(".d-card", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.06, ease: "expo.out" }, 0.3);
+    tl.fromTo("#d-end p", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 51.5);
+    tl.to("#d-rail", { opacity: 0, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, 56.0);
     window.__timelines["docs"] = tl;
   </script>
 </template>
