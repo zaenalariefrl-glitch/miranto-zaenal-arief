@@ -5,3 +5,4 @@ renders/
 work-*/
 .*.hf-transaction-*/
 assets/video/
+render.log
