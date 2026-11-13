@@ -1,0 +1,40 @@
+<template>
+  <style>
+    @font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+    @font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces-italic.woff2") format("woff2"); font-weight: 100 900; font-style: italic; }
+    @font-face { font-family: "Geist"; src: url("assets/fonts/geist.woff2") format("woff2"); font-weight: 100 900; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0b1426; color: #f3eee4; }
+    /* Title card */
+    #i-card { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 160px;
+      background: radial-gradient(60% 70% at 70% 50%, rgba(201,164,92,0.14), transparent 70%), #0b1426; }
+    .kick { font: 600 28px/1 "Geist"; letter-spacing: 0.22em; text-transform: uppercase; color: #c9a45c; }
+    #i-title { margin-top: 28px; font: 400 132px/0.98 "Fraunces"; letter-spacing: -0.02em; }
+    #i-title em { font-style: italic; color: #c9a45c; }
+    #i-sub { margin-top: 30px; font: 400 36px/1.4 "Geist"; color: #e6dccb; max-width: 1100px; }
+    /* Film, full frame */
+    #i-film { position: absolute; inset: 0; background: #000; }
+    #i-video { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; object-fit: contain; }
+    #i-credit { position: absolute; right: 40px; bottom: 30px; padding: 8px 14px; border-radius: 6px;
+      background: rgba(0,0,0,0.55); font: 400 28px/1.2 "Geist"; color: #f3eee4; }
+  </style>
+  <div id="root" data-composition-id="impact" data-width="1920" data-height="1080">
+    <div id="i-film">
+      <video id="i-video" class="clip" src="assets/video/genre-impact.mp4" data-start="4.5" data-duration="164.49" data-has-audio="true" data-volume="1" playsinline></video>
+    </div>
+    <p id="i-credit" data-layout-ignore>Video: GenRe Indonesia</p>
+    <div id="i-card">
+      <p class="kick">B2 · GenRe 2023 to 2024</p>
+      <h2 id="i-title">The <em>Impact</em> Film</h2>
+      <p id="i-sub">Kena GenRe: young people, marginal groups and local enterprise in Yogyakarta.</p>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#i-card > *", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3, stagger: 0.2, ease: "power2.out" }, 0.1);
+    tl.to("#i-card", { opacity: 0, duration: 0.45, ease: "power2.in" }, 4.05);
+    tl.fromTo("#i-credit", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 4.7);
+    tl.to("#i-credit", { opacity: 0, duration: 0.4 }, 10.7);
+    tl.to("#i-credit", { opacity: 1, duration: 0.4 }, 164.0);
+    window.__timelines["impact"] = tl;
+  </script>
+</template>
