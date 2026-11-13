@@ -1,0 +1,76 @@
+<template>
+  <style>
+    @font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+    @font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces-italic.woff2") format("woff2"); font-weight: 100 900; font-style: italic; }
+    @font-face { font-family: "Geist"; src: url("assets/fonts/geist.woff2") format("woff2"); font-weight: 100 900; }
+    #root { position: absolute; inset: 0; overflow: hidden; color: #f3eee4;
+      background:
+        repeating-linear-gradient(92deg, rgba(0,0,0,0.05) 0 3px, transparent 3px 11px, rgba(255,220,180,0.025) 11px 13px, transparent 13px 29px),
+        radial-gradient(70% 80% at 45% 45%, #3a291d, #1f150e); }
+    .beat { position: absolute; inset: 0; }
+    .wm { position: absolute; font: italic 400 300px/0.9 "Fraunces"; letter-spacing: -0.04em; color: rgba(201,164,92,0.07); white-space: nowrap; }
+    .kick { font: 600 28px/1 "Geist"; letter-spacing: 0.22em; text-transform: uppercase; color: #c9a45c; }
+    .ttl { margin-top: 26px; font: 400 128px/0.98 "Fraunces"; letter-spacing: -0.02em; }
+    .ttl em { font-style: italic; color: #c9a45c; }
+    .ln { margin-top: 20px; font: 400 76px/1.02 "Fraunces"; letter-spacing: -0.02em; }
+    .ln em { font-style: italic; color: #c9a45c; }
+    .sub { margin-top: 26px; font: 400 34px/1.4 "Geist"; color: #e6dccb; }
+    .stats { margin-top: 40px; }
+    .stats p { padding: 14px 0; border-top: 1px solid rgba(243,238,228,0.16); font: 400 30px/1.3 "Geist"; color: #cdbfae; }
+    .stats p b { font: 400 36px/1 "Fraunces"; color: #c9a45c; margin-right: 16px; }
+    .print { position: absolute; background: #f4efe6; padding: 14px 14px 56px; box-shadow: 0 26px 50px rgba(0,0,0,0.55), 0 2px 6px rgba(0,0,0,0.35); }
+    .print .ph { overflow: hidden; background: #222; }
+    .print img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .print .cap { position: absolute; left: 16px; right: 16px; bottom: 12px; font: italic 400 28px/1 "Fraunces"; color: #3a2e22; white-space: nowrap; }
+  </style>
+  <div id="root" data-composition-id="crown" data-width="1920" data-height="1080">
+    <!-- Beat 1: Duta GenRe DIY 2023 -->
+    <div class="beat" id="c-b1" data-layout-ignore>
+      <p class="wm" style="left:620px; top:790px">2023</p>
+      <div id="c-copy1" style="position:absolute; left:120px; top:170px; width:520px">
+        <p class="kick">B2 · The sash</p>
+        <h2 class="ttl">The <em>Sash</em></h2>
+        <p class="sub">Juara 1 Putra, Duta GenRe DIY 2023.</p>
+        <div class="stats">
+          <p><b>2023</b>The provincial crown</p>
+          <p><b>2024</b>The national sash</p>
+        </div>
+      </div>
+      <div class="print" style="left:680px; top:100px; transform:rotate(-2deg)"><div class="ph" style="width:440px; height:550px"><img src="assets/img/s-diy-apresiasi.webp" alt=""></div><p class="cap">Apresiasi Duta GenRe DIY</p></div>
+      <div class="print" style="left:1190px; top:60px; transform:rotate(2deg)"><div class="ph" style="width:320px; height:400px"><img src="assets/img/s-diy-wave.webp" alt="" style="object-position:50% 40%"></div><p class="cap">Juara 1 Putra</p></div>
+      <div class="print" style="left:1560px; top:110px; transform:rotate(-1.5deg)"><div class="ph" style="width:300px; height:375px"><img src="assets/img/s-diy-bow.webp" alt="" style="object-position:40% 60%"></div><p class="cap">The bow</p></div>
+      <div class="print" style="left:1200px; top:560px; transform:rotate(-2.5deg)"><div class="ph" style="width:320px; height:400px"><img src="assets/img/s-diy-walk.webp" alt="" style="object-position:50% 30%"></div><p class="cap">Side by side</p></div>
+      <div class="print" style="left:1570px; top:590px; transform:rotate(2deg)"><div class="ph" style="width:300px; height:375px"><img src="assets/img/s-diy-heritage.webp" alt="" style="object-position:50% 60%"></div><p class="cap">Duta GenRe DIY</p></div>
+    </div>
+    <!-- Beat 2: Duta GenRe Indonesia 2024 -->
+    <div class="beat" id="c-b2" data-layout-ignore>
+      <p class="wm" style="left:1260px; top:790px">2024</p>
+      <div class="print" style="left:110px; top:150px; transform:rotate(-2deg)"><div class="ph" style="width:480px; height:600px"><img src="assets/img/s-genre-indonesia-2024.webp" alt="" style="object-position:50% 40%"></div><p class="cap">Duta GenRe Indonesia 2024</p></div>
+      <div class="print" style="left:650px; top:70px; transform:rotate(2deg)"><div class="ph" style="width:360px; height:462px"><img src="assets/img/s-stage-sing.webp" alt="" style="object-position:45% 50%"></div><p class="cap">On stage</p></div>
+      <div class="print" style="left:930px; top:510px; transform:rotate(-1.5deg)"><div class="ph" style="width:360px; height:450px"><img src="assets/img/s-stage-perform.webp" alt=""></div><p class="cap">Performance night</p></div>
+      <div id="c-copy2" style="position:absolute; left:1390px; top:200px; width:440px">
+        <p class="kick">2024</p>
+        <h3 class="ln">Duta GenRe <em>Indonesia.</em></h3>
+        <p class="sub">The national title, one year after the provincial crown.</p>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // Beat 1
+    tl.fromTo("#c-copy1 > *", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3, stagger: 0.15, ease: "power2.out" }, 0.1);
+    tl.fromTo("#c-b1 .print", { opacity: 0, y: -70, scale: 1.08 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, stagger: 0.16, ease: "expo.out" }, 0.3);
+    tl.fromTo("#c-b1 .print img", { scale: 1.08 }, { scale: 1, duration: 5.4, ease: "power1.out" }, 0);
+    tl.fromTo("#c-b1 .wm", { x: 0 }, { x: -60, duration: 5.4, ease: "none" }, 0);
+    tl.to("#c-b1", { x: -1950, duration: 0.7, ease: "power3.in" }, 5.0);
+    // Beat 2
+    tl.fromTo("#c-b2", { x: 1950 }, { x: 0, duration: 0.8, ease: "expo.out" }, 5.5);
+    tl.fromTo("#c-copy2 > *", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3, stagger: 0.15, ease: "power2.out" }, 6.0);
+    tl.fromTo("#c-b2 .print img", { scale: 1.08 }, { scale: 1, duration: 5.4, ease: "power1.out" }, 5.5);
+    tl.fromTo("#c-b2 .wm", { x: 0 }, { x: -60, duration: 5.4, ease: "none" }, 5.5);
+    tl.to("#c-b2", { opacity: 0, filter: "blur(10px)", duration: 0.35, ease: "power2.in" }, 10.5);
+    tl.to("#c-b1 .print, #c-b1 .clip-paper", { y: 16, duration: 3.5, ease: "sine.inOut", stagger: 0.1 }, 1.6);
+    tl.to("#c-b2 .print", { y: 16, duration: 3.6, ease: "sine.inOut", stagger: 0.1 }, 6.5);
+    window.__timelines["crown"] = tl;
+  </script>
+</template>
